@@ -1,0 +1,20 @@
+### Gradle ###
+.gradle
+**/build/
+
+### Android Studio ###
+**/local.properties
+.externalNativeBuild
+.cxx
+/captures
+.DS_Store
+
+### IntelliJ ###
+*.iml
+.idea
+render.experimental.xml
+out
+
+
+
+
