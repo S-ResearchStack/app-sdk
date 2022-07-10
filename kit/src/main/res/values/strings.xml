@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name" translatable="false">HealthcareResearchKit</string>
+    <string name="open_source_licence" translatable="false">Open Source Licence</string>
+    <string name="open_source_licence_textfiled_label" translatable="false">Licence</string>
+    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+        deserunt mollit anim id est laborum.
+    </string>
+    <string name="lorem_ipsum_short" translatable="false">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua.
+    </string>
+    <string name="default_web_client_id" translatable="false">this will be updated by com.google.gms.google-services plugin</string>
+        <string name="failed_to_signin" translatable="false">failed to sign-in</string>
+    <!-- localization -->
+    <string name="intro_button_text">Get Started</string>
+    <string name="eligibility_intro_button_text">Check Eligibility</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="complete">Complete</string>
+    <string name="submit">Submit</string>
+    <string name="continuous">Continue</string>
+    <string name="join_study">Join Study</string>
+    <string name="start_task">Start task</string>
+</resources>
