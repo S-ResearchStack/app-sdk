@@ -1,6 +1,11 @@
 # Samsung Health Stack App SDK
 
-The *Samsung Health Stack App SDK* is a software framework that makes it easy to create apps for clinical/medical research.
+The app SDK for the Samsung Health Stack is a software framework for app development that makes it easy to analyze data and manage users for clinical/medical studies. The stack also includes:
+
+-   A backend system consisting of services and a data engine available through application programming interface (API) endpoints
+-   A web portal for survey creation, participant management, and data analysis
+
+Refer to https://s-healthstack.io for documentation, including complete installation instructions and getting statred tutorial.
 
 **kit** module is Android client kit for clinical study.
 
