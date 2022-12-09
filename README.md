@@ -9,4 +9,4 @@ Refer to <a href="https://s-healthstack.io" target="_blank">https://s-healthstac
 - The <a href="https://s-healthstack.io/installing-the-backend.html" target="_blank">backend system installation instructions</a>
 - The <a href="https://s-healthstack.io/installing-the-sdk.html" target="_blank">app SDK installation instructions</a>
 - The <a href="https://s-healthstack.io/installing-the-portal.html" target="_blank">web portal installation instructions</a>
-- The <a href="https://s-healthstack.io/tutorial.html" target="_blank">getting statred tutorial</a>
+- The <a href="https://s-healthstack.io/tutorial.html" target="_blank">getting started tutorial</a>
