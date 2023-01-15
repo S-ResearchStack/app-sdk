@@ -7,10 +7,10 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.samsung.healthcare.kit.sample"
+        applicationId = "healthstack.sample"
         minSdk = 29
         targetSdk = 31
     }
@@ -53,9 +53,16 @@ android {
 
 dependencies {
     implementation(project(":kit"))
-    implementation(project(":external"))
+    implementation(project(":app-support"))
+    implementation(project(":healthdata-link:interface"))
+    implementation(project(":healthdata-link:healthconnect"))
+    implementation(project(":backend-integration:interface"))
+    implementation(project(":backend-integration:healthstack-adapter"))
     implementation(project(":resources:korean"))
+
     implementation(platform(AppDependencies.FIREBASE_BOM))
+    implementation(AppDependencies.GOOGLE_HEALTH_CONNECT)
+    implementation(AppDependencies.GOOGLE_HEALTH_DATA)
     implementation(AppDependencies.authImplLibs)
     implementation(AppDependencies.composeImplLibs)
     implementation(AppDependencies.hiltImplLibs)

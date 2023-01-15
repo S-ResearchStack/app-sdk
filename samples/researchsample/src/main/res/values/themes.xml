@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowSplashscreenContent">@drawable/sample_splash_full_screen_light</item>
+        <item name="android:windowSplashscreenContent">@drawable/sample_splash_full_screen_light
+        </item>
     </style>
 </resources>

@@ -1,3 +1,8 @@
+repositories {
+    google()
+    mavenCentral()
+}
+
 buildscript {
     repositories {
         google()
@@ -20,6 +25,7 @@ buildscript {
 plugins {
     id("org.jlleitschuh.gradle.ktlint") version Versions.KTLINT apply false
     kotlin("kapt") version Versions.KOTLIN apply false
+    id("nl.neotech.plugin.rootcoverage") version "1.5.3"
 }
 
 subprojects {
@@ -45,4 +51,8 @@ val testWithLint by tasks.registering {
         getTasksByName("test", true),
         getTasksByName("ktlintCheck", true)
     )
+}
+
+jacoco {
+    toolVersion = Versions.JACOCO
 }

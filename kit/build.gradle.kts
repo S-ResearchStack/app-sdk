@@ -4,16 +4,15 @@ plugins {
     id("de.mannodermaus.android-junit5")
     id("org.jetbrains.dokka")
     id("io.gitlab.arturbosch.detekt")
-    id("jacoco")
     id("kotlin-kapt")
 }
 
 android {
-    compileSdkVersion(31)
+    compileSdk = 33
 
     defaultConfig {
-        minSdkVersion(29)
-        targetSdkVersion(31)
+        minSdk = 29
+        targetSdk = 31
 
         // 1) Make sure to use the AndroidJUnitRunner, or a subclass of it. This requires a dependency on androidx.test:runner, too!
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -22,6 +21,18 @@ android {
 
         vectorDrawables {
             useSupportLibrary = true
+        }
+    }
+
+    buildTypes {
+        debug {
+            isTestCoverageEnabled = true
+        }
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
         }
     }
 
@@ -54,23 +65,16 @@ android {
 }
 
 dependencies {
-    implementation(project(":external"))
+    implementation(project(":healthdata-link:interface"))
 
     implementation(platform(AppDependencies.FIREBASE_BOM))
     implementation(AppDependencies.authImplLibs)
-    implementation(AppDependencies.ANDROIDX_DATASTORE)
     implementation(AppDependencies.ANDROIDX_NAVIGATION_COMPOSE)
     implementation(AppDependencies.composeImplLibs)
     implementation(AppDependencies.ACCOMPANIST_PAGER)
     implementation(AppDependencies.SIGNATURE)
     implementation(AppDependencies.coilImplLibs)
-    implementation(AppDependencies.GOOGLE_HEALTH_DATA)
     implementation(AppDependencies.SUPPORT_ANNOTATION)
-    implementation(AppDependencies.roomLibs)
-
-    kapt(listOf(AppDependencies.ANDROIDX_ROOM_COMPILER))
-    implementation(AppDependencies.GSON)
-    implementation(AppDependencies.CRON_QUARTZ)
 
     debugImplementation(AppDependencies.uiDebugLibs)
 
@@ -89,8 +93,4 @@ tasks.dokkaHtml.configure {
             noAndroidSdkLink.set(false)
         }
     }
-}
-
-jacoco {
-    toolVersion = Versions.JACOCO
 }

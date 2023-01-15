@@ -55,6 +55,6 @@
         consequat, risus eget commodo suscipit, lorem ex condimentum orci, et sollicitudin nisi eros sed lectus. Sed at
         erat nisl. Nunc venenatis mi tellus, vitae congue erat dictum a.
     </string>
-    <string name="research_platform_endpoint">https://shs.dev.ai-service.io</string>
-    <string name="research_project_id">1</string>
+    <string name="research_platform_endpoint">http://you.must.set.backend.url</string>
+    <string name="research_project_id">you_must_set_project_id</string>
 </resources>
