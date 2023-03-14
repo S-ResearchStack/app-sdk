@@ -18,10 +18,10 @@ abstract class QuestionComponent<T : QuestionModel<*>> : Component<T>() {
     override fun Render(model: T, callbackCollection: CallbackCollection) {
         Text(
             text = model.question,
-            style = AppTheme.typography.subHeader2,
-            color = AppTheme.colors.textPrimary,
+            style = AppTheme.typography.subtitle1,
+            color = AppTheme.colors.onSurface,
             modifier = Modifier
-                .padding(start = 12.dp, end = 12.dp)
+                .padding(horizontal = 12.dp)
         )
 
         if (!model.explanation.isNullOrBlank()) {
@@ -32,7 +32,7 @@ abstract class QuestionComponent<T : QuestionModel<*>> : Component<T>() {
                     .fillMaxWidth(1f)
                     .padding(start = 12.dp, end = 12.dp),
                 style = AppTheme.typography.body2,
-                color = AppTheme.colors.textHint
+                color = AppTheme.colors.onBackground.copy(0.6F)
             )
         }
     }

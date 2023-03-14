@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -38,6 +39,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -53,11 +55,11 @@ import healthstack.kit.task.onboarding.model.EligibilityIntroModel
 import healthstack.kit.task.onboarding.model.EligibilityIntroModel.ViewType.Card
 import healthstack.kit.task.survey.question.SubStepHolder
 import healthstack.kit.theme.AppTheme
-import healthstack.kit.ui.BottomSquareButton
+import healthstack.kit.ui.BottomRoundButton
 import healthstack.kit.ui.SdkCard
 import healthstack.kit.ui.TopBar
-import kotlin.math.absoluteValue
 import kotlinx.coroutines.launch
+import kotlin.math.absoluteValue
 
 class EligibilityIntroView : View<EligibilityIntroModel>() {
     @Composable
@@ -67,16 +69,23 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
         holder: SubStepHolder?,
     ) {
         val scrollState = rememberScrollState()
+
         Scaffold(
             topBar = {
                 TopBar(title = model.title) {
                     callbackCollection.prev()
                 }
             },
+            bottomBar = {
+                BottomRoundButton(text = LocalContext.current.getString(R.string.eligibility_intro_button_text)) {
+                    callbackCollection.next()
+                }
+            }
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(vertical = 8.dp)
                     .background(AppTheme.colors.background)
                     .verticalScroll(scrollState)
             ) {
@@ -90,9 +99,6 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
                         .background(AppTheme.colors.background)
                         .fillMaxHeight(),
                 )
-                BottomSquareButton(text = LocalContext.current.getString(R.string.eligibility_intro_button_text)) {
-                    callbackCollection.next()
-                }
             }
         }
     }
@@ -114,7 +120,7 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
             Spacer(modifier = Modifier.height(32.dp))
             Text(
                 model.description,
-                color = AppTheme.colors.textPrimary,
+                color = AppTheme.colors.onSurface,
                 modifier = Modifier
                     .padding(24.dp),
                 style = AppTheme.typography.body1
@@ -130,15 +136,16 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 title,
-                style = AppTheme.typography.title2,
-                color = AppTheme.colors.textPrimaryAccent
+                style = AppTheme.typography.headline3,
+                color = AppTheme.colors.primary
             )
             Spacer(modifier = Modifier.height(8.dp))
             Column(modifier = Modifier.padding(horizontal = 12.dp)) {
                 constraints.forEach { constraint ->
                     Text(
                         "- $constraint",
-                        color = AppTheme.colors.textPrimary
+                        color = AppTheme.colors.onSurface,
+                        style = AppTheme.typography.subtitle2
                     )
                 }
             }
@@ -157,7 +164,7 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
         ) {
             Text(
                 model.description,
-                color = AppTheme.colors.textPrimary,
+                color = AppTheme.colors.onSurface,
                 style = AppTheme.typography.body1
             )
             Spacer(modifier = Modifier.height(12.dp))
@@ -190,14 +197,18 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
                 startAlpha = startAlpha,
                 backgroundColor = backgroundColor,
             )
+            Spacer(Modifier.height(25.dp))
             Row(
                 modifier = Modifier
-                    .wrapContentSize()
+                    .height(10.dp)
+                    .wrapContentWidth()
+                    .background(AppTheme.colors.background)
                     .align(Alignment.CenterHorizontally),
             ) {
                 conditions.forEachIndexed { index, _ ->
                     Surface(
-                        modifier = Modifier.width(20.dp),
+                        modifier = Modifier.width(20.dp)
+                            .background(AppTheme.colors.background),
                     ) {
                         val selected = pagerState.currentPage == index
                         Tab(
@@ -222,6 +233,8 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
                                             unselectedTabIcon
                                         }
                                     ),
+                                    modifier = Modifier.width(8.dp).height(8.dp)
+                                        .background(AppTheme.colors.background),
                                     contentDescription = null,
                                     tint = AppTheme.colors.primary
                                 )
@@ -242,7 +255,7 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
         contentPadding: PaddingValues = PaddingValues(horizontal = 50.dp),
         startScale: Float = 1f,
         startAlpha: Float = 1f,
-        backgroundColor: Color = AppTheme.colors.primary,
+        backgroundColor: Color = AppTheme.colors.background,
     ) {
         HorizontalPager(
             count = contents.size,
@@ -287,9 +300,9 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
             modifier = modifier
                 .size(
                     width = 280.dp,
-                    height = 445.dp,
+                    height = 430.dp,
                 )
-                .padding(bottom = 25.dp),
+                .padding(horizontal = 10.dp),
             shape = RoundedCornerShape(4.dp),
             elevation = 12.dp,
             color = backgroundColor,
@@ -297,13 +310,14 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
             Column(
                 modifier = Modifier
                     .clickable(onClick = { onClick() })
+                    .background(backgroundColor)
                     .fillMaxSize()
             ) {
                 Box(
                     modifier = Modifier
                         .height(300.dp)
                         .fillMaxWidth()
-                        .background(AppTheme.colors.surface),
+                        .background(AppTheme.colors.background),
                 ) {
                     Image(
                         painter = painterResource(imageId),
@@ -312,7 +326,6 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
                         contentScale = ContentScale.FillWidth
                     )
                 }
-                Spacer(modifier = Modifier.height(16.dp))
                 Box(
                     modifier = Modifier.fillMaxSize()
                 ) {
@@ -323,20 +336,20 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
                             text = content.title,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            style = AppTheme.typography.title3,
-                            color = AppTheme.colors.textPrimaryAccent,
-                            modifier = Modifier.padding(horizontal = 24.dp)
+                            style = AppTheme.typography.headline3,
+                            color = AppTheme.colors.primary,
+                            modifier = Modifier.padding(horizontal = 16.dp)
                         )
-                        Spacer(modifier = Modifier.height(4.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
                         content.constraints.forEachIndexed { index, subTitle ->
                             if (index < 3) {
                                 Text(
                                     text = "• $subTitle",
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis,
-                                    style = AppTheme.typography.body1,
-                                    color = AppTheme.colors.textPrimary,
-                                    modifier = Modifier.padding(horizontal = 30.dp)
+                                    style = AppTheme.typography.subtitle2,
+                                    color = AppTheme.colors.onSurface,
+                                    modifier = Modifier.padding(horizontal = 20.dp)
                                 )
                             } else {
                                 Icon(
@@ -358,7 +371,7 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
 }
 
 @PreviewGenerated
-@Preview(showBackground = true)
+@Preview(showBackground = true, device = Devices.NEXUS_6)
 @Composable
 fun EligibilityIntroViewPreview() {
     val eligibilityIntroView = EligibilityIntroView()

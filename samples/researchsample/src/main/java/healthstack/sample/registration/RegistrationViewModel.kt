@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import healthstack.backend.integration.BackendFacadeHolder
+import healthstack.backend.integration.exception.UserAlreadyExistsException
 import healthstack.sample.registration.RegistrationState.Failed
 import healthstack.sample.registration.RegistrationState.Init
 import healthstack.sample.registration.RegistrationState.Loading
@@ -32,7 +33,9 @@ class RegistrationViewModel : ViewModel() {
                                     healthstack.backend.integration.registration.User(auth.uid!!, profile)
                                 )
                             _state.value = Success
-                            // TODO handle specfic exception
+                            // TODO handle specific exception
+                        } catch (e: UserAlreadyExistsException) {
+                            _state.value = Success
                         } catch (e: Exception) {
                             Log.d(RegistrationViewModel::class.simpleName, "fail to register user")
                             _state.value = Failed

@@ -6,7 +6,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import healthstack.kit.auth.SignInProvider.Basic
 import healthstack.kit.auth.SignInProvider.Google
 import healthstack.kit.task.base.ImageArticleModel
 import healthstack.kit.task.onboarding.OnboardingTask
@@ -34,7 +33,7 @@ import healthstack.kit.task.survey.question.model.ChoiceQuestionModel
 import healthstack.kit.task.survey.question.model.ChoiceQuestionModel.ViewType.DropMenu
 import healthstack.kit.task.survey.question.model.QuestionModel
 import healthstack.kit.theme.AppColors
-import healthstack.kit.theme.blueColors
+import healthstack.kit.theme.mainLightColors
 import healthstack.sample.R.drawable
 import healthstack.sample.registration.RegistrationModel
 import healthstack.sample.registration.RegistrationStep
@@ -46,7 +45,7 @@ object OnboardingModule {
 
     @Singleton
     @Provides
-    fun providesAppColors(): AppColors = blueColors()
+    fun providesAppColors(): AppColors = mainLightColors()
 
     @Singleton
     @Provides
@@ -196,7 +195,7 @@ object OnboardingModule {
     private fun signUp() = SignUpModel(
         id = "sign-up-model",
         title = "CardioFlow",
-        listOf(Basic, Google),
+        listOf(Google),
         description = "Thanks for joining the study!\n" +
             "Now please create an account to keep track\n" +
             "of your data and keep it safe.",

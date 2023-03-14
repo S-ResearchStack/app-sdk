@@ -33,67 +33,101 @@ val Inter: FontFamily = FontFamily(
 )
 
 data class AppTypography(
-    var appTitle: TextStyle = TextStyle(
+    val headline1: TextStyle = TextStyle(
         fontFamily = Inter,
         fontWeight = FontWeight.W600,
-        fontSize = 20.sp
+        fontSize = 40.sp,
+        lineHeight = 52.sp
+    ),
+    val headline2: TextStyle = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.W600,
+        fontSize = 32.sp,
+        lineHeight = 41.6.sp
+    ),
+    val headline3: TextStyle = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.W600,
+        fontSize = 20.sp,
+        lineHeight = 26.sp
+    ),
+    val headline4: TextStyle = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.W600,
+        fontSize = 16.sp,
+        lineHeight = 20.8.sp
     ),
     val title1: TextStyle = TextStyle(
         fontFamily = Inter,
-        fontWeight = FontWeight.Medium,
-        fontSize = 40.sp
+        fontWeight = FontWeight.W600,
+        fontSize = 18.sp,
+        lineHeight = 23.4.sp
     ),
     val title2: TextStyle = TextStyle(
         fontFamily = Inter,
-        fontWeight = FontWeight.Medium,
-        fontSize = 22.sp
+        fontWeight = FontWeight.W600,
+        fontSize = 16.sp,
+        lineHeight = 20.8.sp
     ),
     val title3: TextStyle = TextStyle(
         fontFamily = Inter,
         fontWeight = FontWeight.W600,
-        fontSize = 20.sp
+        fontSize = 14.sp,
+        lineHeight = 18.2.sp
     ),
-
-    val subHeader1: TextStyle = TextStyle(
-        fontFamily = Inter,
-        fontWeight = FontWeight.W600,
-        fontSize = 18.sp
-    ),
-
-    val subHeader2: TextStyle = TextStyle(
-        fontFamily = Inter,
-        fontWeight = FontWeight.W600,
-        fontSize = 16.sp
-    ),
-
-    val topBar: TextStyle = TextStyle(
+    val subtitle1: TextStyle = TextStyle(
         fontFamily = Inter,
         fontWeight = FontWeight.W400,
-        fontSize = 18.sp
+        fontSize = 18.sp,
+        lineHeight = 23.4.sp
     ),
-
+    val subtitle2: TextStyle = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.W400,
+        fontSize = 16.sp,
+        lineHeight = 20.8.sp
+    ),
+    val subtitle3: TextStyle = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.W400,
+        fontSize = 14.sp,
+        lineHeight = 18.2.sp
+    ),
     val body1: TextStyle = TextStyle(
         fontFamily = Inter,
         fontWeight = FontWeight.W400,
-        fontSize = 16.sp
+        fontSize = 16.sp,
+        lineHeight = 20.8.sp
     ),
-
     val body2: TextStyle = TextStyle(
-        fontFamily = OpenSans,
+        fontFamily = Inter,
         fontWeight = FontWeight.W400,
-        fontSize = 14.sp
+        fontSize = 14.sp,
+        lineHeight = 18.2.sp
     ),
-
     val body3: TextStyle = TextStyle(
         fontFamily = Inter,
         fontWeight = FontWeight.W400,
-        fontSize = 12.sp
+        fontSize = 12.sp,
+        lineHeight = 15.6.sp
     ),
-
-    val body4: TextStyle = TextStyle(
+    val caption: TextStyle = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.W600,
+        fontSize = 12.sp,
+        lineHeight = 15.6.sp
+    ),
+    val overline1: TextStyle = TextStyle(
         fontFamily = Inter,
         fontWeight = FontWeight.W400,
-        fontSize = 10.sp
+        fontSize = 10.sp,
+        lineHeight = 13.sp
+    ),
+    val overline2: TextStyle = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.W600,
+        fontSize = 10.sp,
+        lineHeight = 13.sp
     ),
 )
 

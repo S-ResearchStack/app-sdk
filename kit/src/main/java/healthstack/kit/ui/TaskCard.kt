@@ -30,7 +30,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import healthstack.kit.R
 import healthstack.kit.annotation.PreviewGenerated
 import healthstack.kit.theme.AppTheme
@@ -40,13 +39,14 @@ fun TaskCard(
     @DrawableRes id: Int = R.drawable.ic_task,
     taskName: String,
     description: String,
+    isActive: Boolean = true,
     buttonText: String? = null,
-    buttonEnabled: Boolean = true,
+    isCompleted: Boolean = false,
     onClick: () -> Unit = { },
 ) {
     val shape = RoundedCornerShape(4.dp)
 
-    if (buttonEnabled)
+    if (!isCompleted)
         Card(
             shape = shape,
             backgroundColor = AppTheme.colors.surface,
@@ -88,22 +88,22 @@ fun TaskCard(
                     ) {
                         Text(
                             text = taskName,
-                            style = AppTheme.typography.subHeader2,
-                            color = AppTheme.colors.textPrimary,
-                            lineHeight = 20.sp
+                            style = AppTheme.typography.headline4,
+                            color = AppTheme.colors.onSurface,
                         )
                         Text(
                             text = description,
                             style = AppTheme.typography.body3,
-                            color = AppTheme.colors.textHint,
-                            lineHeight = 15.sp
+                            color = AppTheme.colors.onSurface.copy(0.6F),
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(18.dp))
-                val taskButtonName = buttonText ?: LocalContext.current.getString(R.string.start_task)
-                RoundButton(taskButtonName, modifier = Modifier.fillMaxWidth(1f)) {
-                    onClick()
+                if (isActive) {
+                    Spacer(modifier = Modifier.height(18.dp))
+                    val taskButtonName = buttonText ?: LocalContext.current.getString(R.string.start_task)
+                    RoundButton(taskButtonName, modifier = Modifier.fillMaxWidth(1f)) {
+                        onClick()
+                    }
                 }
             }
         }
@@ -131,7 +131,7 @@ fun TaskCard(
                         modifier = Modifier
                             .height(24.dp)
                             .width(24.dp),
-                        tint = AppTheme.colors.textHint
+                        tint = AppTheme.colors.primary.copy(0.05F)
                     )
                     Spacer(modifier = Modifier.width(24.dp))
                     Column(
@@ -142,15 +142,13 @@ fun TaskCard(
                     ) {
                         Text(
                             text = taskName,
-                            style = AppTheme.typography.subHeader2,
-                            color = AppTheme.colors.textHint,
-                            lineHeight = 20.sp
+                            style = AppTheme.typography.headline4,
+                            color = AppTheme.colors.onSurface.copy(0.6F),
                         )
                         Text(
                             text = description,
                             style = AppTheme.typography.body3,
-                            color = AppTheme.colors.textHint,
-                            lineHeight = 15.sp
+                            color = AppTheme.colors.onSurface.copy(0.6F)
                         )
                     }
                 }
@@ -166,7 +164,7 @@ fun TaskCardPreview() =
         taskName = "Medical History Survey",
         description = "Please fill out this survey and help us get to know your health condition",
         buttonText = "Get started"
-    ) { }
+    )
 
 @PreviewGenerated
 @Preview(showBackground = true)
@@ -176,5 +174,5 @@ fun TaskCardCompletedPreview() =
         taskName = "Medical History Survey",
         description = "Please fill out this survey and help us get to know your health condition",
         buttonText = "Get started",
-        buttonEnabled = false
-    ) { }
+        isCompleted = true
+    )

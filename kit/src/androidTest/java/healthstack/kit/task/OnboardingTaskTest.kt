@@ -10,6 +10,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions.swipeLeft
 import androidx.test.espresso.action.ViewActions.swipeRight
 import healthstack.healthdata.link.HealthDataLink
@@ -43,6 +44,7 @@ import io.mockk.coEvery
 import io.mockk.coJustRun
 import io.mockk.mockk
 import java.lang.Thread.sleep
+import junit.framework.TestCase.assertFalse
 import org.junit.Rule
 import org.junit.Test
 
@@ -214,9 +216,12 @@ class OnboardingTaskTest {
         coJustRun { healthLinkMock.requestPermissions() }
         coEvery { healthLinkMock.hasAllPermissions() } returns true
 
+        val task = onboardingTask(viewType)
+        assertFalse(task.isCompleted)
+
         rule.setContent {
             AppTheme {
-                onboardingTask(viewType).Render()
+                task.Render()
             }
         }
 
@@ -228,6 +233,8 @@ class OnboardingTaskTest {
 
     private fun checkEligibilityAndPerform(context: Context) {
         val flow = listOf(
+            { checkEligibilityIntroAndPerform(context) },
+            { Espresso.pressBack() },
             { checkEligibilityIntroAndPerform(context) },
             { checkAgeQuestionAndPerform(context) },
             { checkGenderQuestionAndPerform(context) },

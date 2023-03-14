@@ -17,7 +17,7 @@ import kotlin.reflect.KClass
 
 class HealthConnectAdapter(
     healthDataTypeNames: List<String>,
-    val healthConnectClient: HealthConnectClient,
+    private val healthConnectClient: HealthConnectClient,
 ) : HealthDataLink {
     private val healthDataTypes: List<KClass<out Record>> = healthDataTypeNames.map {
         HealthConnectUtils.nameToRecord(it)
@@ -47,9 +47,14 @@ class HealthConnectAdapter(
             requiredPermissions
         )
 
-    override suspend fun requestPermissions() = launcher.launch(requiredPermissions)
+    override suspend fun requestPermissions() {
+        healthConnectClient.permissionController.revokeAllPermissions()
+        launcher.launch(requiredPermissions)
+    }
 
     override suspend fun getHealthData(startTime: Instant, endTime: Instant, healthDataTypeName: String): HealthData {
+        require(endTime.isAfter(startTime))
+
         // TODO: check permission
 
         val recordType = HealthConnectUtils.nameToRecord(healthDataTypeName)
@@ -73,6 +78,7 @@ class HealthConnectAdapter(
     }
 
     override suspend fun getChanges(token: String, healthDataTypeName: String): Change {
+        HealthConnectUtils.nameToRecord(healthDataTypeName)
         val changesResponse = healthConnectClient.getChanges(token)
 
         return changesResponse.toChange(healthDataTypeName)

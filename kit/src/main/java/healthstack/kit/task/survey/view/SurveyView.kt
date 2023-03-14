@@ -85,7 +85,7 @@ fun MultiPageSurveyLayout(
                 onClickLeftButton = { index -= 1 },
                 onClickRightButton = {
                     if (subStepHolder.subSteps[index].model.getResponse() == null) {
-                        ViewUtil.showToastMessage(context, "please input answer")
+                        ViewUtil.showToastMessage(context, "Please input answer")
                         return@BottomBar
                     }
 
@@ -108,10 +108,10 @@ fun MultiPageSurveyLayout(
                 .verticalScroll(scrollState)
         ) {
             SurveyProgressView(
-                "${index + 1}/${subStepHolder.size}",
+                "${index + 1} out of ${subStepHolder.size}",
                 (index + 1) / subStepHolder.size.toFloat()
             )
-            Spacer(modifier = Modifier.height(64.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             subStepHolder.subSteps[index].Render(callbackCollection)
         }
     }
@@ -123,13 +123,22 @@ private fun getNextButtonMessage(index: Int, subStepHolder: SubStepHolder?, cont
 
 @Composable
 fun SurveyProgressView(progressText: String, progress: Float) {
-    Column {
-        Text(progressText)
-        Spacer(modifier = Modifier.height(15.dp))
+    Column(
+        modifier = Modifier
+            .padding(vertical = 12.dp)
+    ) {
         LinearProgressIndicator(
             progress = progress,
-            modifier = Modifier.fillMaxWidth(1f),
+            modifier = Modifier
+                .fillMaxWidth(1f)
+                .height(12.dp),
             color = AppTheme.colors.primary
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            progressText,
+            style = AppTheme.typography.body2,
+            color = AppTheme.colors.onSurface
         )
     }
 }
@@ -178,7 +187,7 @@ fun SinglePageSurveyLayout(
 @Preview(showBackground = true)
 @Composable
 fun EligibilityCheckerViewPreview() {
-    val view = SurveyView(false)
+    val view = SurveyView(true)
     val model = SurveyModel(
         id = "eligibility",
         title = "Eligibility",

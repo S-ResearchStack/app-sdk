@@ -1,8 +1,8 @@
 package healthstack.kit.ui
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -22,7 +22,7 @@ enum class ButtonShape {
 fun KitButton(
     text: String = "",
     buttonColor: Color = AppTheme.colors.primary,
-    textColor: Color = AppTheme.colors.textSecondary,
+    textColor: Color = AppTheme.colors.surface,
     shape: RoundedCornerShape = RoundedCornerShape(
         MaterialTheme.shapes.small.topStart,
         MaterialTheme.shapes.small.topEnd,
@@ -32,7 +32,7 @@ fun KitButton(
     border: BorderStroke? = null,
     modifier: Modifier = Modifier
         .height(44.dp)
-        .width(320.dp),
+        .fillMaxWidth(),
     enabled: Boolean = true,
     onClick: () -> Unit,
 ) {
@@ -42,7 +42,7 @@ fun KitButton(
         shape = shape,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = buttonColor,
-            disabledBackgroundColor = Color(0xFFB3C6F1)
+            disabledBackgroundColor = buttonColor.copy(alpha = 0.33F)
         ),
         elevation = ButtonDefaults.elevation(defaultElevation = 0.dp),
         border = border,
@@ -51,7 +51,7 @@ fun KitButton(
         Text(
             text = text,
             color = textColor,
-            style = AppTheme.typography.subHeader2
+            style = AppTheme.typography.title2
         )
     }
 }

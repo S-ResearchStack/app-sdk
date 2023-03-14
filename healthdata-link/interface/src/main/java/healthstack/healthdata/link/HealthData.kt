@@ -1,5 +1,11 @@
 package healthstack.healthdata.link
 
+/**
+ * Transfer object created to transmit health data according to Backend API Spec.
+ *
+ * @property type Type of health data. (ex) BloodPressure, HeartRate, SleepSession
+ * @property data List of actual data collected.
+ */
 data class HealthData(
     val type: String,
     val data: List<Map<String, Any>>,

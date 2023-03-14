@@ -1,5 +1,6 @@
 package healthstack.kit.auth
 
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
@@ -43,6 +44,9 @@ class FirebaseGoogleAuthContract(
         getClient(context).signInIntent
 
     override fun parseResult(resultCode: Int, intent: Intent?): FirebaseUser? {
+        if (resultCode != RESULT_OK)
+            return null
+
         val googleAccount = GoogleSignIn
             .getSignedInAccountFromIntent(intent)
             .getResult(ApiException::class.java)

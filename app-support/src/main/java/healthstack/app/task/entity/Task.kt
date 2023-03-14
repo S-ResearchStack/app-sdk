@@ -1,6 +1,7 @@
 package healthstack.app.task.entity
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import healthstack.backend.integration.task.ChoiceProperties
 import healthstack.backend.integration.task.Item
@@ -16,7 +17,7 @@ import java.time.LocalDateTime
 internal const val CHOICE = "CHOICE"
 internal const val SCALE = "SCALE"
 
-@Entity
+@Entity(indices = [Index(value = ["revisionId", "taskId", "scheduledAt"], unique = true)])
 data class Task(
     @PrimaryKey
     val id: Int? = null,
@@ -25,8 +26,8 @@ data class Task(
     val properties: Properties,
     val result: List<Result>? = null,
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    val scheduledAt: LocalDateTime? = null,
-    val validUntil: LocalDateTime? = null,
+    val scheduledAt: LocalDateTime,
+    val validUntil: LocalDateTime,
     val submittedAt: LocalDateTime? = null,
     val startedAt: LocalDateTime? = null,
 ) {
@@ -48,7 +49,10 @@ data class Task(
         properties.title,
         properties.description,
         {},
-        isCompleted = result != null
+        isCompleted = result != null,
+        isActive = LocalDateTime.now().let {
+            scheduledAt <= it && it <= validUntil
+        }
     ).apply {
         properties.items.map {
             this.addQuestion(

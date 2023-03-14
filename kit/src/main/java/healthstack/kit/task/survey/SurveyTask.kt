@@ -25,6 +25,7 @@ open class SurveyTask private constructor(
     name: String,
     description: String,
     val step: SurveyStep,
+    private var isActive: Boolean = true,
 ) : Task(
     id,
     name,
@@ -54,7 +55,8 @@ open class SurveyTask private constructor(
         TaskCard(
             taskName = name,
             description = description,
-            buttonEnabled = isCompleted.not(),
+            isActive = isActive,
+            isCompleted = isCompleted,
             buttonText = LocalContext.current.getString(R.string.start_task)
         ) {
             onClick()
@@ -70,6 +72,7 @@ open class SurveyTask private constructor(
         private val callback: () -> Unit,
         private val pageable: Boolean = true,
         private val isCompleted: Boolean = false,
+        private val isActive: Boolean = true,
     ) {
         private val subSteps = mutableListOf<QuestionSubStep<*, *>>()
 
@@ -108,6 +111,7 @@ open class SurveyTask private constructor(
                 )
             ).apply {
                 this.isCompleted = this@Builder.isCompleted
+                this.isActive = this@Builder.isActive
             }
     }
 }

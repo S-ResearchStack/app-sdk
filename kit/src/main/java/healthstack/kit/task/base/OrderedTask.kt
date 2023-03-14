@@ -5,6 +5,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.MutableLiveData
 
+/**
+ * [Task] with multiple [Step]s
+ * OnboardingTask is an example of OrderedTask
+ *
+ * @property id id
+ * @property name name
+ * @property description concise description of task
+ * @property callback a method returning task's state
+ */
 open class OrderedTask(
     id: String,
     name: String,
@@ -15,6 +24,12 @@ open class OrderedTask(
     name,
     description,
 ) {
+    /**
+     * Inner class indicating progress of this [OrderedTask]
+     *
+     * @property current currently rendered [Step]
+     * @property length a number of [Step]s of this [OrderedTask]
+     */
     inner class Progress {
         var current: Int = 0
         val length: Int = steps.size
@@ -24,10 +39,22 @@ open class OrderedTask(
 
     protected val pageableStream = MutableLiveData<Int>(0)
 
+    /**
+     * A method for checking next [Step]
+     */
     protected fun hasNext(): Boolean = progress.current < progress.length - 1
+
+    /**
+     * A method for checking previous [Step]
+     */
 
     protected fun hasPrev(): Boolean = progress.current > 0
 
+    /**
+     * An object including callback.
+     *
+     * @see [CallbackCollection]
+     */
     open val pageCallbacks =
         object : CallbackCollection() {
             override fun next() {

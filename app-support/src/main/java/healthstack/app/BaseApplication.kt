@@ -65,6 +65,7 @@ private fun Main(
                 }
                 navController.navigate(SignUp.name) {
                     this.launchSingleTop = true
+                    popUpTo(0)
                 }
             }
             onboardingTask.Render()
@@ -78,6 +79,7 @@ private fun Main(
                 }
                 navController.navigate(AppStage.Main.name) {
                     this.launchSingleTop = true
+                    popUpTo(0)
                 }
             }
             singUpTask.Render()

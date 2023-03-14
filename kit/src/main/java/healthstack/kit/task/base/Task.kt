@@ -14,7 +14,9 @@ import androidx.compose.runtime.Composable
  * @property id id
  * @property name name
  * @property description concise description of task
- * @property callback a method returning task's state
+ * @property isCompleted flag for completion of task
+ * @property callback a method handling task's state when it is finished
+ * @property canceled a method handling task's state when it is canceled
  */
 abstract class Task(
     val id: String,
@@ -35,6 +37,9 @@ abstract class Task(
 
     var canceled: (() -> Unit)? = null
 
+    /**
+     * A method for rendering CardView UI.
+     */
     @Composable
     abstract fun CardView(onClick: () -> Unit)
 

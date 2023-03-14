@@ -3,7 +3,6 @@ package healthstack.kit.ui
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
@@ -21,7 +20,7 @@ import healthstack.kit.theme.AppTheme
 @Composable
 fun TopBar(
     title: String = "",
-    color: Color = AppTheme.colors.onSurface,
+    color: Color = AppTheme.colors.background,
     onClickBack: (() -> Unit)?,
     onClickAction: () -> Unit,
     actionIcon: ImageVector = Icons.Default.MoreVert,
@@ -55,7 +54,7 @@ fun TopBar(
                 color = color
             )
         },
-        backgroundColor = MaterialTheme.colors.background.copy(alpha = 0f),
+        backgroundColor = AppTheme.colors.background,
         elevation = 0.dp
     )
 }
@@ -82,8 +81,8 @@ fun TopBar(
         title = {
             Text(
                 text = title,
-                style = AppTheme.typography.topBar,
-                color = color
+                style = AppTheme.typography.subtitle1,
+                color = AppTheme.colors.onSurface
             )
         },
         backgroundColor = AppTheme.colors.background,
@@ -95,12 +94,21 @@ fun TopBar(
 @Preview(showBackground = true)
 @Composable
 fun ConsentTopBarPreview() {
-    TopBar(onClickBack = {})
+    TopBar()
 }
 
 @PreviewGenerated
 @Preview(showBackground = true)
 @Composable
 fun ConsentTopBarPreview2() {
-    TopBar(onClickBack = {}, onClickAction = {})
+    TopBar(onClickBack = null, onClickAction = nothing)
 }
+
+@PreviewGenerated
+@Preview(showBackground = true)
+@Composable
+fun ConsentTopBarPreview3() {
+    TopBar(onClickBack = nothing)
+}
+
+private val nothing: () -> Unit = { }

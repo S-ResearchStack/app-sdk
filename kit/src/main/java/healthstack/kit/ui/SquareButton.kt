@@ -1,8 +1,8 @@
 package healthstack.kit.ui
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,11 +14,11 @@ import healthstack.kit.theme.AppTheme
 fun SquareButton(
     text: String = "",
     buttonColor: Color = AppTheme.colors.primary,
-    textColor: Color = AppTheme.colors.textSecondary,
+    textColor: Color = AppTheme.colors.surface,
     border: BorderStroke? = null,
     modifier: Modifier = Modifier
         .height(44.dp)
-        .width(320.dp),
+        .fillMaxWidth(),
     enabled: Boolean = true,
     onClick: () -> Unit,
 ) {

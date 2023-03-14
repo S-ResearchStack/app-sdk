@@ -14,7 +14,7 @@ class ResearchApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val healthDataRequired = listOf("HeartRateSeries", "SleepSession")
+        val healthDataRequired = listOf("HeartRate", "SleepSession")
 
         HealthDataLinkHolder.initialize(
             HealthConnectAdapter(

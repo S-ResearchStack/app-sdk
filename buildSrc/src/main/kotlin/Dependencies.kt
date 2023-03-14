@@ -154,7 +154,8 @@ object AppDependencies {
     const val RETROFIT_GSON = "com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}"
     const val OKHTTP = "com.squareup.okhttp3:okhttp:${Versions.OKHTTP}"
     const val OKHTTP_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP}"
-
+    const val OKHTTP_MOCKWEB_SERVER = "com.squareup.okhttp3:mockwebserver:${Versions.OKHTTP}"
+    
     val httpClientImplLibs = arrayListOf<String>().apply {
         add(RETROFIT)
         add(RETROFIT_GSON)

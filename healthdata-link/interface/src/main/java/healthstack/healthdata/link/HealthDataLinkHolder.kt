@@ -1,5 +1,8 @@
 package healthstack.healthdata.link
 
+/**
+ * An object holding singleton instance of [HealthDataLink]
+ */
 object HealthDataLinkHolder {
     private lateinit var INSTANCE: HealthDataLink
 

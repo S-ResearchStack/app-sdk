@@ -6,7 +6,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import healthstack.kit.theme.AppTheme
-import healthstack.kit.theme.lightColors
+import healthstack.kit.theme.mainLightColors
 import healthstack.kit.ui.ButtonShape.ROUND
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -22,7 +22,7 @@ class BottomBarTest {
         val text = "bottom"
 
         rule.setContent {
-            AppTheme(colors = lightColors()) {
+            AppTheme(colors = mainLightColors()) {
                 BottomBar(text = text, shape = ROUND) {
                     clicked = true
                 }
@@ -40,7 +40,7 @@ class BottomBarTest {
         val text = "bottom"
 
         rule.setContent {
-            AppTheme(colors = lightColors()) {
+            AppTheme(colors = mainLightColors()) {
                 BottomBar(text = text, buttonEnabled = false, shape = ROUND) { }
             }
         }
@@ -55,7 +55,7 @@ class BottomBarTest {
         val text = "bottom"
 
         rule.setContent {
-            AppTheme(colors = lightColors()) {
+            AppTheme(colors = mainLightColors()) {
                 BottomBarWithGradientBackground(text = text, shape = ROUND) {
                     clicked = true
                 }

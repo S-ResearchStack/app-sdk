@@ -2,12 +2,14 @@ package healthstack.kit.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import healthstack.kit.annotation.PreviewGenerated
@@ -22,10 +24,10 @@ fun BottomSquareButton(
 
 @Composable
 fun BottomRoundButton(
-    text: String,
+    text: String = "Dummy name",
     onClick: () -> Unit,
 ) {
-    BottomButton(text, RoundedCornerShape(50), onClick)
+    BottomButton(text, RoundedCornerShape(4.dp), onClick)
 }
 
 @Composable
@@ -34,8 +36,9 @@ private fun BottomButton(text: String, shape: RoundedCornerShape, onClick: () ->
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Bottom,
         modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp)
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(start = 20.dp, end = 20.dp, bottom = 24.dp)
     ) {
         KitButton(text = text, shape = shape) {
             onClick()
@@ -44,15 +47,17 @@ private fun BottomButton(text: String, shape: RoundedCornerShape, onClick: () ->
 }
 
 @PreviewGenerated
-@Preview(showBackground = true)
+@Preview(showBackground = true, device = Devices.NEXUS_5)
 @Composable
-fun BottomButtonPreview() {
-    BottomSquareButton("hello") {}
+fun BottomSquareButtonPreview() {
+    BottomSquareButton("hello", nothing)
 }
 
 @PreviewGenerated
-@Preview(showBackground = true)
+@Preview(showBackground = true, device = Devices.NEXUS_5)
 @Composable
-fun ButtomRoundButtonPreview() {
-    BottomRoundButton("hello") {}
+fun BottomRoundButtonPreview() {
+    BottomRoundButton("hello", nothing)
 }
+
+private val nothing: () -> Unit = { }

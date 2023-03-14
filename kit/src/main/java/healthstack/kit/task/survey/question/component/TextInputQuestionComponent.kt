@@ -49,7 +49,7 @@ class TextInputQuestionComponent : QuestionComponent<TextInputQuestionModel>() {
             modifier = modifier,
             placeholder = { Text("Type here..") },
             colors = TextFieldDefaults.textFieldColors(
-                textColor = AppTheme.colors.textPrimary,
+                textColor = AppTheme.colors.onSurface,
                 backgroundColor = AppTheme.colors.background,
                 unfocusedIndicatorColor = AppTheme.colors.primary
             ),

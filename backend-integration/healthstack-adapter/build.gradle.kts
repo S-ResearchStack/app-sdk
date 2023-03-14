@@ -55,6 +55,7 @@ dependencies {
     testRuntimeOnly(AppDependencies.JUNIT_ENGINE)
     testImplementation(AppDependencies.testImplLibs)
     testImplementation(AppDependencies.coroutineTestImplLibs)
+    testImplementation(AppDependencies.OKHTTP_MOCKWEB_SERVER)
 }
 
 tasks.dokkaHtml.configure {

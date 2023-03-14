@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -32,15 +33,15 @@ fun GoogleSignInButton(
     Column(
         modifier = Modifier
             .wrapContentSize()
-            .padding(vertical = 20.dp),
+            .padding(start = 20.dp, end = 20.dp, bottom = 24.dp),
     ) {
         Button(
             modifier = Modifier
-                .width(320.dp)
+                .fillMaxWidth()
                 .height(44.dp),
-            border = BorderStroke(width = 1.dp, AppTheme.colors.border),
+            border = BorderStroke(width = 1.dp, AppTheme.colors.primary),
             colors = ButtonDefaults.buttonColors(backgroundColor = AppTheme.colors.background),
-            shape = RoundedCornerShape(2.dp),
+            shape = RoundedCornerShape(4.dp),
             onClick = onClick
         ) {
             Row(
@@ -55,11 +56,13 @@ fun GoogleSignInButton(
                     contentDescription = null,
                     contentScale = ContentScale.Fit
                 )
+
                 Spacer(modifier = Modifier.width(10.dp))
+
                 Text(
                     text = "Continue with Google",
                     color = AppTheme.colors.primary,
-                    style = AppTheme.typography.subHeader2
+                    style = AppTheme.typography.title2
                 )
             }
         }

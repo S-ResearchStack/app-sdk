@@ -29,10 +29,10 @@ import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
-import java.time.LocalDate
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
+import java.time.LocalDate
 
 class BaseAppTest {
     @get:Rule
@@ -82,7 +82,7 @@ class BaseAppTest {
             buttonText = "Continue",
             description = "Congratulations! Everything is all set for you. " +
                 "Now please tap on the button below to start your CardioFlow journey!",
-            drawableId = R.drawable.sample_image_alpha1
+            drawableId = R.drawable.ic_task
         ),
     )
 

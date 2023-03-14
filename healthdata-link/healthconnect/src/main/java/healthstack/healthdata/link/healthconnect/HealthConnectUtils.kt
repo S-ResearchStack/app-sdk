@@ -75,7 +75,7 @@ object HealthConnectUtils {
             "Distance" to DistanceRecord::class,
             "ElevationGained" to ElevationGainedRecord::class,
             "FloorsClimbed" to FloorsClimbedRecord::class,
-            "HeartRateSeries" to HeartRateRecord::class, // Keep legacy Series suffix
+            "HeartRate" to HeartRateRecord::class, // Keep legacy Series suffix
             "HeartRateVariabilityDifferentialIndex" to
                 HeartRateVariabilityDifferentialIndexRecord::class,
             "HeartRateVariabilityRmssd" to HeartRateVariabilityRmssdRecord::class,

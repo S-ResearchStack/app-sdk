@@ -101,13 +101,13 @@ private fun DailyTaskView(
             Spacer(Modifier.height(32.dp))
             Tasks(
                 "Today",
-                viewModel.todayTasks.collectAsState().value, { }
-            ) { }
+                viewModel.todayTasks.collectAsState().value
+            )
             Spacer(Modifier.height(32.dp))
             Tasks(
                 "Completed",
-                viewModel.completedTasks.collectAsState().value, { }
-            ) { }
+                viewModel.completedTasks.collectAsState().value
+            )
         }
     }
 }
@@ -116,8 +116,8 @@ private fun DailyTaskView(
 fun Tasks(
     title: String,
     state: TasksState,
-    onReload: () -> Unit,
-    onStartTask: (Task) -> Unit,
+    onReload: () -> Unit = { },
+    onStartTask: (Task) -> Unit = { },
 ) {
     Column {
         Row(
@@ -129,7 +129,7 @@ fun Tasks(
             Text(
                 title,
                 style = AppTheme.typography.title3,
-                color = AppTheme.colors.textPrimary
+                color = AppTheme.colors.onSurface
             )
             IconButton(onClick = {
                 onReload()

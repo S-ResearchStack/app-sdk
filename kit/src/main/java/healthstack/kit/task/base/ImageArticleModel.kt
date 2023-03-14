@@ -1,5 +1,8 @@
 package healthstack.kit.task.base
 
+/**
+ * A [StepModel] with image.
+ */
 class ImageArticleModel(
     id: String,
     title: String,

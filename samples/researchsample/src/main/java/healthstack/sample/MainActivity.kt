@@ -1,6 +1,12 @@
 package healthstack.sample
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.PowerManager
+import android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.Surface
@@ -30,13 +36,22 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var signUpTask: SignUpTask
 
+    @SuppressLint("BatteryLife")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val healthDataToDisplay = listOf(HeartRateStatus, SleepSessionStatus, TaskStatus)
         val healthDataSyncSpecs = listOf(
-            SyncManager.HealthDataSyncSpec("HeartRateSeries", 15, TimeUnit.MINUTES),
+            SyncManager.HealthDataSyncSpec("HeartRate", 15, TimeUnit.MINUTES),
         )
+
+        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+        if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
+            val intent = Intent()
+            intent.action = ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+            intent.data = Uri.parse("package:$packageName")
+            startActivity(intent)
+        }
 
         (HealthDataLinkHolder.getInstance() as HealthConnectAdapter).createLauncher(this)
 

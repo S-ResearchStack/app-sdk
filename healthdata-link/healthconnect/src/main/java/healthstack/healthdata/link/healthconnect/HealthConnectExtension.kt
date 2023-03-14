@@ -4,6 +4,7 @@ import androidx.health.connect.client.changes.UpsertionChange
 import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.records.Record
 import androidx.health.connect.client.records.SleepSessionRecord
+import androidx.health.connect.client.records.SleepStageRecord
 import androidx.health.connect.client.records.StepsRecord
 import androidx.health.connect.client.response.ChangesResponse
 import androidx.health.connect.client.response.ReadRecordsResponse
@@ -55,6 +56,15 @@ fun List<Record>.toHealthData(healthDataSet: MutableList<Map<String, Any>>) {
             is SleepSessionRecord ->
                 healthDataSet.add(
                     mapOf(
+                        HealthData.START_TIME_KEY to it.startTime,
+                        HealthData.END_TIME_KEY to it.endTime
+                    )
+                )
+
+            is SleepStageRecord ->
+                healthDataSet.add(
+                    mapOf(
+                        "stage" to it.stage,
                         HealthData.START_TIME_KEY to it.startTime,
                         HealthData.END_TIME_KEY to it.endTime
                     )

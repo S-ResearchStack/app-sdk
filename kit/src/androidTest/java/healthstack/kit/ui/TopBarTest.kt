@@ -8,7 +8,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import healthstack.kit.theme.AppTheme
-import healthstack.kit.theme.lightColors
+import healthstack.kit.theme.mainLightColors
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -23,7 +23,7 @@ class TopBarTest {
         var actionButtonClicked = false
         val topBarTitle = "TopBar Test"
         rule.setContent {
-            AppTheme(colors = lightColors()) {
+            AppTheme(colors = mainLightColors()) {
                 TopBar(
                     title = topBarTitle,
                     color = AppTheme.colors.onSurface,

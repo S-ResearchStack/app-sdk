@@ -11,6 +11,7 @@ import healthstack.kit.task.base.ImageArticleModel
 import healthstack.kit.task.base.View
 import healthstack.kit.task.onboarding.model.EligibilityResultModel
 import healthstack.kit.task.survey.question.SubStepHolder
+import healthstack.kit.ui.ButtonShape.ROUND
 import healthstack.kit.ui.layout.ImageArticleLayout
 
 class EligibilityResultView : View<EligibilityResultModel>() {
@@ -29,7 +30,8 @@ class EligibilityResultView : View<EligibilityResultModel>() {
             LocalContext.current.getString(R.string.continuous),
             onClickBack = { callbackCollection.prev() },
             onComplete = { callbackCollection.next() },
-            buttonHidden = callbackCollection.getEligibility().not()
+            buttonHidden = callbackCollection.getEligibility().not(),
+            buttonShape = ROUND
         )
     }
 }

@@ -24,9 +24,9 @@ fun RoundTextField(
     onValueChange: (String) -> Unit,
     placeholder: String = "",
     colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(
-        textColor = AppTheme.colors.textPrimary,
-        backgroundColor = AppTheme.colors.lightBackground,
-        disabledTextColor = Color(0xFFF8F8F8),
+        textColor = AppTheme.colors.onSurface,
+        backgroundColor = AppTheme.colors.surface,
+        disabledTextColor = AppTheme.colors.onSurface.copy(0.38F),
         cursorColor = AppTheme.colors.primary,
         focusedBorderColor = AppTheme.colors.primary,
         unfocusedBorderColor = Color.Transparent,
@@ -42,7 +42,13 @@ fun RoundTextField(
             .height(48.dp),
         onValueChange = { newValue -> onValueChange(newValue) },
         shape = RoundedCornerShape(50),
-        placeholder = { Text(text = placeholder, color = AppTheme.colors.textHint) },
+        placeholder = {
+            Text(
+                text = placeholder,
+                style = AppTheme.typography.subtitle2,
+                color = AppTheme.colors.onSurface.copy(0.6F),
+            )
+        },
         visualTransformation = if (shouldMask) PasswordVisualTransformation() else VisualTransformation.None
     )
 }
@@ -54,9 +60,9 @@ fun SquareTextField(
     onValueChange: (String) -> Unit,
     placeholder: String = "",
     colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(
-        textColor = AppTheme.colors.textPrimary,
-        backgroundColor = AppTheme.colors.lightBackground,
-        disabledTextColor = Color(0xFFF8F8F8),
+        textColor = AppTheme.colors.onSurface,
+        backgroundColor = AppTheme.colors.surface,
+        disabledTextColor = AppTheme.colors.onSurface.copy(0.38F),
         cursorColor = AppTheme.colors.primary,
         focusedBorderColor = AppTheme.colors.primary,
         unfocusedBorderColor = Color.Transparent,
@@ -71,7 +77,13 @@ fun SquareTextField(
             .width(312.dp)
             .height(48.dp),
         onValueChange = { newValue -> onValueChange(newValue) },
-        placeholder = { Text(text = placeholder, color = AppTheme.colors.textHint) },
+        placeholder = {
+            Text(
+                text = placeholder,
+                style = AppTheme.typography.subtitle2,
+                color = AppTheme.colors.onSurface.copy(0.6F),
+            )
+        },
         visualTransformation = if (shouldMask) PasswordVisualTransformation() else VisualTransformation.None,
     )
 }
@@ -80,26 +92,28 @@ fun SquareTextField(
 @Preview(showBackground = true)
 @Composable
 fun RoundTextFieldMaskedPreview() {
-    RoundTextField(value = "password", onValueChange = {}, shouldMask = true)
+    RoundTextField(value = "password", onValueChange = nothing, shouldMask = true)
 }
 
 @PreviewGenerated
 @Preview(showBackground = true)
 @Composable
 fun RoundTextFieldUnMaskedPreview() {
-    RoundTextField(value = "", onValueChange = {}, placeholder = "email", shouldMask = false)
+    RoundTextField(value = "", onValueChange = nothing, placeholder = "email", shouldMask = false)
 }
 
 @PreviewGenerated
 @Preview(showBackground = true)
 @Composable
 fun SquareTextFieldMaskedPreview() {
-    SquareTextField(value = "password", onValueChange = {}, shouldMask = true)
+    SquareTextField(value = "password", onValueChange = nothing, shouldMask = true)
 }
 
 @PreviewGenerated
 @Preview(showBackground = true)
 @Composable
 fun SquareTextFieldUnMaskedPreview() {
-    SquareTextField(value = "", onValueChange = {}, placeholder = "email", shouldMask = false)
+    SquareTextField(value = "", onValueChange = nothing, placeholder = "email", shouldMask = false)
 }
+
+private val nothing: (arg: String) -> Unit = { }

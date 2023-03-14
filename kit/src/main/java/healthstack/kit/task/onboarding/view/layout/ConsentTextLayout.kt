@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,10 +26,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.ImageLoader
 import coil.compose.LocalImageLoader
 import coil.compose.rememberAsyncImagePainter
@@ -38,6 +37,7 @@ import healthstack.kit.task.base.CallbackCollection
 import healthstack.kit.task.onboarding.model.ConsentTextModel
 import healthstack.kit.theme.AppTheme
 import healthstack.kit.ui.BottomBarWithGradientBackground
+import healthstack.kit.ui.ButtonShape
 import healthstack.kit.ui.LabeledCheckbox
 import healthstack.kit.ui.TopBar
 import kotlinx.coroutines.launch
@@ -75,6 +75,7 @@ fun ConsentTextLayout(
         bottomBar = {
             BottomBarWithGradientBackground(
                 text = buttonText,
+                shape = ButtonShape.ROUND,
                 buttonEnabled = allChecked && signature.isNotBlank() && isEveryPermissionActive,
             ) {
                 callbackCollection.next()
@@ -83,7 +84,7 @@ fun ConsentTextLayout(
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .verticalScroll(scrollState)
                 .padding(innerPadding)
         ) {
@@ -95,15 +96,14 @@ fun ConsentTextLayout(
                 Text(
                     modifier = Modifier.padding(vertical = 10.dp),
                     text = model.subTitle,
-                    color = AppTheme.colors.textPrimary,
-                    style = AppTheme.typography.subHeader2
+                    color = AppTheme.colors.onSurface,
+                    style = AppTheme.typography.body1
                 )
                 Text(
                     modifier = Modifier.padding(vertical = 10.dp),
                     text = model.description,
                     style = MaterialTheme.typography.body1,
-                    lineHeight = 23.sp,
-                    color = AppTheme.colors.textPrimary
+                    color = AppTheme.colors.onSurface
                 )
 
                 model.checkBoxTexts.forEachIndexed { index, consentMessage ->
@@ -121,12 +121,13 @@ fun ConsentTextLayout(
                 }
             }
 
+            Spacer(Modifier.height(150.dp))
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(150.dp)
-                    .padding(vertical = 32.dp)
-                    .background(color = Color(0x33C4C4C4))
+                    .background(AppTheme.colors.disabled.copy(0.2F))
                     .clickable {
                         onClickPad()
                     },
@@ -136,12 +137,12 @@ fun ConsentTextLayout(
                         modifier = Modifier.align(alignment = Alignment.Center),
                         text = "Tap to sign.",
                         style = AppTheme.typography.body1,
-                        color = AppTheme.colors.textPrimary
+                        color = AppTheme.colors.onSurface
                     )
                 else
                     Surface(
                         modifier = Modifier.fillMaxSize(),
-                        color = Color(0xFFF8F8F8)
+                        color = AppTheme.colors.disabled.copy(0.2F)
                     ) {
                         val imageLoader = ImageLoader
                             .Builder(LocalContext.current)

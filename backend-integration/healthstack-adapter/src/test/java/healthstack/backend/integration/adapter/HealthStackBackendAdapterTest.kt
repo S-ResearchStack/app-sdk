@@ -16,9 +16,9 @@ import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 
 @DisplayName("Health Stack Backend Adapter Test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -87,6 +87,17 @@ class HealthStackBackendAdapterTest {
         runTest {
             assertThrows<IllegalArgumentException> {
                 healthStackBackendAdapter.getTasks(idToken, lastSyncTime, lastSyncTime)
+            }
+        }
+    }
+
+    @Tag("negative")
+    @Test
+    fun `getTasks should throw IllegalArgumentException when lastSyncTime is after now`() {
+        val lastSyncTime = LocalDateTime.now().plusDays(1)
+        runTest {
+            assertThrows<IllegalArgumentException> {
+                healthStackBackendAdapter.getTasks(idToken, lastSyncTime)
             }
         }
     }

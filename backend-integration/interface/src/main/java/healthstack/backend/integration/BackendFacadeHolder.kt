@@ -1,5 +1,8 @@
 package healthstack.backend.integration
 
+/**
+ * To use the instance as a singleton, we provide holder which holds the single instance.
+ */
 object BackendFacadeHolder {
     private lateinit var INSTANCE: BackendFacade
 

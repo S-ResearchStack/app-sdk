@@ -10,7 +10,7 @@ import healthstack.kit.task.onboarding.step.EligibilityIntroStep
 import healthstack.kit.task.onboarding.step.EligibilityResultStep
 import healthstack.kit.task.onboarding.step.IntroStep
 
-class OnboardingTask private constructor(
+open class OnboardingTask private constructor(
     id: String,
     name: String,
     description: String,

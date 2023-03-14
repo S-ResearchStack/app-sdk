@@ -11,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import healthstack.kit.auth.SignInProvider
 import healthstack.kit.auth.SignInProvider.Basic
@@ -27,6 +28,11 @@ object SignUpComponent {
         }
 }
 
+internal const val EMAIL_TEST_TAG = "emailTestTag"
+internal const val PASSWORD_TEST_TAG = "passwordTag"
+internal const val PASSWORD_CONFIRM_TEST_TAG = "pwConfirmTag"
+internal const val SIGNUP_BUTTON_TEST_TAG = "signupButtonTag"
+
 @Composable
 fun BasicSignUpComponent(onClick: () -> Unit) {
     val emailState = remember { mutableStateOf("") }
@@ -39,6 +45,7 @@ fun BasicSignUpComponent(onClick: () -> Unit) {
         SquareTextField(
             modifier = Modifier
                 .padding(vertical = 8.dp)
+                .testTag(EMAIL_TEST_TAG)
                 .width(312.dp)
                 .height(48.dp),
             value = emailState.value,
@@ -51,6 +58,7 @@ fun BasicSignUpComponent(onClick: () -> Unit) {
         SquareTextField(
             modifier = Modifier
                 .padding(vertical = 8.dp)
+                .testTag(PASSWORD_TEST_TAG)
                 .width(312.dp)
                 .height(48.dp),
             value = passwordState.value,
@@ -64,6 +72,7 @@ fun BasicSignUpComponent(onClick: () -> Unit) {
         SquareTextField(
             modifier = Modifier
                 .padding(vertical = 8.dp)
+                .testTag(PASSWORD_CONFIRM_TEST_TAG)
                 .width(312.dp)
                 .height(48.dp),
             value = passwordConfirmState.value,
@@ -76,6 +85,7 @@ fun BasicSignUpComponent(onClick: () -> Unit) {
 
         SquareButton(
             modifier = Modifier
+                .testTag(SIGNUP_BUTTON_TEST_TAG)
                 .width(320.dp)
                 .height(44.dp),
             text = "Sign Up",

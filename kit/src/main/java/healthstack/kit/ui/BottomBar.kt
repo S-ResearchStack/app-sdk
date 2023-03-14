@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import healthstack.kit.theme.AppTheme
 import healthstack.kit.ui.ButtonShape.ROUND
@@ -51,10 +50,9 @@ fun BottomBar(
     onClick: () -> Unit,
 ) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp)
+            .padding(start = 20.dp, end = 20.dp, bottom = 24.dp)
     ) {
         if (shape == SQUARE)
             SquareButton(
@@ -95,7 +93,7 @@ fun BottomBarWithGradientBackground(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp)
+                .padding(start = 20.dp, end = 20.dp, bottom = 24.dp)
                 .background(
                     gradientBrush,
                 ),
@@ -126,9 +124,8 @@ private fun BottomBarText(
 ) {
     Text(
         text = text,
-        color = MaterialTheme.colors.primary,
-        fontWeight = FontWeight.Bold,
-        style = MaterialTheme.typography.subtitle1,
+        color = AppTheme.colors.primary,
+        style = AppTheme.typography.title2,
         modifier = Modifier
             .padding(horizontal = 24.dp)
             .alpha(if (enabled) 1f else ContentAlpha.disabled)
