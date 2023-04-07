@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="healthstack.sample">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="healthstack.sample">
 
     <queries>
-        <package android:name="com.google.android.apps.healthdata" />
+        <package android:name="com.google.android.apps.healthdata"/>
     </queries>
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:name=".ResearchApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:usesCleartextTraffic="true"
         android:fullBackupOnly="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthcareResearchKit">
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE"/>
             </intent-filter>
 
             <meta-data
                 android:name="health_permissions"
-                android:resource="@array/health_permissions" />
+                android:resource="@array/health_permissions"/>
         </activity>
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"
             android:foregroundServiceType="location|microphone"
-            tools:node="merge" />
+            tools:node="merge"/>
     </application>
 </manifest>

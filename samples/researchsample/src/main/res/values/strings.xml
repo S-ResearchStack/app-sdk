@@ -1,60 +1,62 @@
 <resources>
     <string name="app_name">ResearchSample</string>
-    <string name="consent_overview">Vivamus laoreet erat sit amet tincidunt scelerisque. Maecenas odio sapien, molestie
-        eu vulputate sodales, tincidunt at neque. Nunc venenatis velit et ligula dictum, eget accumsan felis
-        consectetur. Donec scelerisque fermentum vestibulum. Nam molestie finibus mauris, id congue lectus ultrices eu.
-        Nunc et odio vitae dui interdum dictum. Proin sagittis leo quam. Proin vulputate massa ac orci pulvinar, eget
-        rhoncus urna congue. Sed ut vehicula tellus, eget scelerisque enim. Cras lobortis diam at faucibus scelerisque.
-        Curabitur pharetra arcu erat, nec tincidunt mi eleifend ut. Nunc suscipit risus vitae consectetur sodales.
-        Aenean vitae lectus odio. Phasellus diam orci, accumsan non elementum at, finibus condimentum mauris. Nullam est
-        enim, rhoncus a rutrum sed, laoreet a magna.
-    </string>
-    <string name="consent_data_gathering">Duis euismod sollicitudin elementum. Interdum et malesuada fames ac ante ipsum
-        primis in faucibus. Sed at pharetra sapien. Pellentesque cursus laoreet interdum. Nunc mi sapien, congue vel
-        eleifend in, luctus sit amet massa. Nam tempus metus nec mauris bibendum, vel suscipit quam aliquet. Vestibulum
-        sagittis mi et tempus iaculis. Integer varius eros non sagittis elementum. Proin dictum magna sit amet nulla
-        volutpat posuere eget ac mi. Cras aliquam tristique velit nec porttitor. Integer nulla ligula, vestibulum a
-        ullamcorper non, volutpat non nibh. Integer auctor ipsum id leo pharetra, vitae dapibus augue sagittis. Proin ut
-        diam non orci vulputate rutrum a et nulla. Maecenas in varius augue, eu pretium metus. In auctor ornare augue ac
-        sodales.
-    </string>
-    <string name="consent_privacy">Aenean in ligula quis arcu rhoncus tristique. Donec ut nisl suscipit augue ornare
-        venenatis. Suspendisse commodo nibh dignissim, congue justo quis, ultrices sapien. Aliquam at lacinia ante. Sed
-        venenatis quam eget dui lobortis, non ullamcorper tellus molestie. Quisque tempus fringilla velit, et viverra
-        odio accumsan quis. Suspendisse potenti. Nullam ac dolor nunc. Pellentesque nec scelerisque risus. Interdum et
-        malesuada fames ac ante ipsum primis in faucibus. Phasellus consectetur efficitur rutrum. Suspendisse in arcu id
-        ex luctus aliquam quis at quam.
-    </string>
-    <string name="consent_data_use">Maecenas quis varius massa. Nam in dapibus turpis, ut varius eros. Proin a ex enim.
-        Sed faucibus magna vel tincidunt facilisis. Donec id ligula vel mi suscipit sollicitudin. Nulla non magna
-        blandit, semper augue vel, sagittis dui. Curabitur quis rutrum ex. Sed ipsum odio, mattis et dignissim sit amet,
-        volutpat et turpis. Sed quis placerat orci. Duis vitae bibendum diam.
-    </string>
-    <string name="consent_time_commitment">Sed nec tortor sapien. Quisque tempor scelerisque vulputate. Nulla eget
-        consequat urna. Aliquam tempus sagittis orci vel tempus. Mauris porta ante sed maximus iaculis. Etiam elit
-        purus, pretium nec ipsum non, aliquam commodo erat. Aliquam sagittis, nibh at porta pellentesque, libero purus
-        finibus nulla, sed consectetur tellus sem non nisl. Duis eu sollicitudin orci. Quisque tincidunt feugiat sapien
-        ac accumsan. Nullam vitae fringilla quam.
-    </string>
-    <string name="consent_study_tasks">Integer tristique, nulla nec auctor consectetur, justo dolor sagittis erat, vel
-        laoreet erat turpis vitae dui. Praesent purus tellus, eleifend faucibus sapien id, egestas mollis turpis. Fusce
-        enim lorem, ornare quis ligula a, mattis feugiat diam. Praesent ullamcorper fringilla urna sollicitudin
-        convallis. Curabitur eget dapibus ipsum, ac suscipit mauris. In hac habitasse platea dictumst. Vestibulum non
-        hendrerit ex.
-    </string>
-    <string name="consent_study_survey">Nulla convallis ligula ornare efficitur ullamcorper. Vivamus erat enim,
-        malesuada sit amet dolor ac, tristique blandit felis. Praesent a ante ac nisi tempor elementum. Mauris ligula
-        tellus, porttitor eu vehicula eget, condimentum sed nisi. Donec pharetra lacus tincidunt sapien dignissim
-        iaculis. Duis id ultrices tortor, at congue dolor. Donec consequat fringilla leo, eu congue nulla suscipit non.
-    </string>
-    <string name="consent_withdrawing">Sed convallis, ligula vel egestas commodo, mauris nisl tincidunt arcu, id
-        tristique est nunc sit amet felis. Curabitur tortor dolor, ullamcorper vitae pulvinar egestas, venenatis a sem.
-        Cras sit amet maximus magna. Vivamus auctor nisi quis felis mattis, vel sagittis purus pulvinar. Nunc tristique
-        nibh mauris, at eleifend arcu sodales nec. Curabitur rhoncus rutrum metus, ac pretium ante tempor sed. Sed
-        vehicula placerat felis, nec interdum nisl fringilla eu. Nunc iaculis sit amet massa fringilla rhoncus. Maecenas
-        consequat, risus eget commodo suscipit, lorem ex condimentum orci, et sollicitudin nisi eros sed lectus. Sed at
-        erat nisl. Nunc venenatis mi tellus, vitae congue erat dictum a.
-    </string>
+    <!-- study information -->
+    <string-array name="contact_dials">
+        <item>Central Line,9257643619</item>
+        <item>Study Operator,9257643619</item>
+    </string-array>
+    <string name="contact_email">CardioFlow@research.edu</string>
+    <string name="user_agreement_url">https://s-healthstack.io</string>
+    <string name="privacy_polity_url">https://s-healthstack.io</string>
+    <string name="licenses_url">https://s-healthstack.io</string>
+    <!-- my profile -->
+    <string-array name="profile_genders">
+        <item>Female</item>
+        <item>Male</item>
+    </string-array>
+    <string-array name="profile_countries">
+        <item>United States</item>
+        <item>United Kingdom</item>
+        <item>Ukraine</item>
+        <item>Vietnam</item>
+        <item>Virgin Islands (US)</item>
+        <item>Korea</item>
+    </string-array>
+    <string-array name="profile_races">
+        <item>American Indian or Alaskan Native</item>
+        <item>Asian</item>
+        <item>Black or African American</item>
+        <item>Native Hawaiian</item>
+        <item>White</item>
+    </string-array>
+    <!-- This field will be disabled in profile view -->
+    <string-array name="from_eligibility">
+        <item>age</item>
+        <item>gender</item>
+    </string-array>
+    <!-- This field will be displayed in profile view -->
+    <string-array name="profile_field">
+        <item>age</item>
+        <item>gender</item>
+        <item>id</item>
+        <item>email</item>
+        <item>race</item>
+        <item>country</item>
+        <item>dob</item>
+    </string-array>
+    <string name="id_title">Participant ID</string>
+    <string name="email_title">Email</string>
+    <string name="race_title">Race</string>
+    <string name="race_placeholder">Select Race</string>
+    <string name="country_title">Country</string>
+    <string name="country_placeholder">Select a country</string>
+    <string name="dob_title">Date of Birth</string>
+    <string name="dob_placeholder">MM / DD / YYYY</string>
+    <string name="age_title">Age</string>
+    <string name="age_placeholder">Select Age</string>
+    <string name="gender_title">Biological Gender</string>
+    <string name="gender_placeholder">Select Gender</string>
+    <!-- backend integration -->
     <string name="research_platform_endpoint">http://you.must.set.backend.url</string>
     <string name="research_project_id">you_must_set_project_id</string>
 </resources>

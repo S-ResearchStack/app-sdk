@@ -23,7 +23,7 @@ class TopBarTest {
         var actionButtonClicked = false
         val topBarTitle = "TopBar Test"
         rule.setContent {
-            AppTheme(colors = mainLightColors()) {
+            AppTheme(mainLightColors()) {
                 TopBar(
                     title = topBarTitle,
                     color = AppTheme.colors.onSurface,

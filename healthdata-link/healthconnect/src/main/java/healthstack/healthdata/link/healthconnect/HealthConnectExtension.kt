@@ -1,11 +1,14 @@
 package healthstack.healthdata.link.healthconnect
 
 import androidx.health.connect.client.changes.UpsertionChange
+import androidx.health.connect.client.records.BloodPressureRecord
 import androidx.health.connect.client.records.HeartRateRecord
+import androidx.health.connect.client.records.OxygenSaturationRecord
 import androidx.health.connect.client.records.Record
 import androidx.health.connect.client.records.SleepSessionRecord
 import androidx.health.connect.client.records.SleepStageRecord
 import androidx.health.connect.client.records.StepsRecord
+import androidx.health.connect.client.records.WeightRecord
 import androidx.health.connect.client.response.ChangesResponse
 import androidx.health.connect.client.response.ReadRecordsResponse
 import healthstack.healthdata.link.Change
@@ -67,6 +70,28 @@ fun List<Record>.toHealthData(healthDataSet: MutableList<Map<String, Any>>) {
                         "stage" to it.stage,
                         HealthData.START_TIME_KEY to it.startTime,
                         HealthData.END_TIME_KEY to it.endTime
+                    )
+                )
+            is BloodPressureRecord ->
+                healthDataSet.add(
+                    mapOf(
+                        HealthData.TIME_KEY to it.time,
+                        "systolic" to it.systolic.inMillimetersOfMercury,
+                        "diastolic" to it.diastolic.inMillimetersOfMercury,
+                    )
+                )
+            is OxygenSaturationRecord ->
+                healthDataSet.add(
+                    mapOf(
+                        HealthData.TIME_KEY to it.time,
+                        "value" to it.percentage.value
+                    )
+                )
+            is WeightRecord ->
+                healthDataSet.add(
+                    mapOf(
+                        HealthData.TIME_KEY to it.time,
+                        "kilograms" to it.weight.inKilograms
                     )
                 )
             else -> throw RuntimeException("Unsupported Data Type.")

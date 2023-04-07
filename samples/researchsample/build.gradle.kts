@@ -67,6 +67,7 @@ dependencies {
     implementation(AppDependencies.composeImplLibs)
     implementation(AppDependencies.hiltImplLibs)
     implementation(AppDependencies.healthDataImplLibs)
+    implementation(AppDependencies.CORE_SPLASHSCREEN)
 
     kapt(AppDependencies.hiltKaptLibs)
 }

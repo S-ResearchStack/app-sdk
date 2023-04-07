@@ -5,11 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.PowerManager
 import android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.Surface
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 import healthstack.app.BaseApplication
 import healthstack.app.status.HeartRateStatus
@@ -38,6 +41,11 @@ class MainActivity : ComponentActivity() {
 
     @SuppressLint("BatteryLife")
     override fun onCreate(savedInstanceState: Bundle?) {
+        var keepSplashScreen = true
+        val delay = 1250L
+        installSplashScreen().setKeepOnScreenCondition { keepSplashScreen && (savedInstanceState == null) }
+        Handler(Looper.getMainLooper()).postDelayed({ keepSplashScreen = false }, delay)
+
         super.onCreate(savedInstanceState)
 
         val healthDataToDisplay = listOf(HeartRateStatus, SleepSessionStatus, TaskStatus)
@@ -62,7 +70,7 @@ class MainActivity : ComponentActivity() {
                         onboardingTask,
                         signUpTask,
                         healthDataToDisplay,
-                        healthDataSyncSpecs
+                        healthDataSyncSpecs,
                     )
                 }
             }

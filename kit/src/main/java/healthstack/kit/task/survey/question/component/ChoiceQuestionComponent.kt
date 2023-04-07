@@ -40,7 +40,7 @@ import kotlin.math.roundToInt
 
 class ChoiceQuestionComponent<T : ChoiceQuestionModel<*>> : QuestionComponent<T>() {
 
-    private val modifier: Modifier = Modifier.fillMaxWidth(1f)
+    private val modifier: Modifier = Modifier.fillMaxWidth()
 
     @Composable
     override fun Render(model: T, callbackCollection: CallbackCollection) {

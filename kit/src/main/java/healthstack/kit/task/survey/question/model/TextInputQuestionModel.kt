@@ -7,8 +7,9 @@ class TextInputQuestionModel(
     query: String,
     explanation: String? = null,
     drawableId: Int? = null,
+    skipLogics: List<SkipLogic> = emptyList(),
     answer: String? = null,
-) : QuestionModel<String>(id, query, explanation, drawableId, Text, answer) {
+) : QuestionModel<String>(id, query, explanation, drawableId, Text, skipLogics, answer) {
     var input: String = ""
 
     override fun getResponse(): String = input

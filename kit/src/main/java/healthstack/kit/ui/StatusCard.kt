@@ -130,7 +130,7 @@ fun HealthDataStatusRow(@DrawableRes drawableId: Int, value: String, unit: Strin
                 .width(80.dp)
                 .height(40.dp),
 
-            ) {
+        ) {
             Row {
                 Text(
                     text = value,

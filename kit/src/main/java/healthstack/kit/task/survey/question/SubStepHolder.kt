@@ -22,7 +22,7 @@ import healthstack.kit.task.base.CallbackCollection
 class SubStepHolder(
     val id: String,
     val name: String,
-    val subSteps: List<QuestionSubStep<*, *>>,
+    val subSteps: List<List<QuestionSubStep<*, *>>>,
 ) {
     /**
      * A method for rendering UI.
@@ -34,18 +34,18 @@ class SubStepHolder(
      * @see [CallbackCollection]
      */
     @Composable
-    fun Render(callbackCollection: CallbackCollection) {
-        subSteps.forEach {
+    fun Render(callbackCollection: CallbackCollection, index: Int) {
+        subSteps[index].forEach {
             it.Render(callbackCollection)
         }
     }
 
-    val size: Int = subSteps.size
-
     /**
      * A method to get result using its subSteps.
      */
-    fun isSufficient(): Boolean = subSteps.all {
-        it.model.isCorrect()
+    fun isSufficient(): Boolean = subSteps.all { section ->
+        section.all {
+            it.model.isCorrect()
+        }
     }
 }

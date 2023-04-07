@@ -54,7 +54,7 @@ open class SurveyStep(
                 subStepHolder = SubStepHolder(
                     "sub-step-holder",
                     "Sub-Step-Holder",
-                    questionnaireSubSteps
+                    listOf(questionnaireSubSteps),
                 )
             )
     }

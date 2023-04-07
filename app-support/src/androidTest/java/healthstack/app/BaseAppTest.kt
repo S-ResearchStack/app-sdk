@@ -121,7 +121,7 @@ class BaseAppTest {
 
         val pref = SettingPreference(rule.activity)
         runBlocking {
-            pref.setAppStage(AppStage.Main)
+            pref.setAppStage(AppStage.Home)
         }
         rule.setContent {
             TaskRoomDatabase.initialize(LocalContext.current)

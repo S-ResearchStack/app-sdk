@@ -20,7 +20,7 @@ class TaskCardTest {
         var clicked = false
         val onClick = { clicked = true }
         rule.setContent {
-            AppTheme(colors = mainLightColors()) {
+            AppTheme(mainLightColors()) {
                 TaskCard(
                     taskName = "TaskName",
                     description = "Good For You",
@@ -39,7 +39,7 @@ class TaskCardTest {
     @Test
     fun testDisabledTaskButton() {
         rule.setContent {
-            AppTheme(colors = mainLightColors()) {
+            AppTheme(mainLightColors()) {
                 TaskCard(
                     taskName = "TaskName",
                     description = "Good For You",

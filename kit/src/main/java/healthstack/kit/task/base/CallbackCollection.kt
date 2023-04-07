@@ -15,4 +15,8 @@ open class CallbackCollection {
 
     open fun setEligibility(value: Boolean): Unit = Unit
     open fun getEligibility(): Boolean = true
+
+    // TODO: value type has to be specified
+    open fun setActivityResult(key: String, value: Any): Unit = Unit
+    open fun getActivityResult(): String = "not implemented"
 }

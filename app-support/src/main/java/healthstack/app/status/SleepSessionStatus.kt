@@ -10,7 +10,7 @@ import kotlin.math.roundToInt
 object SleepSessionStatus : StatusDataType() {
     override fun getIcon(): Int = R.drawable.ic_sleep
 
-    override fun getUnitString(): String = " hrs\nSleep"
+    override fun getUnitString(): String = " hrs"
 
     override suspend fun getLatestStatus(): Any? = getLatestSleepSession()
 

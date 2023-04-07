@@ -33,7 +33,7 @@ class TextInputQuestionComponent : QuestionComponent<TextInputQuestionModel>() {
             InputTextField(
                 response,
                 Modifier
-                    .fillMaxWidth(1f)
+                    .fillMaxWidth()
                     .testTag("TextQuestionInputField")
             ) {
                 response = it

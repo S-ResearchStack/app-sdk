@@ -4,7 +4,6 @@ import healthstack.backend.integration.registration.User
 import healthstack.backend.integration.task.TaskResult
 import healthstack.backend.integration.task.TaskSpec
 import healthstack.healthdata.link.HealthData
-import java.time.LocalDateTime
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -19,6 +18,7 @@ import org.junit.jupiter.params.provider.ValueSource
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
+import java.time.LocalDateTime
 
 @DisplayName("Health Stack Backend Adapter Test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -64,7 +64,7 @@ class HealthStackBackendAdapterTest {
         val lastSyncTime = LocalDateTime.now()
         val endTime = lastSyncTime.plusHours(1L)
         val taskSpec = TaskSpec(
-            0, "taskId", "title", "description",
+            0, "taskId", "title", "SURVEY", "description",
             "0 0 12 1/1 * ? *", "2022-09-12T12:00:00", "2022-09-12T12:00:00",
             1440, emptyList()
         )

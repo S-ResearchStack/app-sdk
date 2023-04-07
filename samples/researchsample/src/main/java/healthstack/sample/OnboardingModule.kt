@@ -10,7 +10,6 @@ import healthstack.kit.auth.SignInProvider.Google
 import healthstack.kit.task.base.ImageArticleModel
 import healthstack.kit.task.onboarding.OnboardingTask
 import healthstack.kit.task.onboarding.model.ConsentTextModel
-import healthstack.kit.task.onboarding.model.EligibilityCheckerModel
 import healthstack.kit.task.onboarding.model.EligibilityIntroModel
 import healthstack.kit.task.onboarding.model.EligibilityIntroModel.EligibilityCondition
 import healthstack.kit.task.onboarding.model.EligibilityIntroModel.ViewType.Card
@@ -164,11 +163,6 @@ object OnboardingModule {
             "to make sure that you are eligible to join this study.",
         conditions = eligibilitySections,
         viewType = Card
-    )
-
-    private fun eligibilityChecker(@ApplicationContext context: Context) = EligibilityCheckerModel(
-        id = "eligibility",
-        title = "Eligibility",
     )
 
     private fun eligibilityResult(@ApplicationContext context: Context) = EligibilityResultModel(

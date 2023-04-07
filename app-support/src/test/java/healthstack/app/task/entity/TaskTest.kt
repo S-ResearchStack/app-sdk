@@ -6,6 +6,7 @@ import healthstack.backend.integration.task.Contents
 import healthstack.backend.integration.task.Item
 import healthstack.backend.integration.task.Option
 import healthstack.backend.integration.task.ScaleProperties
+import healthstack.kit.task.survey.SurveyTask
 import healthstack.kit.task.survey.question.model.ChoiceQuestionModel
 import healthstack.kit.task.survey.question.model.MultiChoiceQuestionModel
 import org.junit.Assert.assertEquals
@@ -26,6 +27,7 @@ class TaskTest {
             description = "property description",
             items = emptyList()
         ),
+        type = "SURVEY",
         scheduledAt = LocalDateTime.now(),
         validUntil = LocalDateTime.now().plusDays(1)
     )
@@ -127,8 +129,8 @@ class TaskTest {
             )
         )
 
-        val surveyTask = testTask.toViewTask()
-        val questions = surveyTask.step.subStepHolder.subSteps.map { it.model }
+        val surveyTask = testTask.toViewTask() as SurveyTask
+        val questions = surveyTask.step.subStepHolder.subSteps.first().map { it.model }
         assertEquals(testTask.properties.items.size, questions.size)
         assertTrue(questions[0] is ChoiceQuestionModel)
         assertTrue(questions[1] is MultiChoiceQuestionModel)

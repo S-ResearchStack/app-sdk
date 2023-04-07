@@ -8,6 +8,7 @@ import healthstack.backend.integration.BackendFacadeHolder
 import healthstack.backend.integration.adapter.HealthStackBackendAdapter
 import healthstack.healthdata.link.HealthDataLinkHolder
 import healthstack.healthdata.link.healthconnect.HealthConnectAdapter
+import healthstack.kit.sensor.SensorUtils
 
 @HiltAndroidApp
 class ResearchApplication : Application() {
@@ -29,6 +30,8 @@ class ResearchApplication : Application() {
                 this.getString(R.string.research_project_id)
             ).let { HealthStackBackendAdapter.getInstance() }
         )
+
+        SensorUtils.initialize(this)
 
         TaskRoomDatabase.initialize(this)
     }

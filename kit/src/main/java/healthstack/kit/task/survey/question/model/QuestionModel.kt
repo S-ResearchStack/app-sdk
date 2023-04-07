@@ -6,6 +6,7 @@ abstract class QuestionModel<R>(
     val explanation: String? = null,
     val drawableId: Int? = null,
     val type: QuestionType,
+    val skipLogics: List<SkipLogic>,
     private val answer: R? = null,
 ) {
 
@@ -19,3 +20,8 @@ abstract class QuestionModel<R>(
         Text
     }
 }
+
+class SkipLogic(
+    val condition: String,
+    val goToItemSequence: Int
+)

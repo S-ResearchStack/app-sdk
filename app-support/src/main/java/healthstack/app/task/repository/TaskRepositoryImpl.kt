@@ -6,6 +6,7 @@ import healthstack.app.task.entity.Task.Result
 import healthstack.backend.integration.BackendFacadeHolder
 import healthstack.backend.integration.task.ItemResult
 import healthstack.backend.integration.task.TaskResult
+import healthstack.kit.task.activity.ActivityTask
 import healthstack.kit.task.survey.SurveyTask
 import healthstack.kit.task.survey.question.SubStepHolder
 import kotlinx.coroutines.CoroutineScope
@@ -21,14 +22,21 @@ class TaskRepositoryImpl : TaskRepository {
     private val taskDao = TaskRoomDatabase.getInstance().taskDao()
 
     override suspend fun updateResult(task: ViewTask) {
-        if (task is SurveyTask) taskDao.setResult(
-            task.id,
-            task.step.subStepHolder.getResult(),
-            task.startedAt.toString(),
-            LocalDateTime.now().toString()
-        )
-        else
-            taskDao.setSubmittedAt(task.id, LocalDateTime.now().toString())
+        when (task) {
+            is SurveyTask -> taskDao.setResult(
+                task.id,
+                task.step.subStepHolder.getResult(),
+                task.startedAt.toString(),
+                LocalDateTime.now().toString()
+            )
+            is ActivityTask -> taskDao.setResult(
+                task.id,
+                listOf(Result("activity", task.result.toString().replace("=", ":"))),
+                task.startedAt.toString(),
+                LocalDateTime.now().toString()
+            )
+            else -> taskDao.setSubmittedAt(task.id, LocalDateTime.now().toString())
+        }
 
         uploadTaskResult(task.id)
     }
@@ -91,9 +99,11 @@ class TaskRepositoryImpl : TaskRepository {
 }
 
 fun SubStepHolder.getResult(): List<Result> =
-    subSteps.map {
-        Result(
-            it.model.id,
-            it.getResult().toString()
-        )
+    subSteps.flatMap { section ->
+        section.map {
+            Result(
+                it.model.id,
+                it.getResult().toString()
+            )
+        }
     }

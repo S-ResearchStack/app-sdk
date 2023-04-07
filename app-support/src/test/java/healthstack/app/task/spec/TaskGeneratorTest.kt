@@ -7,15 +7,15 @@ import healthstack.backend.integration.task.ItemProperties
 import healthstack.backend.integration.task.Option
 import healthstack.backend.integration.task.ScaleProperties
 import healthstack.backend.integration.task.TaskSpec
-import java.text.ParseException
-import java.time.LocalDateTime
-import java.time.format.DateTimeParseException
-import java.time.temporal.ChronoUnit
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import java.text.ParseException
+import java.time.LocalDateTime
+import java.time.format.DateTimeParseException
+import java.time.temporal.ChronoUnit
 
 class TaskGeneratorTest {
 
@@ -24,6 +24,7 @@ class TaskGeneratorTest {
     private val everydayTaskSpec = TaskSpec(
         revisionId = 1,
         taskId = "task-id",
+        type = "SURVEY",
         title = "spec-test",
         description = "good test",
         schedule = "0 0 12 1/1 * ? *",

@@ -3,7 +3,7 @@ package healthstack.kit.ui
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import healthstack.kit.theme.AppTheme
-import healthstack.kit.theme.darkColors
+import healthstack.kit.theme.mainLightColors
 import java.time.LocalDate
 import org.junit.Rule
 import org.junit.Test
@@ -15,7 +15,7 @@ class WeeklyCardTest {
     @Test
     fun testWeeklyCard() {
         rule.setContent {
-            AppTheme(colors = darkColors()) {
+            AppTheme(mainLightColors()) {
                 WeeklyCard(LocalDate.of(2015, 7, 7))
             }
         }

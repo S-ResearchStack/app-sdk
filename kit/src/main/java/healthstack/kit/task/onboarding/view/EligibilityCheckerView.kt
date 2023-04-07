@@ -4,4 +4,4 @@ import healthstack.kit.task.survey.view.SurveyView
 
 open class EligibilityCheckerView(
     pageable: Boolean = true,
-) : SurveyView(pageable)
+) : SurveyView(pageable, true)

@@ -21,6 +21,7 @@ object Versions {
 
     object AndroidX {
         const val CORE_KTX = "1.7.0"
+        const val CORE_SPLASHSCREEN = "1.0.0"
         const val COMPAT = "1.4.1"
         const val WORK = "2.7.1"
         const val CONCURRENT = "1.1.0"
@@ -38,6 +39,7 @@ object Versions {
     const val SUPPORT_ANNOTATION = "28"
     const val GSON = "2.9.0"
     const val CRON_QUARTZ = "2.3.2"
+    const val ANTLR = "4.11.1"
 
     const val DOKKA = "1.6.21"
 
@@ -70,6 +72,7 @@ object Versions {
     const val COIL = "2.2.1"
     const val MATERIAL_UI = "1.4.0"
     const val ACCOMPANIST_PAGER = "0.25.0"
+    const val ACCOMPANIST_SYSTEMUI = "0.25.1"
     const val SIGNATURE_PAD = "0.0.18"
 }
 
@@ -104,6 +107,8 @@ object AppDependencies {
     const val GOOGLE_HEALTH_DATA =
         "com.google.android.libraries.healthdata:health-data-api:${Versions.Google.HEALTH_DATA}"
     const val GOOGLE_HEALTH_CONNECT = "androidx.health.connect:connect-client:${Versions.Google.HEALTH_CONNECT}"
+
+    const val ANTLR = "org.antlr:antlr4:${Versions.ANTLR}"
 
     val healthDataImplLibs = arrayListOf<String>().apply {
         add(ANDROIDX_WORK)
@@ -155,7 +160,7 @@ object AppDependencies {
     const val OKHTTP = "com.squareup.okhttp3:okhttp:${Versions.OKHTTP}"
     const val OKHTTP_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP}"
     const val OKHTTP_MOCKWEB_SERVER = "com.squareup.okhttp3:mockwebserver:${Versions.OKHTTP}"
-    
+
     val httpClientImplLibs = arrayListOf<String>().apply {
         add(RETROFIT)
         add(RETROFIT_GSON)
@@ -234,10 +239,13 @@ object AppDependencies {
     const val COMPOSE_MATERIAL_ANDROID_ICON_EXT =
         "androidx.compose.material:material-icons-extended:${Versions.Compose.UI}"
     const val COMPOSE_ACTIVITY = "androidx.activity:activity-compose:${Versions.Compose.ACTIVITY}"
+    const val ACCOMPANIST_SYSTEMUI =
+        "com.google.accompanist:accompanist-systemuicontroller:${Versions.ACCOMPANIST_SYSTEMUI}"
     const val ACCOMPANIST_PAGER = "com.google.accompanist:accompanist-pager:${Versions.ACCOMPANIST_PAGER}"
     const val SIGNATURE = "se.warting.signature:signature-pad:${Versions.SIGNATURE_PAD}"
     const val COIL_SVG = "io.coil-kt:coil-svg:${Versions.COIL}"
     const val COIL_COMPOSE = "io.coil-kt:coil-compose:${Versions.COIL}"
+    const val CORE_SPLASHSCREEN = "androidx.core:core-splashscreen:${Versions.AndroidX.CORE_SPLASHSCREEN}"
 
     val composeImplLibs = arrayListOf<String>().apply {
         add(MATERIAL)

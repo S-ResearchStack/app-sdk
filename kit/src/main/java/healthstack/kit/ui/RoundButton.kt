@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import healthstack.kit.theme.AppTheme
 
@@ -19,6 +20,7 @@ fun RoundButton(
     modifier: Modifier = Modifier
         .height(44.dp)
         .fillMaxWidth(),
+    radius: Dp = 4.dp,
     enabled: Boolean = true,
     onClick: () -> Unit,
 ) {
@@ -26,7 +28,7 @@ fun RoundButton(
         text,
         buttonColor,
         textColor,
-        RoundedCornerShape(4.dp),
+        RoundedCornerShape(radius),
         border,
         modifier,
         enabled,

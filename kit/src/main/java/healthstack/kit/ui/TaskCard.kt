@@ -52,7 +52,7 @@ fun TaskCard(
             backgroundColor = AppTheme.colors.surface,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(151.dp)
+                .wrapContentHeight()
                 .shadow(elevation = 2.dp, shape = shape, clip = false),
         ) {
             Column(
@@ -91,17 +91,18 @@ fun TaskCard(
                             style = AppTheme.typography.headline4,
                             color = AppTheme.colors.onSurface,
                         )
-                        Text(
-                            text = description,
-                            style = AppTheme.typography.body3,
-                            color = AppTheme.colors.onSurface.copy(0.6F),
-                        )
+                        if (description.isNotEmpty())
+                            Text(
+                                text = description,
+                                style = AppTheme.typography.body3,
+                                color = AppTheme.colors.onSurface.copy(0.6F),
+                            )
                     }
                 }
                 if (isActive) {
                     Spacer(modifier = Modifier.height(18.dp))
                     val taskButtonName = buttonText ?: LocalContext.current.getString(R.string.start_task)
-                    RoundButton(taskButtonName, modifier = Modifier.fillMaxWidth(1f)) {
+                    RoundButton(taskButtonName, radius = 50.dp, modifier = Modifier.fillMaxWidth(1f)) {
                         onClick()
                     }
                 }
@@ -129,9 +130,8 @@ fun TaskCard(
                         imageVector = Icons.Default.CheckCircle,
                         contentDescription = "",
                         modifier = Modifier
-                            .height(24.dp)
-                            .width(24.dp),
-                        tint = AppTheme.colors.primary.copy(0.05F)
+                            .size(24.dp),
+                        tint = AppTheme.colors.primary.copy(0.38F)
                     )
                     Spacer(modifier = Modifier.width(24.dp))
                     Column(
@@ -143,13 +143,14 @@ fun TaskCard(
                         Text(
                             text = taskName,
                             style = AppTheme.typography.headline4,
-                            color = AppTheme.colors.onSurface.copy(0.6F),
+                            color = AppTheme.colors.onSurface.copy(0.38F),
                         )
-                        Text(
-                            text = description,
-                            style = AppTheme.typography.body3,
-                            color = AppTheme.colors.onSurface.copy(0.6F)
-                        )
+                        if (description.isNotEmpty())
+                            Text(
+                                text = description,
+                                style = AppTheme.typography.body3,
+                                color = AppTheme.colors.onSurface.copy(0.38F),
+                            )
                     }
                 }
             }
@@ -175,4 +176,25 @@ fun TaskCardCompletedPreview() =
         description = "Please fill out this survey and help us get to know your health condition",
         buttonText = "Get started",
         isCompleted = true
+    )
+
+@PreviewGenerated
+@Preview(showBackground = true)
+@Composable
+fun TaskCardCompleted1Preview() =
+    TaskCard(
+        taskName = "Medical History Survey",
+        description = "",
+        buttonText = "Get started",
+        isCompleted = true
+    )
+
+@PreviewGenerated
+@Preview(showBackground = true)
+@Composable
+fun TaskCardPreview1() =
+    TaskCard(
+        taskName = "Medical History Survey",
+        description = "",
+        buttonText = "Get started"
     )

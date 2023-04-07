@@ -14,6 +14,10 @@ class PropertyDeserializer : JsonDeserializer<ItemProperties> {
     ): ItemProperties? {
         val jsonObject: JsonObject = json?.asJsonObject ?: throw NullPointerException()
 
+        if (!jsonObject.has("tag"))
+        // TODO refactor branching logic
+            return null
+
         return when (jsonObject["tag"].asString.uppercase()) {
             "SLIDER" -> context?.deserialize(json, ScaleProperties::class.java)
             "RADIO", "CHECKBOX" -> context?.deserialize(

@@ -18,7 +18,7 @@ class StatusCardTest {
         val value = "2"
         val unit = "BPM"
         rule.setContent {
-            AppTheme(colors = mainLightColors()) {
+            AppTheme(mainLightColors()) {
                 StatusCard(drawableId = drawable.ic_100tb, value = value, unit = unit)
             }
         }

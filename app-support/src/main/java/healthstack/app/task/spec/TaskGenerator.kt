@@ -2,10 +2,10 @@ package healthstack.app.task.spec
 
 import healthstack.app.task.entity.Task.Properties
 import healthstack.backend.integration.task.TaskSpec
+import org.quartz.CronExpression
 import java.text.ParseException
 import java.time.LocalDateTime
 import java.util.Date
-import org.quartz.CronExpression
 
 object TaskGenerator {
 
@@ -33,6 +33,7 @@ object TaskGenerator {
                 null,
                 spec.revisionId,
                 spec.taskId,
+                spec.type,
                 Properties(spec.title, spec.description, spec.items),
                 null,
                 LocalDateTime.now(),

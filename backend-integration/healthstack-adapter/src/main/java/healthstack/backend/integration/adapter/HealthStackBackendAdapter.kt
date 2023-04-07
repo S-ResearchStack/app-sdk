@@ -3,6 +3,7 @@ package healthstack.backend.integration.adapter
 import healthstack.backend.integration.BackendFacade
 import healthstack.backend.integration.exception.RegisterException
 import healthstack.backend.integration.exception.UserAlreadyExistsException
+import healthstack.backend.integration.registration.UserProfile
 import healthstack.healthdata.link.HealthData
 import java.net.HttpURLConnection
 import java.time.LocalDateTime
@@ -29,6 +30,9 @@ class HealthStackBackendAdapter(
             }
         }
     }
+
+    override suspend fun updateUser(idToken: String, userId: String, userProfile: UserProfile) =
+        networkClient.updateUser(idToken, projectId, userId, userProfile)
 
     @Throws(IllegalArgumentException::class)
     override suspend fun getTasks(

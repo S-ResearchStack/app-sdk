@@ -23,9 +23,7 @@ class TextFieldTest {
     fun testMaskTextFieldTest() {
         var text = "text message"
         rule.setContent {
-            val colors = mainLightColors()
-            colors.updateColorsFrom(mainLightColors())
-            AppTheme(colors = colors) {
+            AppTheme(mainLightColors()) {
                 RoundTextField(
                     modifier = Modifier.testTag(testTag),
                     value = text,
@@ -46,7 +44,7 @@ class TextFieldTest {
     fun testUnmaskTextFieldTest() {
         var text = "text message"
         rule.setContent {
-            AppTheme(colors = mainLightColors()) {
+            AppTheme(mainLightColors()) {
                 RoundTextField(
                     modifier = Modifier.testTag(testTag),
                     value = text,

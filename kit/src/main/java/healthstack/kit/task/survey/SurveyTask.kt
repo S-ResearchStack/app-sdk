@@ -25,7 +25,6 @@ open class SurveyTask private constructor(
     name: String,
     description: String,
     val step: SurveyStep,
-    private var isActive: Boolean = true,
 ) : Task(
     id,
     name,
@@ -74,7 +73,8 @@ open class SurveyTask private constructor(
         private val isCompleted: Boolean = false,
         private val isActive: Boolean = true,
     ) {
-        private val subSteps = mutableListOf<QuestionSubStep<*, *>>()
+        private val subStepList = mutableListOf<MutableList<QuestionSubStep<*, *>>>()
+        private var isSurveyWithSection = true
 
         @Suppress("UNCHECKED_CAST")
         fun <R> addQuestion(question: QuestionModel<R>) {
@@ -84,8 +84,12 @@ open class SurveyTask private constructor(
             )
         }
 
-        fun <R> addQuestion(question: QuestionModel<R>, component: Component<QuestionModel<R>>) {
-            subSteps.add(
+        private fun <R> addQuestion(question: QuestionModel<R>, component: Component<QuestionModel<R>>) {
+            if (subStepList.isEmpty()) {
+                subStepList.add(mutableListOf())
+                isSurveyWithSection = false
+            }
+            subStepList.last().add(
                 QuestionSubStep(
                     UUID.randomUUID().toString(),
                     UUID.randomUUID().toString(),
@@ -95,23 +99,26 @@ open class SurveyTask private constructor(
             )
         }
 
-        fun build(): SurveyTask =
-            SurveyTask(
-                id,
-                revisionId,
-                taskId,
+        fun addSection() {
+            subStepList.add(mutableListOf())
+        }
+
+        fun build(): SurveyTask = SurveyTask(
+            id,
+            revisionId,
+            taskId,
+            name,
+            description,
+            SurveyStep(
+                UUID.randomUUID().toString(),
                 name,
-                description,
-                SurveyStep(
-                    UUID.randomUUID().toString(),
-                    name,
-                    SurveyModel(id, name),
-                    SurveyView(pageable),
-                    subStepHolder = SubStepHolder(id, name, subSteps)
-                )
-            ).apply {
-                this.isCompleted = this@Builder.isCompleted
-                this.isActive = this@Builder.isActive
-            }
+                SurveyModel(id, name),
+                SurveyView(pageable = !isSurveyWithSection, isSurveyWithSection = isSurveyWithSection),
+                subStepHolder = SubStepHolder(id, name, subStepList)
+            )
+        ).apply {
+            this.isCompleted = this@Builder.isCompleted
+            this.isActive = this@Builder.isActive
+        }
     }
 }

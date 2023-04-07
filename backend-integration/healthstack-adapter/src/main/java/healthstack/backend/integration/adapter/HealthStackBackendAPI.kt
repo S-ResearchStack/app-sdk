@@ -1,6 +1,7 @@
 package healthstack.backend.integration.adapter
 
 import healthstack.backend.integration.registration.User
+import healthstack.backend.integration.registration.UserProfile
 import healthstack.backend.integration.task.TaskResult
 import healthstack.backend.integration.task.TaskSpec
 import healthstack.healthdata.link.HealthData
@@ -28,7 +29,15 @@ interface HealthStackBackendAPI {
         @Body user: User,
     )
 
-    @GET("api/projects/{projectId}/tasks")
+    @PATCH("/api/projects/{projectId}/users/{userId}")
+    suspend fun updateUser(
+        @Header("id-token") idToken: String,
+        @Path("projectId") projectId: String,
+        @Path("userId") userId: String,
+        @Body userProfile: UserProfile,
+    )
+
+    @GET("/api/projects/{projectId}/tasks")
     suspend fun getTasks(
         @Header("id-token") idToken: String,
         @Path("projectId") projectId: String,
@@ -37,7 +46,7 @@ interface HealthStackBackendAPI {
         @Query("status") status: String = "PUBLISHED",
     ): List<TaskSpec>
 
-    @PATCH("api/projects/{projectId}/tasks")
+    @PATCH("/api/projects/{projectId}/tasks")
     suspend fun uploadTaskResult(
         @Header("id-token") idToken: String,
         @Path("projectId") projectId: String,

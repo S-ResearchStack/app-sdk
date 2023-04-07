@@ -20,7 +20,8 @@ data class TaskSpec(
     @SerializedName("id")
     val taskId: String,
     val title: String,
-    val description: String,
+    val type: String,
+    val description: String?,
     val schedule: String,
     val startTime: String,
     val endTime: String,
@@ -59,11 +60,13 @@ data class Item(
  */
 data class Contents(
     val type: String,
-    val title: String,
+    val required: Boolean,
+    val title: String? = null,
     val explanation: String? = null,
     @SerializedName("properties")
-    val itemProperties: ItemProperties,
-    val required: Boolean,
+    val itemProperties: ItemProperties? = null,
+    val completionTitle: String? = null,
+    val completionDescription: String? = null,
 )
 
 /**
@@ -73,6 +76,8 @@ data class Contents(
  */
 open class ItemProperties(
     val tag: String,
+    @SerializedName("skip_logic")
+    val skipLogic: List<SkipLogic>?
 )
 
 /**
@@ -83,8 +88,9 @@ open class ItemProperties(
  */
 class ChoiceProperties(
     tag: String,
+    skipLogic: List<SkipLogic>? = null,
     val options: List<Option>,
-) : ItemProperties(tag)
+) : ItemProperties(tag, skipLogic)
 
 /**
  * Item properties for the scale question.
@@ -97,11 +103,12 @@ class ChoiceProperties(
  */
 class ScaleProperties(
     tag: String,
+    skipLogic: List<SkipLogic>? = null,
     val low: Int,
     val high: Int,
     val lowLabel: String?,
     val highLabel: String?,
-) : ItemProperties(tag)
+) : ItemProperties(tag, skipLogic)
 
 /**
  * Stores the option.
@@ -110,4 +117,9 @@ class ScaleProperties(
  */
 data class Option(
     val value: String,
+)
+
+data class SkipLogic(
+    val condition: String,
+    val goToItemSequence: Int,
 )

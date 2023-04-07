@@ -10,10 +10,11 @@ class ChoiceQuestionModel<R>(
     explanation: String? = null,
     drawableId: Int? = null,
     answer: R? = null,
+    skipLogics: List<SkipLogic> = emptyList(),
 
     val candidates: List<R>,
     val viewType: ViewType = Radio,
-) : QuestionModel<R>(id, query, explanation, drawableId, Choice, answer) {
+) : QuestionModel<R>(id, query, explanation, drawableId, Choice, skipLogics, answer) {
 
     var selection: Int? = null
         set(value) {

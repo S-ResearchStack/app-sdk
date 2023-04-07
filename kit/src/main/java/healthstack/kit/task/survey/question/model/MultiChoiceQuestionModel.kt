@@ -8,8 +8,9 @@ open class MultiChoiceQuestionModel(
     explanation: String? = null,
     drawableId: Int? = null,
     answer: String? = null,
+    skipLogics: List<SkipLogic> = emptyList(),
     val candidates: List<String>,
-) : QuestionModel<String>(id, query, explanation, drawableId, MultipleChoice, answer) {
+) : QuestionModel<String>(id, query, explanation, drawableId, MultipleChoice, skipLogics, answer) {
 
     private val selections: MutableSet<Int> = mutableSetOf()
 

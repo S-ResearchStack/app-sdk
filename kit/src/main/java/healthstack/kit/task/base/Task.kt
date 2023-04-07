@@ -33,6 +33,8 @@ abstract class Task(
 
     var isCompleted: Boolean = false
 
+    var isActive: Boolean = true
+
     var callback: (() -> Unit)? = null
 
     var canceled: (() -> Unit)? = null

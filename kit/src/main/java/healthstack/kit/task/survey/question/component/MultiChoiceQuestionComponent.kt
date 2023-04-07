@@ -19,7 +19,7 @@ import healthstack.kit.ui.LabeledCheckbox
 
 class MultiChoiceQuestionComponent<T : MultiChoiceQuestionModel> : QuestionComponent<T>() {
 
-    private val modifier: Modifier = Modifier.fillMaxWidth(1f)
+    private val modifier: Modifier = Modifier.fillMaxWidth()
 
     @Composable
     override fun Render(model: T, callbackCollection: CallbackCollection) {

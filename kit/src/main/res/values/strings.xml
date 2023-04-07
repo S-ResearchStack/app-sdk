@@ -2,17 +2,104 @@
     <string name="app_name" translatable="false">HealthcareResearchKit</string>
     <string name="open_source_licence" translatable="false">Open Source Licence</string>
     <string name="open_source_licence_textfiled_label" translatable="false">Licence</string>
-    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+        exercitation ullamco laboris
+        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum
+        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+        culpa qui officia
         deserunt mollit anim id est laborum.
     </string>
-    <string name="lorem_ipsum_short" translatable="false">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+    <string name="lorem_ipsum_short" translatable="false">Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit, sed do eiusmod tempor
         incididunt ut labore et dolore magna aliqua.
     </string>
-    <string name="default_web_client_id" translatable="false">this will be updated by com.google.gms.google-services plugin</string>
-        <string name="failed_to_signin" translatable="false">failed to sign-in</string>
+    <string name="default_web_client_id" translatable="false">this will be updated by
+        com.google.gms.google-services plugin
+    </string>
+    <string name="failed_to_signin" translatable="false">failed to sign-in</string>
+    <!-- study information -->
+    <string-array name="contact_dials">
+        <item>name,dial</item>
+        <item>name,dial</item>
+    </string-array>
+    <string name="contact_email">sample@email.com</string>
+    <string name="study_explanation">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+        do
+        eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit
+        in voluptate velit
+        esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.\n\nDuis aute irure dolor in reprehenderit in voluptate velit
+        esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+    </string>
+    <string name="reward_information">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+        do
+        eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit
+        in voluptate velit
+        esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.\n\nDuis aute irure dolor in reprehenderit in voluptate velit
+        esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+    </string>
+    <string name="user_agreement_url">https://url</string>
+    <string name="privacy_polity_url">https://url</string>
+    <string name="licenses_url">https://url</string>
+    <!-- my profile -->
+    <string-array name="profile_genders">
+        <item>Female</item>
+        <item>Male</item>
+    </string-array>
+    <string-array name="profile_countries">
+        <item>United States</item>
+        <item>United Kingdom</item>
+        <item>Ukraine</item>
+        <item>Vietnam</item>
+        <item>Virgin Islands (US)</item>
+        <item>Korea</item>
+    </string-array>
+    <string-array name="profile_races">
+        <item>American Indian or Alaskan Native</item>
+        <item>Asian</item>
+        <item>Black or African American</item>
+        <item>Native Hawaiian</item>
+        <item>White</item>
+    </string-array>
+    <string-array name="from_eligibility">
+        <item>age</item>
+        <item>gender</item>
+    </string-array>
+    <string-array name="profile_field">
+        <item>age</item>
+        <item>gender</item>
+        <item>id</item>
+        <item>email</item>
+        <item>race</item>
+        <item>country</item>
+        <item>dob</item>
+    </string-array>
+    <string name="id_title">Participant ID</string>
+    <string name="email_title">Email</string>
+    <string name="race_title">Race</string>
+    <string name="race_placeholder">Select Race</string>
+    <string name="country_title">Country</string>
+    <string name="country_placeholder">Select a country</string>
+    <string name="dob_title">Date of Birth</string>
+    <string name="dob_placeholder">MM / DD / YYYY</string>
+    <string name="age_title">Age</string>
+    <string name="age_placeholder">Select Age</string>
+    <string name="gender_title">Biological Gender</string>
+    <string name="gender_placeholder">Select Gender</string>
     <!-- localization -->
     <string name="intro_button_text">Get Started</string>
     <string name="eligibility_intro_button_text">Check Eligibility</string>

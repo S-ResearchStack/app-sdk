@@ -70,11 +70,15 @@ dependencies {
     implementation(platform(AppDependencies.FIREBASE_BOM))
     implementation(AppDependencies.authImplLibs)
     implementation(AppDependencies.ANDROIDX_NAVIGATION_COMPOSE)
+    implementation(AppDependencies.ANDROIDX_DATASTORE)
     implementation(AppDependencies.composeImplLibs)
     implementation(AppDependencies.ACCOMPANIST_PAGER)
+    implementation(AppDependencies.ACCOMPANIST_SYSTEMUI)
     implementation(AppDependencies.SIGNATURE)
     implementation(AppDependencies.coilImplLibs)
     implementation(AppDependencies.SUPPORT_ANNOTATION)
+    implementation(AppDependencies.ANTLR)
+    implementation(files("../jarfile/branch-logic-engine-0.0.1-plain.jar"))
 
     debugImplementation(AppDependencies.uiDebugLibs)
 

@@ -3,7 +3,6 @@ package healthstack.kit.task.survey.question.component
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,8 +19,6 @@ abstract class QuestionComponent<T : QuestionModel<*>> : Component<T>() {
             text = model.question,
             style = AppTheme.typography.subtitle1,
             color = AppTheme.colors.onSurface,
-            modifier = Modifier
-                .padding(horizontal = 12.dp)
         )
 
         if (!model.explanation.isNullOrBlank()) {
@@ -29,8 +26,7 @@ abstract class QuestionComponent<T : QuestionModel<*>> : Component<T>() {
             Text(
                 text = model.explanation,
                 modifier = Modifier
-                    .fillMaxWidth(1f)
-                    .padding(start = 12.dp, end = 12.dp),
+                    .fillMaxWidth(),
                 style = AppTheme.typography.body2,
                 color = AppTheme.colors.onBackground.copy(0.6F)
             )
