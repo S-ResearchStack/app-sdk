@@ -6,7 +6,7 @@ The app SDK for the Samsung Health Stack is a software framework for app develop
 -   A web portal for survey creation, participant management, and data analysis
 
 Refer to <a href="https://s-healthstack.io" target="_blank">https://s-healthstack.io</a> for documentation, or jump directly to:
-- The <a href="https://s-healthstack.io/installing-the-backend.html" target="_blank">backend system installation instructions</a>
-- The <a href="https://s-healthstack.io/installing-the-sdk.html" target="_blank">app SDK installation instructions</a>
-- The <a href="https://s-healthstack.io/installing-the-portal.html" target="_blank">web portal installation instructions</a>
+- The <a href="https://s-healthstack.io/install-backend.html" target="_blank">backend system installation instructions</a>
+- The <a href="https://s-healthstack.io/install-sdk.html" target="_blank">app SDK installation instructions</a>
+- The <a href="https://s-healthstack.io/install-portal.html" target="_blank">web portal installation instructions</a>
 - The <a href="https://s-healthstack.io/tutorial.html" target="_blank">getting started tutorial</a>
