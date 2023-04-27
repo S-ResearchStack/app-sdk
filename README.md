@@ -35,41 +35,42 @@ Follow these instructions to install, build, and verify the app SDK.
 
 1. Set up and install Android Studio on Windows, macOS, or Linux using the instructions at [https://developer.android.com/studio](https://developer.android.com/studio){:target="_blank"}.
 
-## III. Clone the Repository
-
-1. Clone the app SDK repository. 
-
-   ```
-   git clone https://github.com/S-HealthStack/app-sdk
-   ```
-
 # Build
 
-<!-- Zain to check if detekt is supported -->
+## III. Prepare the Modules
 
-## IV. Prepare the Modules
+1. Open your project's build.gradle file in a text editor or an IDE that supports Kotlin DSL.
 
-1. Clean all modules.
+2. Locate the `dependencies` block in the build.gradle file. If the block doesn't exist, you can add it at the end of the file:
 
    ```
-   ./gradlew clean 
+   dependencies {
+       // dependencies go here
+   }
    ```
 
-2. Build either all modules or just the kit.
+3. Add the S-HealthStack SDK and related module dependencies inside the `dependencies` block, like so:
 
-   - To build all modules, including sample modules:
+   ```
+   dependencies {
+       implementation("io.s-healthstack:kit:0.9.1")
+       implementation("io.s-healthstack:app-support:0.9c")
+       implementation("io.s-healthstack:healthdata-link:0.9c")
+       implementation("io.s-healthstack:healthconnect:0.9c")
+       implementation("io.s-healthstack:backend-integration:0.9c")
+       implementation("io.s-healthstack:healthstack-adapter:0.9c")
+   }
+   ```
 
-     ```
-     ./gradlew build -x detekt
-     ```
+   These dependencies will add the necessary modules of the S-HealthStack SDK to your project. You can find a list of all the modules here: [Maven Central - s-healthstack](https://central.sonatype.com/search?smo=true&q=s-healthstack). 
 
-   - To build just the kit module and generate an android archive package (aar):
+   > Version 0.9c refers to the beta version. Please refer to the Maven Center to see the latest versions.
 
-     ```
-     ./gradlew :kit:build -x detekt
-     ```
+4. Save the build.gradle file.
 
-## V. Unit Test
+5. Build your project with Gradle, either using the command line or from within your IDE. Gradle will automatically download the SDK and its dependencies from the appropriate repositories and include them in your project.
+
+## IV. Unit Test
 
 1. Test either all modules or just the kit.
 
@@ -86,15 +87,15 @@ Follow these instructions to install, build, and verify the app SDK.
      ```
 
 
-## VI. Check the Coding Style
+## V. Check the Coding Style
 
 1. Use the [Compose API guidelines](https://github.com/androidx/androidx/blob/androidx-main/compose/docs/compose-api-guidelines.md){:target="_blank"} to check your coding style. The guidelines outline the patterns, best practices, and prescriptive style guidelines for writing idiomatic Jetpack Compose APIs. 
 
-## VII. Create a Firebase Project
+## VI. Create a Firebase Project
 
 1. Follow the instructions at [https://firebase.google.com/docs/android/setup](https://firebase.google.com/docs/android/setup){:target="_blank"} to add a Firebase project to the Firebase account you created during backend system installation.
 
-## VIII. Per App Configuration
+## VII. Per App Configuration
 
 After app creation, for each app you need to:
 
@@ -104,6 +105,6 @@ After app creation, for each app you need to:
 
 Refer to [Configuring the App Environment](../app-creation/configure-app.md) for details.
 
-## IX. Reference Documentation
+## VIII. Reference Documentation
 
 Refer to our [API reference](../../api-reference/api-overview.md) and [SDK reference](../../sdk-reference/kit.md) documentation for details on all the backend API endpoints and SDK packages.
