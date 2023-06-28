@@ -1,6 +1,7 @@
 package healthstack.sample
 
 import android.content.Context
+import android.content.res.Configuration
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,9 +30,10 @@ import healthstack.kit.task.signup.SignUpTask
 import healthstack.kit.task.signup.model.RegistrationCompletedModel
 import healthstack.kit.task.signup.model.SignUpModel
 import healthstack.kit.task.survey.question.model.ChoiceQuestionModel
-import healthstack.kit.task.survey.question.model.ChoiceQuestionModel.ViewType.DropMenu
+import healthstack.kit.task.survey.question.model.ChoiceQuestionModel.ViewType.Dropdown
 import healthstack.kit.task.survey.question.model.QuestionModel
 import healthstack.kit.theme.AppColors
+import healthstack.kit.theme.mainDarkColors
 import healthstack.kit.theme.mainLightColors
 import healthstack.sample.R.drawable
 import healthstack.sample.registration.RegistrationModel
@@ -42,9 +44,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object OnboardingModule {
 
+    private fun isNightMode(context: Context): Boolean =
+        context.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration
+            .UI_MODE_NIGHT_YES
+
     @Singleton
     @Provides
-    fun providesAppColors(): AppColors = mainLightColors()
+    fun providesAppColors(@ApplicationContext context: Context): AppColors =
+        if (isNightMode(context)) mainDarkColors() else mainLightColors()
 
     @Singleton
     @Provides
@@ -237,7 +244,7 @@ object OnboardingModule {
             "age",
             "What's your age?",
             candidates = (20..50).toList(),
-            viewType = DropMenu
+            viewType = Dropdown
         ),
         ChoiceQuestionModel(
             "gender",

@@ -9,9 +9,9 @@ class GuidedBreathingIntroModel(
     title: String = "Guided Breathing",
     header: String = "Guided Breathing",
     body: List<String>? = listOf(
-        "Sit upright and take 10 deep breaths in and out as loudly as you can.",
+        "Sit upright and take 3 deep breaths in and out as loudly as you can.",
+        "Inhale for 5 seconds and exhale for 5 seconds. Then, repeat for 3 cycles.",
         "Do not hold your breath between inhale & exhale.",
-        "Try your best to follow the breathing guidance.",
     ),
     drawableId: Int? = R.drawable.ic_activity_guided_breathing,
     buttonText: String? = "Begin",

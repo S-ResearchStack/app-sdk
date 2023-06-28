@@ -76,7 +76,8 @@ fun ConsentTextLayout(
             BottomBarWithGradientBackground(
                 text = buttonText,
                 shape = ButtonShape.ROUND,
-                buttonEnabled = allChecked && signature.isNotBlank() && isEveryPermissionActive,
+                buttonEnabled = allChecked && signature.isNotBlank() && isEveryPermissionActive && model
+                    .encodedSignature.isNotEmpty(),
             ) {
                 callbackCollection.next()
             }

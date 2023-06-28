@@ -4,7 +4,7 @@ import healthstack.kit.task.base.StepModel
 import healthstack.kit.ui.TextType
 import healthstack.kit.ui.TextType.PARAGRAPH
 
-abstract class SimpleViewActivityModel(
+open class SimpleViewActivityModel(
     id: String,
     title: String,
     val header: String,

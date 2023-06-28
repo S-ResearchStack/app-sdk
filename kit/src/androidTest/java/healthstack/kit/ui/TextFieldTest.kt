@@ -6,6 +6,7 @@ import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTextReplacement
 import healthstack.kit.theme.AppTheme
 import healthstack.kit.theme.mainLightColors
@@ -38,6 +39,23 @@ class TextFieldTest {
         node.performTextReplacement(changed)
         node.assertTextEquals("••••••••••••")
         assertEquals(changed, text)
+    }
+
+    @Test
+    fun testNotEnabledTextFieldTest() {
+        val text = "text message"
+        rule.setContent {
+            AppTheme(mainLightColors()) {
+                RoundTextBoxWithIcon(
+                    label = "first",
+                    modifier = Modifier.testTag(testTag),
+                    value = text,
+                    enabled = false
+                )
+            }
+        }
+        rule.onNodeWithText("first")
+            .assertExists()
     }
 
     @Test

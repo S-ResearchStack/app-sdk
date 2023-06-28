@@ -10,6 +10,12 @@ import androidx.compose.ui.unit.dp
 import healthstack.kit.task.base.CallbackCollection
 import healthstack.kit.task.survey.question.model.QuestionModel
 import healthstack.kit.task.survey.question.model.QuestionModel.QuestionType
+import healthstack.kit.task.survey.question.model.QuestionModel.QuestionType.Choice
+import healthstack.kit.task.survey.question.model.QuestionModel.QuestionType.DateTime
+import healthstack.kit.task.survey.question.model.QuestionModel.QuestionType.Image
+import healthstack.kit.task.survey.question.model.QuestionModel.QuestionType.MultipleChoice
+import healthstack.kit.task.survey.question.model.QuestionModel.QuestionType.Ranking
+import healthstack.kit.task.survey.question.model.QuestionModel.QuestionType.Text
 import healthstack.kit.theme.AppTheme
 
 abstract class QuestionComponent<T : QuestionModel<*>> : Component<T>() {
@@ -17,7 +23,7 @@ abstract class QuestionComponent<T : QuestionModel<*>> : Component<T>() {
     override fun Render(model: T, callbackCollection: CallbackCollection) {
         Text(
             text = model.question,
-            style = AppTheme.typography.subtitle1,
+            style = AppTheme.typography.title2,
             color = AppTheme.colors.onSurface,
         )
 
@@ -36,9 +42,12 @@ abstract class QuestionComponent<T : QuestionModel<*>> : Component<T>() {
     companion object {
         fun defaultComponentOf(type: QuestionType): Component<out QuestionModel<*>> =
             when (type) {
-                QuestionType.Choice -> ChoiceQuestionComponent()
-                QuestionType.Text -> TextInputQuestionComponent()
-                QuestionType.MultipleChoice -> MultiChoiceQuestionComponent()
+                Choice -> ChoiceQuestionComponent()
+                Text -> TextInputQuestionComponent()
+                MultipleChoice -> MultiChoiceQuestionComponent()
+                Ranking -> RankingQuestionComponent()
+                DateTime -> DateTimeQuestionComponent()
+                Image -> ImageQuestionComponent()
             }
     }
 }

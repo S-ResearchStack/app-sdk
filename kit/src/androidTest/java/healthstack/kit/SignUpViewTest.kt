@@ -1,7 +1,9 @@
 package healthstack.kit
 
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import com.google.firebase.auth.FirebaseAuth
 import healthstack.kit.auth.SignInProvider.Basic
 import healthstack.kit.auth.SignInProvider.Google
@@ -46,5 +48,9 @@ class SignUpViewTest {
 
         rule.onNodeWithText("testTitle").assertExists()
         rule.onNodeWithText("WrongTestTitle").assertDoesNotExist()
+
+        rule.onNodeWithContentDescription("back button icon")
+            .assertExists()
+            .performClick()
     }
 }

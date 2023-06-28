@@ -13,6 +13,8 @@ interface TaskRepository {
 
     fun getCompletedTasks(targetDay: LocalDate): Flow<List<Task>>
 
+    fun getCompletedTasksToSync(from: LocalDateTime, to: LocalDateTime): Flow<List<TaskEntity>>
+
     suspend fun insertAll(tasks: List<TaskEntity>)
 
     suspend fun updateResult(task: Task)

@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import healthstack.kit.task.activity.model.ColorWordChallengeMeasureModel
@@ -44,7 +45,7 @@ class ColorWordChallengeMeasureView : View<ColorWordChallengeMeasureModel>() {
         var state by remember { mutableStateOf(0) }
         var cur by remember { mutableStateOf(0) }
         var textColor by remember { mutableStateOf(model.getRandomColor()) }
-        val testset = model.getTestset()
+        val testset = model.testset
 
         val onClick: (Int) -> Unit = func@{ idx ->
             if (testset[cur][0] == idx) state = 1
@@ -94,11 +95,14 @@ class ColorWordChallengeMeasureView : View<ColorWordChallengeMeasureModel>() {
                 )
 
                 Box(
-                    modifier = Modifier.fillMaxWidth().height(300.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(300.dp),
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth(),
                         text = model.colorWords[testset[cur][testset[cur][0]]],
                         style = AppTheme.typography.headline2,
                         color = Color(textColor),
@@ -110,10 +114,10 @@ class ColorWordChallengeMeasureView : View<ColorWordChallengeMeasureModel>() {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
-                    Circle(Color(model.colorCodes[testset[cur][1]])) { onClick(1) }
-                    Circle(Color(model.colorCodes[testset[cur][2]])) { onClick(2) }
-                    Circle(Color(model.colorCodes[testset[cur][3]])) { onClick(3) }
-                    Circle(Color(model.colorCodes[testset[cur][4]])) { onClick(4) }
+                    Circle(Color(model.colorCodes[testset[cur][1]]), model.colorWords[testset[cur][1]]) { onClick(1) }
+                    Circle(Color(model.colorCodes[testset[cur][2]]), model.colorWords[testset[cur][2]]) { onClick(2) }
+                    Circle(Color(model.colorCodes[testset[cur][3]]), model.colorWords[testset[cur][3]]) { onClick(3) }
+                    Circle(Color(model.colorCodes[testset[cur][4]]), model.colorWords[testset[cur][4]]) { onClick(4) }
                 }
             }
         }
@@ -123,11 +127,17 @@ class ColorWordChallengeMeasureView : View<ColorWordChallengeMeasureModel>() {
 @Composable
 fun Circle(
     color: Color = Color.Red,
+    tag: String = "RED",
     onClick: () -> Unit = {},
 ) {
     Column(modifier = Modifier.wrapContentSize(Alignment.Center)) {
         Box(
-            modifier = Modifier.size(40.dp).clip(CircleShape).background(color).clickable { onClick() }
+            modifier = Modifier
+                .size(40.dp)
+                .clip(CircleShape)
+                .background(color)
+                .clickable { onClick() }
+                .testTag(tag)
         )
     }
 }

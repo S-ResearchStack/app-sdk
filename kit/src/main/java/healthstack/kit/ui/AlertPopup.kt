@@ -18,26 +18,32 @@ import healthstack.kit.theme.AppTheme
 
 @Composable
 fun AlertPopup(
-    initiateText: String,
+    initiateText: String?,
     title: String,
     body: String,
     confirmText: String,
-    dismissText: String,
+    dismissText: String?,
+    onDismissRequest: () -> Unit = {},
     onConfirmClicked: () -> Unit = {},
 ) {
     val popupState = remember { mutableStateOf(false) }
 
-    ClickableText(
-        text = AnnotatedString(initiateText),
-        style = AppTheme.typography.title3.copy(color = AppTheme.colors.primary),
-        onClick = { popupState.value = true }
-    )
+    initiateText?.let {
+        ClickableText(
+            text = AnnotatedString(it),
+            style = AppTheme.typography.title3.copy(color = AppTheme.colors.primary),
+            onClick = { popupState.value = true }
+        )
+    } ?: run { popupState.value = true }
 
     if (popupState.value) {
         AlertDialog(
             modifier = Modifier.width(280.dp).shadow(12.dp),
             shape = RoundedCornerShape(8.dp),
-            onDismissRequest = { popupState.value = false },
+            onDismissRequest = {
+                onDismissRequest()
+                popupState.value = false
+            },
             title = {
                 Text(
                     text = title,
@@ -66,12 +72,17 @@ fun AlertPopup(
                 )
             },
             dismissButton = {
-                ClickableText(
-                    text = AnnotatedString(dismissText),
-                    style = AppTheme.typography.title3.copy(color = AppTheme.colors.primary),
-                    onClick = { popupState.value = false },
-                    modifier = Modifier.padding(vertical = 20.dp, horizontal = 6.dp)
-                )
+                dismissText?.let {
+                    ClickableText(
+                        text = AnnotatedString(it),
+                        style = AppTheme.typography.title3.copy(color = AppTheme.colors.primary),
+                        onClick = {
+                            onDismissRequest()
+                            popupState.value = false
+                        },
+                        modifier = Modifier.padding(vertical = 20.dp, horizontal = 6.dp)
+                    )
+                } ?: Unit
             }
         )
     }

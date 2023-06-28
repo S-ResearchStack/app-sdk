@@ -1,5 +1,6 @@
 package healthstack.backend.integration.task
 
+import java.time.Clock
 import java.time.LocalDateTime
 
 /**
@@ -17,7 +18,7 @@ interface TaskClient {
     suspend fun getTasks(
         idToken: String,
         lastSyncTime: LocalDateTime,
-        endTime: LocalDateTime = LocalDateTime.now(),
+        endTime: LocalDateTime = LocalDateTime.now(Clock.systemUTC()),
     ): List<TaskSpec>
 
     /**
@@ -27,4 +28,13 @@ interface TaskClient {
      * @param result [healthstack.backend.integration.task.TaskResult]
      */
     suspend fun uploadTaskResult(idToken: String, result: TaskResult)
+
+    /**
+     * Uploads the user's task execution result as a file to Backend.
+     *
+     * @param idToken An encrypted token containing the user's information issued when the logs in to the application.
+     * @param sourcePath Absolute path of the result file stored in device.
+     * @param targetPath Bucket path for the result file to be uploaded.
+     */
+    suspend fun uploadTaskResultAsFile(idToken: String, sourcePath: String, targetPath: String)
 }

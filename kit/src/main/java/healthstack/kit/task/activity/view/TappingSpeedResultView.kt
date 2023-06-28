@@ -25,7 +25,7 @@ class TappingSpeedResultView : SimpleActivityView<TappingSpeedResultModel>() {
 fun TappingSpeedResultPreview() {
     val view = TappingSpeedResultView()
     val model = TappingSpeedResultModel("id", "Tapping Speed")
-    val callbackCollection = object : CallbackCollection() {}
+    val callbackCollection = CallbackCollection()
     return view.Render(
         model,
         callbackCollection,

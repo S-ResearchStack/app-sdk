@@ -108,10 +108,12 @@ class HealthPlatformAdapter(
         return healthDataClient.readData(request).await().toHealthData(healthDataType)
     }
 
+    @ForVerificationGenerated
     override suspend fun getChangesToken(healthDataTypeName: String): String {
         TODO("Not yet implemented")
     }
 
+    @ForVerificationGenerated
     override suspend fun getChanges(token: String, healthDataTypeName: String): Change {
         TODO("Not yet implemented")
     }

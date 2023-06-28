@@ -8,7 +8,11 @@ import healthstack.backend.integration.BackendFacadeHolder
 import healthstack.backend.integration.adapter.HealthStackBackendAdapter
 import healthstack.healthdata.link.HealthDataLinkHolder
 import healthstack.healthdata.link.healthconnect.HealthConnectAdapter
+import healthstack.kit.notification.AlarmUtils
+import healthstack.kit.notification.NotificationUtils
+import healthstack.kit.sensor.AudioRecorder
 import healthstack.kit.sensor.SensorUtils
+import healthstack.kit.sensor.SpeechRecognitionManager
 
 @HiltAndroidApp
 class ResearchApplication : Application() {
@@ -33,6 +37,14 @@ class ResearchApplication : Application() {
 
         SensorUtils.initialize(this)
 
+        AudioRecorder.initialize(this)
+
+        SpeechRecognitionManager.initialize(this)
+
         TaskRoomDatabase.initialize(this)
+
+        NotificationUtils.initialize(this)
+
+        AlarmUtils.initialize(this)
     }
 }

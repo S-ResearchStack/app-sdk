@@ -37,7 +37,7 @@ class ReactionTimeMeasureModel(
     }
 
     class SensorDataManager() : SensorEventListener {
-        private val shakeThreshold = 10f
+        private val shakeThreshold = 9.9f
         private val timeThreshold = 100
 
         private var lastRecorded: Long = 0

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import healthstack.kit.annotation.ForVerificationGenerated
 import healthstack.kit.annotation.PreviewGenerated
 import healthstack.kit.theme.AppTheme
 
@@ -64,4 +65,4 @@ fun LabeledCheckBoxUnCheckedPreview() =
 fun LabeledCheckBoxCheckedPreview() =
     LabeledCheckbox(true, nothing, "checked")
 
-private val nothing: (Boolean) -> Unit = { }
+private val nothing: (Boolean) -> Unit = @ForVerificationGenerated { }

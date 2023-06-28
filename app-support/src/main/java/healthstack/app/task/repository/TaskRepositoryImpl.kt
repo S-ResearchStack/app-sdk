@@ -2,6 +2,7 @@ package healthstack.app.task.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import healthstack.app.task.db.TaskRoomDatabase
+import healthstack.app.task.entity.Task
 import healthstack.app.task.entity.Task.Result
 import healthstack.backend.integration.BackendFacadeHolder
 import healthstack.backend.integration.task.ItemResult
@@ -14,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import java.time.LocalDate
 import java.time.LocalDateTime
 import healthstack.kit.task.base.Task as ViewTask
@@ -31,7 +33,7 @@ class TaskRepositoryImpl : TaskRepository {
             )
             is ActivityTask -> taskDao.setResult(
                 task.id,
-                listOf(Result("activity", task.result.toString().replace("=", ":"))),
+                listOf(Result("activity", JSONObject(task.result as Map<*, *>).toString().replace("=", ":"))),
                 task.startedAt.toString(),
                 LocalDateTime.now().toString()
             )
@@ -42,7 +44,7 @@ class TaskRepositoryImpl : TaskRepository {
     }
 
     private suspend fun uploadTaskResult(id: String) {
-        taskDao.findById(id).collect { task ->
+        taskDao.findById(id)?.let { task ->
             FirebaseAuth.getInstance().currentUser?.let { user ->
                 user.getIdToken(false).addOnSuccessListener { tokenResult ->
                     tokenResult.token?.let { token ->
@@ -95,6 +97,12 @@ class TaskRepositoryImpl : TaskRepository {
         ).map { tasks ->
             tasks.map { it.toViewTask() }
         }
+    }
+
+    override fun getCompletedTasksToSync(from: LocalDateTime, to: LocalDateTime): Flow<List<Task>> {
+        return taskDao.getCompletedTasks(
+            from.toString(), to.toString()
+        )
     }
 }
 

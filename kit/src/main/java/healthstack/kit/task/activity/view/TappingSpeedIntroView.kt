@@ -25,7 +25,7 @@ class TappingSpeedIntroView() : SimpleActivityView<TappingSpeedIntroModel>() {
 fun TappingSpeedIntroPreview() {
     val view = TappingSpeedIntroView()
     val model = TappingSpeedIntroModel("id", "Tapping Speed")
-    val callbackCollection = object : CallbackCollection() {}
+    val callbackCollection = CallbackCollection()
     return view.Render(
         model,
         callbackCollection,

@@ -9,6 +9,7 @@ class TextInputQuestionModel(
     drawableId: Int? = null,
     skipLogics: List<SkipLogic> = emptyList(),
     answer: String? = null,
+    val maxCharacter: Int = 500,
 ) : QuestionModel<String>(id, query, explanation, drawableId, Text, skipLogics, answer) {
     var input: String = ""
 

@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -128,9 +129,12 @@ fun TopBarWithDropDown(
         },
         elevation = 0.dp,
         actions = {
-            IconButton(onClick = {
-                expanded.value = true
-            }) {
+            IconButton(
+                modifier = Modifier.testTag("dropDownIcon"),
+                onClick = {
+                    expanded.value = true
+                }
+            ) {
                 Icon(
                     imageVector = Icons.Default.MoreVert,
                     contentDescription = "open dropdown",
@@ -139,7 +143,9 @@ fun TopBarWithDropDown(
                 )
             }
             DropdownMenu(
-                modifier = Modifier.width(width = 200.dp).wrapContentHeight(),
+                modifier = Modifier
+                    .width(width = 200.dp)
+                    .wrapContentHeight(),
                 expanded = expanded.value,
                 onDismissRequest = {
                     expanded.value = false

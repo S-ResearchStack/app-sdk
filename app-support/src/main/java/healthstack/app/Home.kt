@@ -15,7 +15,9 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Settings
@@ -33,6 +35,7 @@ import com.google.firebase.auth.FirebaseAuth
 import healthstack.app.HomeScreenState.HOME
 import healthstack.app.HomeScreenState.TASK
 import healthstack.app.pref.AppStage
+import healthstack.app.pref.AppStage.Education
 import healthstack.app.pref.AppStage.Profile
 import healthstack.app.pref.AppStage.Settings
 import healthstack.app.pref.AppStage.StudyInformation
@@ -41,15 +44,29 @@ import healthstack.app.viewmodel.TaskViewModel
 import healthstack.app.viewmodel.TaskViewModel.TasksState
 import healthstack.kit.task.base.Task
 import healthstack.kit.theme.AppTheme
+import healthstack.kit.ui.BottomBarNavigation
+import healthstack.kit.ui.BottomNavItem
 import healthstack.kit.ui.DropdownMenuItemData
 import healthstack.kit.ui.TopBarWithDropDown
 import healthstack.kit.ui.WeeklyCard
 import java.time.LocalDate
 
+/**
+ * Enum class representing the possible states of the home screen.
+ * @property title A string representing the title of the state.
+ */
 enum class HomeScreenState(val title: String) {
     TASK("Task"),
     HOME("Home")
 }
+
+/**
+ * A composable function representing the entire application.
+ *
+ * @param dataTypeStatus the list of status data types to be displayed in the UI.
+ * @param viewModel the view model for the tasks in the UI.
+ * @param changeNavigation a function to change the current navigation state.
+ */
 
 @Composable
 fun Home(
@@ -63,7 +80,7 @@ fun Home(
         mutableStateOf<Task?>(null)
     }
 
-    val state = remember { mutableStateOf(HomeScreenState.HOME.title) }
+    val state = remember { mutableStateOf(HOME.title) }
     val changeState = { newValue: HomeScreenState -> state.value = newValue.title }
 
     Scaffold(
@@ -83,6 +100,18 @@ fun Home(
                 )
             )
         },
+        bottomBar = {
+            if (state.value == AppStage.Home.title) BottomBarNavigation(
+                listOf(
+                    BottomNavItem(AppStage.Home.title, Icons.Default.Home) {
+                        changeNavigation(AppStage.Home)
+                    },
+                    BottomNavItem(Education.title, Icons.Default.MenuBook) {
+                        changeNavigation(Education)
+                    }
+                )
+            )
+        }
     ) {
         Column(
             modifier = Modifier
@@ -111,6 +140,16 @@ fun Home(
         }
     }
 }
+
+/**
+ * A composable function that displays the daily tasks.
+ *
+ * @param date the current date.
+ * @param dataTypeStatus the list of status data types to be displayed in the UI.
+ * @param viewModel the view model for the tasks in the UI.
+ * @param changeState a function to change the current state of the app.
+ * @param onStartTask a callback function to start a task.
+ */
 
 @Composable
 private fun DailyTaskView(
@@ -157,6 +196,15 @@ private fun DailyTaskView(
         Spacer(Modifier.height(60.dp))
     }
 }
+
+/**
+ * A composable function that displays a card view for a list of tasks.
+ *
+ * @param title the title of the card.
+ * @param state the state of the tasks.
+ * @param onReload a callback function to reload the tasks.
+ * @param onStartTask a callback function to start a task.
+ */
 
 @Composable
 fun HomeTaskCard(

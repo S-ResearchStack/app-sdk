@@ -1,8 +1,5 @@
 package healthstack.kit.ui
 
-import android.app.DatePickerDialog
-import android.util.Log
-import android.widget.DatePicker
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -31,12 +28,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import healthstack.kit.theme.AppTheme
 import kotlinx.coroutines.launch
-import java.util.Calendar
-import java.util.Date
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -67,7 +66,8 @@ fun ModalInitiator(
                     changeModal(id)
                     state.show()
                 }
-            },
+            }
+            .testTag("modal initiator"),
         style = AppTheme.typography.body1,
         color =
         if (selectedValue.value.isEmpty()) AppTheme.colors.onBackground.copy(0.6F)
@@ -83,34 +83,21 @@ fun ModalInitiator(
     Spacer(Modifier.height(32.dp))
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CalendarModalInitiator(
+fun TimePickerInitiator(
     title: String,
     placeholder: String,
-    changeValue: (String) -> Unit,
+    updateValue: (String) -> Unit,
 ) {
-
-    val calendar = Calendar.getInstance()
-    calendar.time = Date()
-
-    val mYear: Int = calendar.get(Calendar.YEAR)
-    val mMonth: Int = calendar.get(Calendar.MONTH)
-    val mDay: Int = calendar.get(Calendar.DAY_OF_MONTH)
-
     val currentValue = remember { mutableStateOf("") }
+    val changeValue = { newValue: String ->
+        currentValue.value = newValue
+        updateValue(newValue)
+    }
     val context = LocalContext.current
 
-    val datePickerDialog = DatePickerDialog(
-        context,
-        { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
-            currentValue.value = "%02d / %02d / %04d".format(dayOfMonth, month + 1, year)
-            Log.e("Date", currentValue.value)
-            changeValue(currentValue.value)
-        },
-        mYear,
-        mMonth,
-        mDay
+    val timePickerDialog = KitTimePickerDialog(
+        context, 12, 0, changeValue
     )
 
     Text(
@@ -125,6 +112,56 @@ fun CalendarModalInitiator(
         text = currentValue.value.ifEmpty { placeholder },
         modifier = Modifier
             .fillMaxWidth()
+            .testTag("timepicker")
+            .clickable {
+                timePickerDialog.show()
+            },
+        style = AppTheme.typography.body1,
+        color =
+        if (currentValue.value.isEmpty()) AppTheme.colors.onBackground.copy(0.6F)
+        else AppTheme.colors.onBackground
+    )
+    Spacer(Modifier.height(4.dp))
+    Divider(
+        color =
+        if (currentValue.value.isEmpty()) AppTheme.colors.onBackground.copy(0.6F)
+        else AppTheme.colors.onBackground,
+        modifier = Modifier.fillMaxWidth()
+    )
+    Spacer(Modifier.height(32.dp))
+}
+
+@Composable
+fun CalendarModalInitiator(
+    title: String,
+    placeholder: String,
+    dateFormat: DateFormat = SimpleDateFormat("dd / MM / yyyy", Locale.US),
+    updateValue: (String) -> Unit,
+) {
+    val currentValue = remember { mutableStateOf("") }
+    val changeValue = { newValue: String ->
+        currentValue.value = newValue
+        updateValue(newValue)
+    }
+
+    val context = LocalContext.current
+    val datePickerDialog = KitDatePickerDialog(
+        context, dateFormat, changeValue
+    )
+
+    Text(
+        text = title,
+        modifier = Modifier
+            .fillMaxWidth(),
+        style = AppTheme.typography.body3,
+        color = AppTheme.colors.onBackground.copy(0.6F)
+    )
+    Spacer(Modifier.height(8.dp))
+    Text(
+        text = currentValue.value.ifEmpty { placeholder },
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag("calendar")
             .clickable {
                 datePickerDialog.show()
             },

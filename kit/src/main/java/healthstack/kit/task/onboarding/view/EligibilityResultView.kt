@@ -58,13 +58,10 @@ fun EligibilityResultViewSuccessPreview() {
             drawableId = drawable.sample_image_alpha1
         )
     )
-    val callbackCollection = object : CallbackCollection() {
-        override fun getEligibility(): Boolean = true
-    }
 
     return view.Render(
         model,
-        callbackCollection,
+        CallbackCollection(),
         null
     )
 }
@@ -92,13 +89,9 @@ fun EligibilityResultViewFailPreview() {
         )
     )
 
-    val callbackCollection = object : CallbackCollection() {
-        override fun getEligibility(): Boolean = false
-    }
-
     return view.Render(
         model,
-        callbackCollection,
+        CallbackCollection(),
         null
     )
 }

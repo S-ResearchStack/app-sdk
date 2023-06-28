@@ -4,6 +4,7 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import healthstack.kit.annotation.ForVerificationGenerated
 import healthstack.kit.sensor.SensorType.ACCELEROMETER
 import healthstack.kit.sensor.SensorType.GYROSCOPE
 
@@ -67,7 +68,7 @@ class SensorDataManager(
                 addResponse(GYROSCOPE.id, event.values)
             }
 
-            else -> {
+            else -> @ForVerificationGenerated {
                 TODO("Not yet implemented")
             }
         }

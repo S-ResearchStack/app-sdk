@@ -85,7 +85,8 @@ class TaskViewModel(
 
                             val taskSpecs = networkClient.getTasks(
                                 idToken,
-                                LocalDateTime.parse(lastSyncTime)
+                                LocalDateTime.parse(lastSyncTime),
+                                LocalDateTime.parse(endTime)
                             )
 
                             taskSpecs.map {

@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import healthstack.kit.annotation.PreviewGenerated
 import healthstack.kit.theme.AppTheme
 
-data class TabContent(val title: String, val Render: @Composable () -> Unit)
+data class TabContent(val title: String, val Render: @Composable () -> Unit = { Text(title) })
 
 @Composable
 fun HorizontalTab(
@@ -61,14 +61,8 @@ fun HorizontalTab(
 fun HorizontalTabPreview() =
     HorizontalTab(
         listOf(
-            TabContent("Tab 1") {
-                Text("First Page")
-            },
-            TabContent("Tab 2") {
-                Text("Second Page")
-            },
-            TabContent("Tab 3") {
-                Text("Last Page")
-            }
+            TabContent("Tab 1"),
+            TabContent("Tab 2"),
+            TabContent("Tab 3")
         )
     )

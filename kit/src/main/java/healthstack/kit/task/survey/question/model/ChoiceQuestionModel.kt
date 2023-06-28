@@ -39,6 +39,6 @@ class ChoiceQuestionModel<R>(
     enum class ViewType {
         Slider,
         Radio,
-        DropMenu
+        Dropdown
     }
 }

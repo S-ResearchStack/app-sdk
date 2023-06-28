@@ -39,6 +39,8 @@ import healthstack.kit.ui.TopBar
 import kotlinx.coroutines.flow.first
 import org.json.JSONException
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class MyProfileView(
     val onClickBack: () -> Unit = {},
@@ -216,6 +218,7 @@ class MyProfileView(
                                 CalendarModalInitiator(
                                     resources.getString(R.string.dob_title),
                                     resources.getString(R.string.dob_placeholder),
+                                    SimpleDateFormat("dd / MM / yyyy", Locale.US),
                                     changeBirthday
                                 )
                         }

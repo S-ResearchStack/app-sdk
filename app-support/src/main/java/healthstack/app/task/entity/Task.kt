@@ -3,21 +3,24 @@ package healthstack.app.task.entity
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import healthstack.app.task.utils.ItemToModelUtil
 import healthstack.backend.integration.task.ChoiceProperties
+import healthstack.backend.integration.task.DateTimeProperties
 import healthstack.backend.integration.task.Item
+import healthstack.backend.integration.task.RankingProperties
 import healthstack.backend.integration.task.ScaleProperties
+import healthstack.backend.integration.task.TextProperties
 import healthstack.kit.task.activity.predefined.PredefinedTaskUtil
 import healthstack.kit.task.survey.SurveyTask
-import healthstack.kit.task.survey.question.model.ChoiceQuestionModel
-import healthstack.kit.task.survey.question.model.ChoiceQuestionModel.ViewType
-import healthstack.kit.task.survey.question.model.ChoiceQuestionModel.ViewType.Slider
-import healthstack.kit.task.survey.question.model.MultiChoiceQuestionModel
 import healthstack.kit.task.survey.question.model.QuestionModel
 import healthstack.kit.task.survey.question.model.SkipLogic
 import java.time.LocalDateTime
 
 internal const val CHOICE = "CHOICE"
 internal const val SCALE = "SCALE"
+internal const val TEXT = "TEXT"
+internal const val DATETIME = "DATETIME"
+internal const val RANK = "RANK"
 
 @Entity(indices = [Index(value = ["revisionId", "taskId", "scheduledAt"], unique = true)])
 data class Task(
@@ -59,6 +62,7 @@ data class Task(
             listOf(properties.items[0].contents.completionDescription ?: ""),
             activityType = this.properties.items[0].contents.type
         )
+
         "SURVEY" -> SurveyTask.Builder(
             id!!.toString(), // TODO
             revisionId,
@@ -76,66 +80,58 @@ data class Task(
                 else this.addQuestion(
                     when (it.contents.type) {
                         CHOICE -> toChoiceQuestionModel(it)
-                        SCALE -> toSliderQuestionModel(it)
+                        SCALE -> toScaleQuestionModel(it)
+                        TEXT -> toTextQuestionModel(it)
+                        RANK -> toRankQuestionModel(it)
+                        DATETIME -> toDateTimeQuestionModel(it)
                         else -> throw NotImplementedError("not supported content type")
                     }
                 )
             }
         }.build()
+
         else -> throw IllegalArgumentException("not supported task type")
     }
 
-    private fun toSliderQuestionModel(item: Item): QuestionModel<Any> {
+    private fun toRankQuestionModel(item: Item): QuestionModel<Any> {
+        require(item.contents.type == RANK)
+        require(item.contents.itemProperties is RankingProperties)
+
+        return ItemToModelUtil.toRank(item) as QuestionModel<Any>
+    }
+
+    private fun toTextQuestionModel(item: Item): QuestionModel<Any> {
+        require(item.contents.type == TEXT)
+        require(item.contents.itemProperties is TextProperties)
+
+        return ItemToModelUtil.toText(item) as QuestionModel<Any>
+    }
+
+    private fun toScaleQuestionModel(item: Item): QuestionModel<Any> {
         require(item.contents.type == SCALE)
         require(item.contents.itemProperties is ScaleProperties)
 
-        return ChoiceQuestionModel(
-            item.name,
-            item.contents.title!!,
-            item.contents.explanation,
-            null,
-            null,
-            (item.contents.itemProperties as ScaleProperties).skipLogic?.map { it.translate() } ?: emptyList(),
-            listOf(
-                (item.contents.itemProperties as ScaleProperties).low,
-                (item.contents.itemProperties as ScaleProperties).high
-            ),
-            Slider
-        )
+        return ItemToModelUtil.toScale(item)
+    }
+
+    private fun toDateTimeQuestionModel(item: Item): QuestionModel<Any> {
+        require(item.contents.type == DATETIME)
+        require(item.contents.itemProperties is DateTimeProperties)
+
+        return ItemToModelUtil.toDateTime(item) as QuestionModel<Any>
     }
 
     private fun toChoiceQuestionModel(item: Item): QuestionModel<Any> {
         require(item.contents.type == CHOICE)
         require(item.contents.itemProperties is ChoiceProperties)
 
-        return if (item.contents.itemProperties!!.tag.uppercase() == "CHECKBOX")
-            toMultiChoiceQuestionModel(item) as QuestionModel<Any>
-        else ChoiceQuestionModel(
-            item.name,
-            item.contents.title!!,
-            item.contents.explanation,
-            null,
-            null,
-            (item.contents.itemProperties as ChoiceProperties).skipLogic?.map { it.translate() } ?: emptyList(),
-            (item.contents.itemProperties as ChoiceProperties).options.map { option -> option.value },
-            ViewType.values()
-                .first { type -> type.name.equals(item.contents.itemProperties!!.tag, ignoreCase = true) }
-        )
-    }
-
-    private fun toMultiChoiceQuestionModel(item: Item): MultiChoiceQuestionModel {
-        return MultiChoiceQuestionModel(
-            item.name,
-            item.contents.title!!,
-            item.contents.explanation,
-            null,
-            null,
-            (item.contents.itemProperties as ChoiceProperties).skipLogic?.map { it.translate() } ?: emptyList(),
-            (item.contents.itemProperties as ChoiceProperties).options.map { option -> option.value },
-        )
-    }
-
-    private fun healthstack.backend.integration.task.SkipLogic.translate(): SkipLogic {
-        return SkipLogic(condition, goToItemSequence)
+        return when (item.contents.itemProperties!!.tag.uppercase()) {
+            "CHECKBOX" -> ItemToModelUtil.toMultiChoice(item) as QuestionModel<Any>
+            "IMAGE", "MULTIIMAGE" -> ItemToModelUtil.toImageChoice(item) as QuestionModel<Any>
+            else -> ItemToModelUtil.toChoice(item)
+        }
     }
 }
+
+fun healthstack.backend.integration.task.SkipLogic.translate(): SkipLogic =
+    SkipLogic(condition, goToItemSequence)

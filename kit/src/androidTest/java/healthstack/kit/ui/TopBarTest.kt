@@ -1,10 +1,12 @@
 package healthstack.kit.ui
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import healthstack.kit.theme.AppTheme
@@ -46,5 +48,32 @@ class TopBarTest {
             .assertExists()
             .performClick()
         assertTrue(actionButtonClicked)
+    }
+
+    @Test
+    fun testTopBarWithDropDown() {
+        val items = listOf(
+            DropdownMenuItemData(
+                text = "first",
+                icon = Icons.Default.Home,
+                {}
+            )
+        )
+
+        rule.setContent {
+            AppTheme(mainLightColors()) {
+                TopBarWithDropDown(
+                    title = "title",
+                    items = items
+                )
+            }
+        }
+
+        rule.onNodeWithTag("dropDownIcon")
+            .assertExists()
+            .performClick()
+
+        rule.onNodeWithText("first")
+            .assertExists()
     }
 }

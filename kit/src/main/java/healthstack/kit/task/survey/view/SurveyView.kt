@@ -135,6 +135,7 @@ fun MultiPageSurveyLayout(
             )
             Spacer(modifier = Modifier.height(30.dp))
             subStep[index].Render(callbackCollection)
+            Spacer(modifier = Modifier.height(50.dp))
         }
     }
 }
@@ -219,6 +220,7 @@ fun SinglePageSurveyLayout(
                     callbackCollection.next()
                 }
             }
+            Spacer(modifier = Modifier.height(50.dp))
         }
     }
 }
@@ -302,6 +304,7 @@ fun SectionPageSurveyLayout(
                 questionSubStep.Render(callbackCollection)
                 Spacer(modifier = Modifier.height(48.dp))
             }
+            Spacer(modifier = Modifier.height(50.dp))
         }
     }
 }

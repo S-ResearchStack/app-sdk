@@ -1,13 +1,17 @@
 package healthstack.healthdata.link.healthconnect
 
 import androidx.health.connect.client.changes.UpsertionChange
+import androidx.health.connect.client.records.BloodGlucoseRecord
 import androidx.health.connect.client.records.BloodPressureRecord
 import androidx.health.connect.client.records.HeartRateRecord
+import androidx.health.connect.client.records.HeightRecord
 import androidx.health.connect.client.records.OxygenSaturationRecord
 import androidx.health.connect.client.records.Record
+import androidx.health.connect.client.records.RespiratoryRateRecord
 import androidx.health.connect.client.records.SleepSessionRecord
 import androidx.health.connect.client.records.SleepStageRecord
 import androidx.health.connect.client.records.StepsRecord
+import androidx.health.connect.client.records.TotalCaloriesBurnedRecord
 import androidx.health.connect.client.records.WeightRecord
 import androidx.health.connect.client.response.ChangesResponse
 import androidx.health.connect.client.response.ReadRecordsResponse
@@ -92,6 +96,35 @@ fun List<Record>.toHealthData(healthDataSet: MutableList<Map<String, Any>>) {
                     mapOf(
                         HealthData.TIME_KEY to it.time,
                         "kilograms" to it.weight.inKilograms
+                    )
+                )
+            is HeightRecord ->
+                healthDataSet.add(
+                    mapOf(
+                        HealthData.TIME_KEY to it.time,
+                        "meters" to it.height.inMeters
+                    )
+                )
+            is TotalCaloriesBurnedRecord ->
+                healthDataSet.add(
+                    mapOf(
+                        "calories" to it.energy.inCalories,
+                        HealthData.START_TIME_KEY to it.startTime,
+                        HealthData.END_TIME_KEY to it.endTime
+                    )
+                )
+            is RespiratoryRateRecord ->
+                healthDataSet.add(
+                    mapOf(
+                        HealthData.TIME_KEY to it.time,
+                        "rpm" to it.rate
+                    )
+                )
+            is BloodGlucoseRecord ->
+                healthDataSet.add(
+                    mapOf(
+                        HealthData.TIME_KEY to it.time,
+                        "millimolesPerLiter" to it.level.inMillimolesPerLiter
                     )
                 )
             else -> throw RuntimeException("Unsupported Data Type.")

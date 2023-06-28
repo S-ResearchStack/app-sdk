@@ -52,4 +52,11 @@ interface HealthStackBackendAPI {
         @Path("projectId") projectId: String,
         @Body taskResult: List<TaskResult>,
     )
+
+    @GET("/cloud-storage/projects/{projectId}/participants/upload-url")
+    suspend fun getUploadUrl(
+        @Header("id-token") idToken: String,
+        @Path("projectId") projectId: String,
+        @Query("object_name") objectName: String,
+    ): String
 }

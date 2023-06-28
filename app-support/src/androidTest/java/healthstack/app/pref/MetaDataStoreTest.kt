@@ -3,14 +3,14 @@ package healthstack.app.pref
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import java.time.Instant
-import java.time.temporal.ChronoUnit
-import java.time.temporal.ChronoUnit.DAYS
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.time.Instant
+import java.time.temporal.ChronoUnit
+import java.time.temporal.ChronoUnit.DAYS
 
 @RunWith(AndroidJUnit4::class)
 class MetaDataStoreTest {
@@ -21,6 +21,7 @@ class MetaDataStoreTest {
         val metaDataStore = MetaDataStore(context)
         val today = Instant.now().truncatedTo(DAYS)
         val heartRate = "HeartRate"
+        val context = metaDataStore.context
         runTest {
             val updateSyncTime = today.plus(3L, ChronoUnit.HOURS)
             metaDataStore.saveChangesToken(heartRate, updateSyncTime.toString())

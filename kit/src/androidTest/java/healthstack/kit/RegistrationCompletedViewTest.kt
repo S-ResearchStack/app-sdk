@@ -1,7 +1,9 @@
 package healthstack.kit
 
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import healthstack.kit.task.base.CallbackCollection
 import healthstack.kit.task.signup.model.RegistrationCompletedModel
 import healthstack.kit.task.signup.view.RegistrationCompletedView
@@ -38,5 +40,9 @@ class RegistrationCompletedViewTest {
 
         rule.onNodeWithText("testTitle").assertExists()
         rule.onNodeWithText("WrongTestTitle").assertDoesNotExist()
+
+        rule.onNodeWithContentDescription("back button icon")
+            .assertExists()
+            .performClick()
     }
 }

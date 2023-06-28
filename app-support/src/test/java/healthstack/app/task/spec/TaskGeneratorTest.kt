@@ -82,7 +82,7 @@ class TaskGeneratorTest {
             assertEquals(everydayTaskSpec.description, task.properties.description)
 
             assertNotNull(task.scheduledAt)
-            assertEquals(task.scheduledAt?.plusMinutes(everydayTaskSpec.validTime), task.validUntil)
+            assertEquals(task.scheduledAt.plusMinutes(everydayTaskSpec.validTime), task.validUntil)
             assertEquals(everydayTaskSpec.items.size, task.properties.items.size)
             everydayTaskSpec.items.forEachIndexed { index, item ->
                 assertEquals(item, task.properties.items[index])

@@ -1,10 +1,19 @@
 package healthstack.backend.integration.adapter
 
+import android.net.Uri
+import android.webkit.MimeTypeMap
+import android.webkit.MimeTypeMap.getFileExtensionFromUrl
 import healthstack.backend.integration.BackendFacade
 import healthstack.backend.integration.exception.RegisterException
 import healthstack.backend.integration.exception.UserAlreadyExistsException
 import healthstack.backend.integration.registration.UserProfile
 import healthstack.healthdata.link.HealthData
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+import java.io.IOException
 import java.net.HttpURLConnection
 import java.time.LocalDateTime
 
@@ -15,6 +24,8 @@ class HealthStackBackendAdapter(
     init {
         require(projectId.isNotBlank())
     }
+
+    private val okHttpClient = OkHttpClient()
 
     override suspend fun sync(idToken: String, healthData: HealthData) {
         networkClient.sync(idToken, projectId, healthData.instantToString())
@@ -47,6 +58,22 @@ class HealthStackBackendAdapter(
 
     override suspend fun uploadTaskResult(idToken: String, result: healthstack.backend.integration.task.TaskResult) =
         networkClient.uploadTaskResult(idToken, projectId, listOf(result))
+
+    override suspend fun uploadTaskResultAsFile(idToken: String, sourcePath: String, targetPath: String) {
+        val signedUrl = networkClient.getUploadUrl(idToken, projectId, targetPath)
+        val uploadFile = File(sourcePath)
+        val extension = getFileExtensionFromUrl(Uri.fromFile(uploadFile).toString())
+        val mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
+
+        val request = Request.Builder()
+            .url(signedUrl)
+            .put(uploadFile.asRequestBody(mime?.toMediaTypeOrNull()))
+            .build()
+
+        okHttpClient.newCall(request).execute().use { res ->
+            if (!res.isSuccessful) throw IOException("Unexpected code $res")
+        }
+    }
 
     companion object {
         private lateinit var INSTANCE: HealthStackBackendAdapter

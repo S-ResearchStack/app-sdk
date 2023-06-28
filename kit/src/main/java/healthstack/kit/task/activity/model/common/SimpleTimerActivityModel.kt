@@ -8,7 +8,7 @@ import healthstack.kit.ui.TextType.PARAGRAPH
 import healthstack.kit.ui.util.InteractionType
 import healthstack.kit.ui.util.InteractionType.NOTHING
 
-abstract class SimpleTimerActivityModel(
+open class SimpleTimerActivityModel(
     id: String,
     title: String,
     val header: String,

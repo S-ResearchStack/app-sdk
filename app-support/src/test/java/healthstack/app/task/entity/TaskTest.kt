@@ -3,9 +3,12 @@ package healthstack.app.task.entity
 import healthstack.app.task.entity.Task.Properties
 import healthstack.backend.integration.task.ChoiceProperties
 import healthstack.backend.integration.task.Contents
+import healthstack.backend.integration.task.DateTimeProperties
 import healthstack.backend.integration.task.Item
 import healthstack.backend.integration.task.Option
+import healthstack.backend.integration.task.RankingProperties
 import healthstack.backend.integration.task.ScaleProperties
+import healthstack.backend.integration.task.TextProperties
 import healthstack.kit.task.survey.SurveyTask
 import healthstack.kit.task.survey.question.model.ChoiceQuestionModel
 import healthstack.kit.task.survey.question.model.MultiChoiceQuestionModel
@@ -45,6 +48,40 @@ class TaskTest {
         required = true,
     )
 
+    private val textContent = Contents(
+        type = TEXT,
+        title = "Text Question",
+        itemProperties = TextProperties(
+            tag = "text",
+        ),
+        required = true,
+    )
+
+    private val dateTimeContent = Contents(
+        type = DATETIME,
+        title = "DateTime Question",
+        itemProperties = DateTimeProperties(
+            tag = "dateTime",
+            isDate = true,
+            isTime = true,
+            isRange = true,
+        ),
+        required = true,
+    )
+
+    private val rankingContent = Contents(
+        type = RANK,
+        title = "Rank Question",
+        itemProperties = RankingProperties(
+            tag = "text",
+            options = listOf(
+                Option("Choice 1"),
+                Option("Choice 2")
+            )
+        ),
+        required = true,
+    )
+
     private val choiceContent = Contents(
         type = CHOICE,
         title = "choice Question",
@@ -77,13 +114,217 @@ class TaskTest {
 
     @Tag("negative")
     @Test
-    fun `toViewTask should throw IllegalArgumentException when type is Choice and content is scale`() {
+    fun `toViewTask should throw IllegalArgumentException when type is Choice and content is Scale`() {
         val testTask = task.changeItem(
             Item(
                 name = "test-item",
-                type = CHOICE,
+                type = "QUESTION",
                 sequence = 0,
                 contents = scaleContent.copy(type = CHOICE)
+            )
+        )
+
+        assertThrows<IllegalArgumentException> {
+            testTask.toViewTask()
+        }
+    }
+
+    @Tag("negative")
+    @Test
+    fun `toViewTask should throw IllegalArgumentException when type is Choice and content is Text`() {
+        val testTask = task.changeItem(
+            Item(
+                name = "test-item",
+                type = "QUESTION",
+                sequence = 0,
+                contents = textContent.copy(type = CHOICE)
+            )
+        )
+
+        assertThrows<IllegalArgumentException> {
+            testTask.toViewTask()
+        }
+    }
+
+    @Tag("negative")
+    @Test
+    fun `toViewTask should throw IllegalArgumentException when type is Choice and content is Rank`() {
+        val testTask = task.changeItem(
+            Item(
+                name = "test-item",
+                type = "QUESTION",
+                sequence = 0,
+                contents = rankingContent.copy(type = CHOICE)
+            )
+        )
+
+        assertThrows<IllegalArgumentException> {
+            testTask.toViewTask()
+        }
+    }
+
+    @Tag("negative")
+    @Test
+    fun `toViewTask should throw IllegalArgumentException when type is Choice and content is DateTime`() {
+        val testTask = task.changeItem(
+            Item(
+                name = "test-item",
+                type = "QUESTION",
+                sequence = 0,
+                contents = dateTimeContent.copy(type = CHOICE)
+            )
+        )
+
+        assertThrows<IllegalArgumentException> {
+            testTask.toViewTask()
+        }
+    }
+
+    @Tag("negative")
+    @Test
+    fun `toViewTask should throw IllegalArgumentException when type is DateTime and content is Choice`() {
+        val testTask = task.changeItem(
+            Item(
+                name = "test-item",
+                type = "QUESTION",
+                sequence = 0,
+                contents = choiceContent.copy(type = DATETIME)
+            )
+        )
+
+        assertThrows<IllegalArgumentException> {
+            testTask.toViewTask()
+        }
+    }
+
+    @Tag("negative")
+    @Test
+    fun `toViewTask should throw IllegalArgumentException when type is DateTime and content is Text`() {
+        val testTask = task.changeItem(
+            Item(
+                name = "test-item",
+                type = "QUESTION",
+                sequence = 0,
+                contents = textContent.copy(type = DATETIME)
+            )
+        )
+
+        assertThrows<IllegalArgumentException> {
+            testTask.toViewTask()
+        }
+    }
+
+    @Tag("negative")
+    @Test
+    fun `toViewTask should throw IllegalArgumentException when type is DateTime and content is Rank`() {
+        val testTask = task.changeItem(
+            Item(
+                name = "test-item",
+                type = "QUESTION",
+                sequence = 0,
+                contents = rankingContent.copy(type = DATETIME)
+            )
+        )
+
+        assertThrows<IllegalArgumentException> {
+            testTask.toViewTask()
+        }
+    }
+
+    @Tag("negative")
+    @Test
+    fun `toViewTask should throw IllegalArgumentException when type is DateTime and content is Scale`() {
+        val testTask = task.changeItem(
+            Item(
+                name = "test-item",
+                type = "QUESTION",
+                sequence = 0,
+                contents = scaleContent.copy(type = DATETIME)
+            )
+        )
+
+        assertThrows<IllegalArgumentException> {
+            testTask.toViewTask()
+        }
+    }
+
+    @Tag("negative")
+    @Test
+    fun `toViewTask should throw IllegalArgumentException when type is Text and content is Scale`() {
+        val testTask = task.changeItem(
+            Item(
+                name = "test-item",
+                type = "QUESTION",
+                sequence = 0,
+                contents = scaleContent.copy(type = TEXT)
+            )
+        )
+
+        assertThrows<IllegalArgumentException> {
+            testTask.toViewTask()
+        }
+    }
+
+    @Tag("negative")
+    @Test
+    fun `toViewTask should throw IllegalArgumentException when type is Text and content is Choice`() {
+        val testTask = task.changeItem(
+            Item(
+                name = "test-item",
+                type = "QUESTION",
+                sequence = 0,
+                contents = choiceContent.copy(type = TEXT)
+            )
+        )
+
+        assertThrows<IllegalArgumentException> {
+            testTask.toViewTask()
+        }
+    }
+
+    @Tag("negative")
+    @Test
+    fun `toViewTask should throw IllegalArgumentException when type is Text and content is DateTime`() {
+        val testTask = task.changeItem(
+            Item(
+                name = "test-item",
+                type = "QUESTION",
+                sequence = 0,
+                contents = dateTimeContent.copy(type = TEXT)
+            )
+        )
+
+        assertThrows<IllegalArgumentException> {
+            testTask.toViewTask()
+        }
+    }
+
+    @Tag("negative")
+    @Test
+    fun `toViewTask should throw IllegalArgumentException when type is Text and content is Ranking`() {
+        val testTask = task.changeItem(
+            Item(
+                name = "test-item",
+                type = "QUESTION",
+                sequence = 0,
+                contents = rankingContent.copy(type = TEXT)
+            )
+        )
+
+        assertThrows<IllegalArgumentException> {
+            testTask.toViewTask()
+        }
+    }
+
+    @Tag("negative")
+    @Test
+    fun `toViewTask should throw IllegalArgumentException when type is Ranking and content is Text`() {
+        val testTask = task.changeItem(
+            Item(
+                name = "test-item",
+                type = "QUESTION",
+                sequence = 0,
+                contents = textContent.copy(type = RANK)
             )
         )
 

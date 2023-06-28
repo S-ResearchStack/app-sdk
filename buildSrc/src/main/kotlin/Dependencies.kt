@@ -32,8 +32,10 @@ object Versions {
         const val ROOM = "2.4.3"
         const val ACTIVITY = "1.6.1"
         const val FRAGMENT = "1.5.5"
+        const val MEDIA3 = "1.0.1"
     }
 
+    const val GUAVA = "31.1-android"
     const val RETROFIT = "2.9.0"
     const val OKHTTP = "4.5.0"
     const val SUPPORT_ANNOTATION = "28"
@@ -69,11 +71,14 @@ object Versions {
         const val ACTIVITY = "1.4.0"
     }
 
+    const val RULES = "1.5.0"
+    const val REORDERABLE = "0.9.6"
     const val COIL = "2.2.1"
     const val MATERIAL_UI = "1.4.0"
     const val ACCOMPANIST_PAGER = "0.25.0"
     const val ACCOMPANIST_SYSTEMUI = "0.25.1"
-    const val SIGNATURE_PAD = "0.0.18"
+    const val SIGNATURE_PAD = "0.1.2"
+    const val BOUQUET = "1.0.0"
 }
 
 object AppDependencies {
@@ -91,6 +96,8 @@ object AppDependencies {
     const val ANDROIDX_ROOM_KTX = "androidx.room:room-ktx:${Versions.AndroidX.ROOM}"
     const val ANDROIDX_ACTIVITY = "androidx.activity:activity-ktx:${Versions.AndroidX.ACTIVITY}"
     const val ANDROIDX_FRAGMENT = "androidx.fragment:fragment-ktx:${Versions.AndroidX.FRAGMENT}"
+
+    const val GUAVA = "com.google.guava:guava:${Versions.GUAVA}"
 
     const val SUPPORT_ANNOTATION =
         "com.android.support:support-annotations:${Versions.SUPPORT_ANNOTATION}"
@@ -157,6 +164,7 @@ object AppDependencies {
     // HTTP
     const val RETROFIT = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
     const val RETROFIT_GSON = "com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}"
+    const val RETROFIT_SCALAR = "com.squareup.retrofit2:converter-scalars:${Versions.RETROFIT}"
     const val OKHTTP = "com.squareup.okhttp3:okhttp:${Versions.OKHTTP}"
     const val OKHTTP_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP}"
     const val OKHTTP_MOCKWEB_SERVER = "com.squareup.okhttp3:mockwebserver:${Versions.OKHTTP}"
@@ -164,6 +172,7 @@ object AppDependencies {
     val httpClientImplLibs = arrayListOf<String>().apply {
         add(RETROFIT)
         add(RETROFIT_GSON)
+        add(RETROFIT_SCALAR)
         add(OKHTTP)
         add(OKHTTP_INTERCEPTOR)
     }
@@ -192,6 +201,7 @@ object AppDependencies {
     const val MOCKITO_INLINE = "org.mockito:mockito-inline:${Versions.MOCKITO_INLINE}"
     const val COROUTINE_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.COROUTINE}"
     const val COROUTINE_GUAVA = "org.jetbrains.kotlinx:kotlinx-coroutines-guava:${Versions.COROUTINE}"
+    const val ANDROID_RULES = "androidx.test:rules:${Versions.RULES}"
 
     val testRuntimeLibs = arrayListOf<String>().apply {
         add(JUNIT_ENGINE)
@@ -227,6 +237,7 @@ object AppDependencies {
         add(JUNIT_PARAMS)
         add(JUNIT_MANNO_CORE)
         add(ESPRESSO)
+        add(ANDROID_RULES)
     }
 
     // UI
@@ -246,6 +257,11 @@ object AppDependencies {
     const val COIL_SVG = "io.coil-kt:coil-svg:${Versions.COIL}"
     const val COIL_COMPOSE = "io.coil-kt:coil-compose:${Versions.COIL}"
     const val CORE_SPLASHSCREEN = "androidx.core:core-splashscreen:${Versions.AndroidX.CORE_SPLASHSCREEN}"
+    const val BURNOUTCREW_REORDERABLE = "org.burnoutcrew.composereorderable:reorderable:${Versions.REORDERABLE}"
+    const val MEDIA3_COMMON = "androidx.media3:media3-common:${Versions.AndroidX.MEDIA3}"
+    const val EXOPLAYER = "androidx.media3:media3-exoplayer:${Versions.AndroidX.MEDIA3}"
+    const val MEDIA3_UI = "androidx.media3:media3-ui:${Versions.AndroidX.MEDIA3}"
+    const val PDF_READER = "io.github.grizzi91:bouquet:${Versions.BOUQUET}"
 
     val composeImplLibs = arrayListOf<String>().apply {
         add(MATERIAL)

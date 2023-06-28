@@ -2,6 +2,7 @@ package healthstack.kit.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -31,10 +32,11 @@ import healthstack.kit.theme.AppTheme
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+import java.util.Locale
 
 data class InsightUnit(val value: String, val unit: String? = null, val color: Color? = null)
 
-fun addCommaToInt(input: Int): String = "%,d".format(input)
+fun addCommaToInt(input: Int): String = "%,d".format(Locale.US, input)
 
 @Composable
 fun InsightCardWithProgress(
@@ -44,7 +46,8 @@ fun InsightCardWithProgress(
     unit: String,
     onClick: () -> Unit = { },
 ) {
-    val progress = (current.toFloat() / total)
+    val progress = minOf(current.toFloat() / total, 1F)
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -88,13 +91,24 @@ fun InsightCardWithProgress(
                     .wrapContentSize(),
                 verticalArrangement = Arrangement.Center
             ) {
-                LinearProgressIndicator(
-                    progress = progress,
-                    color = AppTheme.colors.success,
-                    backgroundColor = AppTheme.colors.onBackground.copy(0.06F),
-                    modifier = Modifier.height(24.dp).width(200.dp)
-                        .clip(RoundedCornerShape(50.dp))
-                )
+                Box(
+                    contentAlignment = Alignment.Center
+                ) {
+                    LinearProgressIndicator(
+                        progress = progress,
+                        color = AppTheme.colors.success,
+                        backgroundColor = AppTheme.colors.onBackground.copy(0.06F),
+                        modifier = Modifier
+                            .height(24.dp)
+                            .width(128.dp)
+                            .clip(RoundedCornerShape(50.dp))
+                    )
+                    Text(
+                        text = "${(progress * 100).toInt()} %",
+                        style = AppTheme.typography.overline2,
+                        color = AppTheme.colors.onPrimary
+                    )
+                }
             }
         }
     }
@@ -260,7 +274,19 @@ fun InsightCardWithProgressPreview() =
         1521,
         6000,
         "steps"
-    ) {}
+    )
+
+@PreviewGenerated
+@Preview(showBackground = true)
+@Composable
+fun ThinInsightCardPreview() =
+    ThinInsightCard(
+        title = "title",
+        insightUnit = InsightUnit(
+            value = "100",
+            unit = "steps"
+        )
+    )
 
 @PreviewGenerated
 @Preview(showBackground = true)
@@ -271,4 +297,4 @@ fun InsightCardWithProgressPreview2() =
         7,
         7,
         "days"
-    ) {}
+    )

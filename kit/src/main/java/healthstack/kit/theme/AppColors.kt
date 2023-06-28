@@ -1,246 +1,45 @@
 package healthstack.kit.theme
 
 import androidx.compose.material.Colors
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 class AppColors(
     // Main Color Palette
-    primary: Color,
-    primaryVariant: Color,
-    background: Color,
-    surface: Color,
-    onPrimary: Color,
-    onBackground: Color,
-    onSurface: Color,
-    onSurfaceVariant: Color,
-    error: Color,
-    errorVariant: Color,
-    onError: Color,
-    disabled: Color,
-    onDisabled: Color,
-    disabled2: Color,
-    onDisabled2: Color,
+    val primary: Color,
+    val primaryVariant: Color,
+    val background: Color,
+    val surface: Color,
+    val onPrimary: Color,
+    val onBackground: Color,
+    val onSurface: Color,
+    val onSurfaceVariant: Color,
+    val error: Color,
+    val errorVariant: Color,
+    val onError: Color,
+    val disabled: Color,
+    val onDisabled: Color,
+    val disabled2: Color,
+    val onDisabled2: Color,
     // Data Visualization Color Palette
-    dataVisualization1: Color,
-    dataVisualization1Variant: Color,
-    dataVisualization2: Color,
-    dataVisualization2Variant: Color,
-    dataVisualization3: Color,
-    dataVisualization3Variant: Color,
-    dataVisualization4: Color,
-    dataVisualization4Variant: Color,
-    dataVisualization5: Color,
-    dataVisualization5Variant: Color,
+    val dataVisualization1: Color,
+    val dataVisualization1Variant: Color,
+    val dataVisualization2: Color,
+    val dataVisualization2Variant: Color,
+    val dataVisualization3: Color,
+    val dataVisualization3Variant: Color,
+    val dataVisualization4: Color,
+    val dataVisualization4Variant: Color,
+    val dataVisualization5: Color,
+    val dataVisualization5Variant: Color,
     // Alert & Status Color Palette
-    success: Color,
-    successVariant: Color,
-    warning: Color,
-    warningVariant: Color,
+    val success: Color,
+    val successVariant: Color,
+    val warning: Color,
+    val warningVariant: Color,
     // Theme
-    isLight: Boolean,
+    val isLight: Boolean,
 ) {
-    var primary by mutableStateOf(primary)
-        private set
-
-    var primaryVariant by mutableStateOf(primaryVariant)
-        private set
-
-    var background by mutableStateOf(background)
-        private set
-
-    var surface by mutableStateOf(surface)
-        private set
-
-    var onPrimary by mutableStateOf(onPrimary)
-        private set
-
-    var onBackground by mutableStateOf(onBackground)
-        private set
-
-    var onSurface by mutableStateOf(onSurface)
-        private set
-
-    var onSurfaceVariant by mutableStateOf(onSurfaceVariant)
-        private set
-
-    var error by mutableStateOf(error)
-        private set
-
-    var errorVariant by mutableStateOf(errorVariant)
-        private set
-
-    var onError by mutableStateOf(onError)
-        private set
-
-    var disabled by mutableStateOf(disabled)
-        private set
-
-    var onDisabled by mutableStateOf(onDisabled)
-        private set
-
-    var disabled2 by mutableStateOf(disabled2)
-        private set
-
-    var onDisabled2 by mutableStateOf(onDisabled2)
-        private set
-
-    var dataVisualization1 by mutableStateOf(dataVisualization1)
-        private set
-
-    var dataVisualization1Variant by mutableStateOf(dataVisualization1Variant)
-        private set
-
-    var dataVisualization2 by mutableStateOf(dataVisualization2)
-        private set
-
-    var dataVisualization2Variant by mutableStateOf(dataVisualization2Variant)
-        private set
-
-    var dataVisualization3 by mutableStateOf(dataVisualization3)
-        private set
-
-    var dataVisualization3Variant by mutableStateOf(dataVisualization3Variant)
-        private set
-
-    var dataVisualization4 by mutableStateOf(dataVisualization4)
-        private set
-
-    var dataVisualization4Variant by mutableStateOf(dataVisualization4Variant)
-        private set
-
-    var dataVisualization5 by mutableStateOf(dataVisualization5)
-        private set
-
-    var dataVisualization5Variant by mutableStateOf(dataVisualization5Variant)
-        private set
-
-    var success by mutableStateOf(success)
-        private set
-
-    var successVariant by mutableStateOf(successVariant)
-        private set
-
-    var warning by mutableStateOf(warning)
-        private set
-
-    var warningVariant by mutableStateOf(warningVariant)
-        private set
-
-    var isLight by mutableStateOf(isLight)
-        private set
-
-    fun copy(
-        // Main Color Palette
-        primary: Color = this.primary,
-        primaryVariant: Color = this.primaryVariant,
-        background: Color = this.background,
-        surface: Color = this.surface,
-        onPrimary: Color = this.onPrimary,
-        onBackground: Color = this.onBackground,
-        onSurface: Color = this.onSurface,
-        onSurfaceVariant: Color = this.onSurfaceVariant,
-        error: Color = this.error,
-        errorVariant: Color = this.errorVariant,
-        onError: Color = this.onError,
-        disabled: Color = this.disabled,
-        onDisabled: Color = this.onDisabled,
-        disabled2: Color = this.disabled2,
-        onDisabled2: Color = this.onDisabled2,
-        // Data Visualization Color Palette
-        dataVisualization1: Color = this.dataVisualization1,
-        dataVisualization1Variant: Color = this.dataVisualization1Variant,
-        dataVisualization2: Color = this.dataVisualization2,
-        dataVisualization2Variant: Color = this.dataVisualization2Variant,
-        dataVisualization3: Color = this.dataVisualization3,
-        dataVisualization3Variant: Color = this.dataVisualization3Variant,
-        dataVisualization4: Color = this.dataVisualization4,
-        dataVisualization4Variant: Color = this.dataVisualization4Variant,
-        dataVisualization5: Color = this.dataVisualization5,
-        dataVisualization5Variant: Color = this.dataVisualization5Variant,
-        // Alert & Status Color Palette
-        success: Color = this.success,
-        successVariant: Color = this.successVariant,
-        warning: Color = this.warning,
-        warningVariant: Color = this.warningVariant,
-        // Theme
-        isLight: Boolean = this.isLight,
-    ): AppColors = AppColors(
-        // Main Color Palette
-        primary,
-        primaryVariant,
-        background,
-        surface,
-        onPrimary,
-        onBackground,
-        onSurface,
-        onSurfaceVariant,
-        error,
-        errorVariant,
-        onError,
-        disabled,
-        onDisabled,
-        disabled2,
-        onDisabled2,
-        // Data Visualization Color Palette
-        dataVisualization1,
-        dataVisualization1Variant,
-        dataVisualization2,
-        dataVisualization2Variant,
-        dataVisualization3,
-        dataVisualization3Variant,
-        dataVisualization4,
-        dataVisualization4Variant,
-        dataVisualization5,
-        dataVisualization5Variant,
-        // Alert & Status Color Palette
-        success,
-        successVariant,
-        warning,
-        warningVariant,
-        // Theme
-        isLight
-    )
-
-    fun updateColorsFrom(other: AppColors) {
-        primary = other.primary
-        primaryVariant = other.primaryVariant
-        background = other.background
-        surface = other.surface
-        onPrimary = other.onPrimary
-        onBackground = other.onBackground
-        onSurface = other.onSurface
-        onSurfaceVariant = other.onSurfaceVariant
-        error = other.error
-        errorVariant = other.errorVariant
-        onError = other.onError
-        disabled = other.disabled
-        onDisabled = other.onDisabled
-        disabled2 = other.disabled2
-        onDisabled2 = other.onDisabled2
-        // Data Visualization Color Palette
-        dataVisualization1 = other.dataVisualization1
-        dataVisualization1Variant = other.dataVisualization1Variant
-        dataVisualization2 = other.dataVisualization2
-        dataVisualization2Variant = other.dataVisualization2Variant
-        dataVisualization3 = other.dataVisualization3
-        dataVisualization3Variant = other.dataVisualization3Variant
-        dataVisualization4 = other.dataVisualization4
-        dataVisualization4Variant = other.dataVisualization4Variant
-        dataVisualization5 = other.dataVisualization5
-        dataVisualization5Variant = other.dataVisualization5Variant
-        // Alert & Status Color Palette
-        success = other.success
-        successVariant = other.successVariant
-        warning = other.warning
-        warningVariant = other.warningVariant
-        // Theme
-        isLight = other.isLight
-    }
-
     fun materialColors(): Colors =
         Colors(
             primary = primary,
@@ -294,6 +93,77 @@ fun mainLightColors(
     warningVariant: Color = Color(0xFFA36400),
     // Theme
     isLight: Boolean = true,
+): AppColors = AppColors(
+    primary = primary,
+    primaryVariant = primaryVariant,
+    background = background,
+    surface = surface,
+    onPrimary = onPrimary,
+    onBackground = onBackground,
+    onSurface = onSurface,
+    onSurfaceVariant = onSurfaceVariant,
+    error = error,
+    errorVariant = errorVariant,
+    onError = onError,
+    disabled = disabled,
+    onDisabled = onDisabled,
+    disabled2 = disabled2,
+    onDisabled2 = onDisabled2,
+    // Data Visualization Color Palette,
+    dataVisualization1 = dataVisualization1,
+    dataVisualization1Variant = dataVisualization1Variant,
+    dataVisualization2 = dataVisualization2,
+    dataVisualization2Variant = dataVisualization2Variant,
+    dataVisualization3 = dataVisualization3,
+    dataVisualization3Variant = dataVisualization3Variant,
+    dataVisualization4 = dataVisualization4,
+    dataVisualization4Variant = dataVisualization4Variant,
+    dataVisualization5 = dataVisualization5,
+    dataVisualization5Variant = dataVisualization5Variant,
+    // Alert & Status Color Palette,
+    success = success,
+    successVariant = successVariant,
+    warning = warning,
+    warningVariant = warningVariant,
+    // Theme
+    isLight = isLight
+)
+
+fun mainDarkColors(
+    // Main Color Palette
+    primary: Color = Color(0xFF68A8FF),
+    primaryVariant: Color = Color(0xFF222F41),
+    background: Color = Color(0xFF0E0E0E),
+    surface: Color = Color(0xFF232527),
+    onPrimary: Color = Color(0xFF000000),
+    onBackground: Color = Color(0xFFFFFFFF),
+    onSurface: Color = Color(0xFFFFFFFF),
+    onSurfaceVariant: Color = Color(0xFF68A8FF),
+    error: Color = Color(0xFFFD7278),
+    errorVariant: Color = Color(0xFFFFCED7),
+    onError: Color = Color(0xFF000000),
+    disabled: Color = Color(0xFF4E4E4E),
+    onDisabled: Color = Color(0xFFFFFFFF),
+    disabled2: Color = Color(0xFF1D1D1D),
+    onDisabled2: Color = Color(0xFF737373),
+    // Data Visualization Color Palette
+    dataVisualization1: Color = Color(0xFFDB5AEE),
+    dataVisualization1Variant: Color = Color(0xFFEFBDF7),
+    dataVisualization2: Color = Color(0xFFFFB536),
+    dataVisualization2Variant: Color = Color(0xFFFFDFAB),
+    dataVisualization3: Color = Color(0xFF09C8FE),
+    dataVisualization3Variant: Color = Color(0xFFACE8FE),
+    dataVisualization4: Color = Color(0xFF1AD598),
+    dataVisualization4Variant: Color = Color(0xFFB3EDD2),
+    dataVisualization5: Color = Color(0xFF1AD598),
+    dataVisualization5Variant: Color = Color(0xFFFFD1D3),
+    // Alert & Status Color Palette
+    success: Color = Color(0xFF74C76A),
+    successVariant: Color = Color(0xFFCEDACA),
+    warning: Color = Color(0xFFEECE55),
+    warningVariant: Color = Color(0xFFF7E8B4),
+    // Theme
+    isLight: Boolean = false,
 ): AppColors = AppColors(
     primary = primary,
     primaryVariant = primaryVariant,

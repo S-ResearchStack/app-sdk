@@ -4,11 +4,8 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -43,10 +40,11 @@ fun SdkCard(
     contentColor: Color = AppTheme.colors.primary,
     border: BorderStroke? = null,
     elevation: Dp = 0.dp,
-    content: @Composable () -> Unit,
+    content: @Composable () -> Unit = {},
 ) {
     Box(
         modifier = modifier
+            .fillMaxWidth()
             .shadow(elevation = elevation, shape = shape, clip = false)
             .zIndex(elevation.value)
             .then(
@@ -81,22 +79,7 @@ private fun SdkCardPreview() =
         color = Color.White,
         contentColor = AppTheme.colors.primary,
         elevation = 10.dp,
-    ) {
-        Column(
-            modifier = Modifier
-                .clickable(onClick = {})
-                .fillMaxSize()
-        ) {
-            Box(
-                modifier = Modifier
-                    .height(240.dp)
-                    .fillMaxWidth()
-            ) {
-                imagePreview()
-            }
-            contentPreview()
-        }
-    }
+    )
 
 @PreviewGenerated
 @Composable

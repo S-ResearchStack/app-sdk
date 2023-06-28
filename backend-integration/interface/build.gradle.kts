@@ -3,6 +3,7 @@ import AppDependencies.GSON
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    id("de.mannodermaus.android-junit5")
     id("org.jetbrains.dokka")
     id("io.gitlab.arturbosch.detekt")
     id("jacoco")
@@ -46,6 +47,9 @@ android {
 dependencies {
     implementation(project(":healthdata-link:interface"))
     implementation(GSON)
+
+    testRuntimeOnly(AppDependencies.JUNIT_ENGINE)
+    testImplementation(AppDependencies.testImplLibs)
 }
 
 tasks.dokkaHtml.configure {

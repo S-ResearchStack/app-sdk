@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import healthstack.kit.annotation.PreviewGenerated
 import healthstack.kit.theme.AppTheme
 
-data class BottomNavItem(val title: String, val icon: ImageVector, val onClick: () -> Unit)
+data class BottomNavItem(val title: String, val icon: ImageVector, val onClick: () -> Unit = { })
 
 @Composable
 fun BottomBarNavigation(
@@ -31,7 +31,9 @@ fun BottomBarNavigation(
     val curItem = remember { mutableStateOf(initial) }
 
     BottomNavigation(
-        modifier = Modifier.fillMaxWidth().height(60.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp),
         backgroundColor = AppTheme.colors.background,
     ) {
         items.forEachIndexed { index, item ->
@@ -67,8 +69,8 @@ fun BottomBarNavigation(
 fun BottomBarNavigationPreview() =
     BottomBarNavigation(
         listOf(
-            BottomNavItem("Home", Icons.Default.Home) {},
-            BottomNavItem("Insights", Icons.Default.InsertChart) {},
-            BottomNavItem("Education", Icons.Default.MenuBook) {}
+            BottomNavItem("Home", Icons.Default.Home),
+            BottomNavItem("Insights", Icons.Default.InsertChart),
+            BottomNavItem("Education", Icons.Default.MenuBook)
         )
     )

@@ -5,7 +5,9 @@ import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import healthstack.app.pref.AppStage
 import healthstack.app.pref.AppStage.Onboarding
 import healthstack.app.pref.SettingPreference
@@ -34,6 +36,14 @@ import org.junit.Rule
 import org.junit.Test
 import java.time.LocalDate
 
+/**
+* This class contains the test functions for the Base Application.
+*
+* @property rule the compose rule used for testing
+* @property onboardingTask the onboarding task used for testing
+* @property signUpTask the sign up task used for testing
+*/
+
 class BaseAppTest {
     @get:Rule
     val rule = createComposeRule() as AndroidComposeTestRule<*, *>
@@ -43,6 +53,11 @@ class BaseAppTest {
         description = "Onboarding Flow",
         introStep = introStep(),
     )
+    /**
+     * This function creates an instance of the IntroStep class which is used to show the introduction step in the Onboarding flow.
+     *
+     * @return the IntroStep object
+     */
 
     private fun introStep() = IntroStep(
         "intro-step",
@@ -50,6 +65,11 @@ class BaseAppTest {
         intro(),
         IntroView("Get Started"),
     )
+    /**
+     * This function creates an instance of the IntroModel class which is used to show the introduction in the Onboarding flow.
+     *
+     * @return the IntroModel object
+     */
 
     private fun intro() = IntroModel(
         id = "intro",
@@ -65,7 +85,9 @@ class BaseAppTest {
             )
         )
     )
-
+    /**
+     * This variable contains the Sign Up Task that is used in the application.
+     */
     private val signUpTask = SignUpTask(
         "signup-task",
         "Sign Up",
@@ -85,6 +107,11 @@ class BaseAppTest {
             drawableId = R.drawable.ic_task
         ),
     )
+    /**
+     * This function tests the Base Application until the Sign Up Task is displayed.
+     *
+     * @throws [AssertionError] if the assertion on the test case fails
+     */
 
     @Test
     fun testBaseAppUntilSignUp() {
@@ -112,11 +139,23 @@ class BaseAppTest {
             .assertIsEnabled()
     }
 
+    /**
+     * This function tests the main functionality of the Base Application.
+     *
+     * @throws [AssertionError] if the assertion on the test case fails
+     */
+
     @Test
     fun testMain() {
         val healthDataLink = mockk<HealthDataLink>()
         HealthDataLinkHolder.initialize(healthDataLink)
-
+        val firebaseAuth = mockk<FirebaseAuth>()
+        val firebaseUser = mockk<FirebaseUser>()
+        mockkStatic(FirebaseAuth::class)
+        every { FirebaseAuth.getInstance() } returns firebaseAuth
+        every { firebaseAuth.currentUser } returns firebaseUser
+        every { firebaseUser.displayName } returns "samsung kim"
+        every { firebaseUser.email } returns "test@samsung.com"
         coEvery { healthDataLink.getHealthData(any(), any(), any()) } returns HealthData("healthdata", emptyList())
 
         val pref = SettingPreference(rule.activity)
@@ -135,5 +174,9 @@ class BaseAppTest {
 
         rule.onNodeWithText(LocalDate.now().dayOfMonth.toString())
             .assertExists()
+
+        rule.onNodeWithText("Education")
+            .assertExists()
+            .performClick()
     }
 }

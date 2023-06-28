@@ -19,7 +19,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun MinuteTextTimer(
     timeSeconds: Int = 10,
-    onTimeout: () -> Unit,
+    onTimeout: () -> Unit = {},
 ) {
     val leftTimeSeconds = remember { mutableStateOf(timeSeconds) }
     LaunchedEffect(Unit) {
@@ -50,7 +50,5 @@ private fun formatTime(timeSeconds: Int): String {
 @Preview(showBackground = true, device = Devices.NEXUS_5)
 @Composable
 fun MinuteTimerPreview() {
-    MinuteTextTimer(
-        onTimeout = {}
-    )
+    MinuteTextTimer()
 }

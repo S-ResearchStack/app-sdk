@@ -66,11 +66,22 @@ fun SignatureLayout(
             SdkCard(
                 modifier = Modifier
                     .height(189.dp)
+                    .fillMaxWidth()
                     .testTag("signatureView"),
                 color = AppTheme.colors.disabled.copy(0.2F)
             ) {
+                var onSigned = false
                 SignaturePadView(
-                    onReady = { signaturePadAdapter = it },
+                    onReady = {
+                        signaturePadAdapter = it
+                    },
+                    onStartSigning = {
+                        if (!onSigned)
+                            signaturePadAdapter!!.clear()
+                    },
+                    onSigned = {
+                        onSigned = true
+                    },
                     penColor = AppTheme.colors.onSurface
                 )
             }
@@ -112,7 +123,8 @@ fun SignatureLayout(
                     text = "Sign",
                     border = BorderStroke(width = 1.dp, color = AppTheme.colors.primary),
                     onClick = {
-                        mutableSvg.value = signaturePadAdapter?.getSignatureSvg() ?: ""
+                        mutableSvg.value =
+                            if (signaturePadAdapter?.isEmpty!!) "" else signaturePadAdapter?.getSignatureSvg()!!
                         onClickDone(mutableSvg.value)
                     }
                 )

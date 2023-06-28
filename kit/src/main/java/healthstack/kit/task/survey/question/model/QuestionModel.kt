@@ -17,11 +17,14 @@ abstract class QuestionModel<R>(
     enum class QuestionType {
         Choice,
         MultipleChoice,
-        Text
+        Text,
+        Ranking,
+        DateTime,
+        Image,
     }
 }
 
 class SkipLogic(
     val condition: String,
-    val goToItemSequence: Int
+    val goToItemSequence: Int,
 )

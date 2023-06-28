@@ -113,7 +113,7 @@ fun TappingButton(tapCount: MutableState<Int>) = Image(
 fun TappingSpeedMeasurePreview() {
     val view = TappingSpeedMeasureView()
     val model = TappingSpeedMeasureModel("id", "Tapping Speed")
-    val callbackCollection = object : CallbackCollection() {}
+    val callbackCollection = CallbackCollection()
     return view.Render(
         model,
         callbackCollection,

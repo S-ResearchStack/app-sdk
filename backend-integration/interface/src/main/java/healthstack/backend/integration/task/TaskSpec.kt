@@ -77,8 +77,18 @@ data class Contents(
 open class ItemProperties(
     val tag: String,
     @SerializedName("skip_logic")
-    val skipLogic: List<SkipLogic>?
+    val skipLogic: List<SkipLogic>?,
 )
+
+/**
+ * System distinguishes the UI component based on the tag.
+ *
+ * @property tag Type of UI component to render. (ex) Radio, Dropdown
+ */
+class TextProperties(
+    tag: String,
+    skipLogic: List<SkipLogic>? = null,
+) : ItemProperties(tag, skipLogic)
 
 /**
  * Item properties for the choice question.
@@ -90,6 +100,34 @@ class ChoiceProperties(
     tag: String,
     skipLogic: List<SkipLogic>? = null,
     val options: List<Option>,
+) : ItemProperties(tag, skipLogic)
+
+/**
+ * Item properties for the ranking question.
+ *
+ * @property options Values given as options. [Option]
+ * @param tag Type of UI component to render.
+ */
+class RankingProperties(
+    tag: String,
+    skipLogic: List<SkipLogic>? = null,
+    val options: List<Option>,
+) : ItemProperties(tag, skipLogic)
+
+/**
+ * Item properties for the date/time question.
+ *
+ * @property options Values given as options. [Option]
+ * @param isTime if format of the answer is time
+ * @param isDate if format of the answer is date
+ * @param isRange if format of the answer is range
+ */
+class DateTimeProperties(
+    tag: String,
+    skipLogic: List<SkipLogic>? = null,
+    val isTime: Boolean,
+    val isDate: Boolean,
+    val isRange: Boolean,
 ) : ItemProperties(tag, skipLogic)
 
 /**
@@ -117,6 +155,7 @@ class ScaleProperties(
  */
 data class Option(
     val value: String,
+    val label: String? = null,
 )
 
 data class SkipLogic(

@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 29
@@ -81,7 +81,7 @@ dependencies {
     implementation(AppDependencies.roomLibs)
     implementation(AppDependencies.GSON)
     implementation(AppDependencies.CRON_QUARTZ)
-
+    implementation(AppDependencies.GUAVA)
     kapt(listOf(AppDependencies.ANDROIDX_ROOM_COMPILER))
 
     debugImplementation(AppDependencies.uiDebugLibs)

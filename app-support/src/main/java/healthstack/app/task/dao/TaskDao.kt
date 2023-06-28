@@ -30,5 +30,5 @@ interface TaskDao {
     suspend fun removeAll()
 
     @Query("SELECT * FROM task WHERE id = :id")
-    fun findById(id: String): Flow<healthstack.app.task.entity.Task>
+    suspend fun findById(id: String): healthstack.app.task.entity.Task?
 }

@@ -1,5 +1,7 @@
 package healthstack.healthdata.link.healthconnect
 
+import android.os.RemoteException
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
 import androidx.health.connect.client.HealthConnectClient
@@ -59,14 +61,19 @@ class HealthConnectAdapter(
 
         val recordType = HealthConnectUtils.nameToRecord(healthDataTypeName)
 
-        val recordsResponse = healthConnectClient.readRecords(
-            ReadRecordsRequest(
-                recordType,
-                Companion.between(startTime, endTime)
+        return try {
+            val recordsResponse = healthConnectClient.readRecords(
+                ReadRecordsRequest(
+                    recordType,
+                    Companion.between(startTime, endTime)
+                )
             )
-        )
 
-        return recordsResponse.toHealthData(healthDataTypeName)
+            recordsResponse.toHealthData(healthDataTypeName)
+        } catch (e: RemoteException) {
+            Log.e(HealthConnectAdapter::class.simpleName, e.message.toString())
+            HealthData(healthDataTypeName, emptyList())
+        }
     }
 
     override suspend fun getChangesToken(healthDataTypeName: String): String {

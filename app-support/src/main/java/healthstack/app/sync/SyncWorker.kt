@@ -18,11 +18,18 @@ import healthstack.backend.integration.BackendFacadeHolder
 import healthstack.healthdata.link.HealthData
 import healthstack.healthdata.link.HealthDataLink
 import healthstack.healthdata.link.HealthDataLinkHolder
+import healthstack.kit.annotation.ForVerificationGenerated
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
+/**
+ * A [CoroutineWorker] that performs synchronization of health data with the backend.
+ * @property healthDataSyncClient A [BackendFacade] instance used to communicate with the backend.
+ * @property healthDataLink A [HealthDataLink] instance used to access health data.
+ */
+@ForVerificationGenerated
 class SyncWorker constructor(
     context: Context,
     params: WorkerParameters,
@@ -30,6 +37,10 @@ class SyncWorker constructor(
     private val healthDataSyncClient: BackendFacade = BackendFacadeHolder.getInstance()
     private val healthDataLink: HealthDataLink = HealthDataLinkHolder.getInstance()
 
+    /**
+     * The main entry point of the worker that performs the synchronization.
+     * @return The result of the synchronization.
+     */
     override suspend fun doWork(): Result {
         val healthDataTypeString: String =
             inputData.getString(HEALTH_DATA_TYPE_KEY) ?: return Result.failure()
@@ -78,6 +89,10 @@ class SyncWorker constructor(
         return Result.success()
     }
 
+    /**
+     * The main entry point of the worker that performs the synchronization.
+     * @return The result of the synchronization.
+     */
     private fun createForegroundInfo(): ForegroundInfo {
         val intent = WorkManager.getInstance(applicationContext)
             .createCancelPendingIntent(id)
@@ -94,6 +109,10 @@ class SyncWorker constructor(
         return ForegroundInfo(Random.nextInt(), notificationBuilder, FOREGROUND_SERVICE_TYPE_LOCATION)
     }
 
+    /**
+     * The main entry point of the worker that performs the synchronization.
+     * @return The result of the synchronization.
+     */
     private suspend fun sync(idToken: String, healthDataToSync: HealthData) {
         healthDataSyncClient.sync(idToken, healthDataToSync)
     }

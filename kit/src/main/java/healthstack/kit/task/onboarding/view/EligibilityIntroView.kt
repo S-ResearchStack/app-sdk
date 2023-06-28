@@ -304,7 +304,7 @@ class EligibilityIntroView : View<EligibilityIntroModel>() {
                 )
                 .padding(horizontal = 10.dp),
             shape = RoundedCornerShape(4.dp),
-            elevation = 12.dp,
+            elevation = 1.dp,
             color = backgroundColor,
         ) {
             Column(

@@ -9,7 +9,6 @@ import androidx.navigation.compose.rememberNavController
 import healthstack.app.pref.AppStage
 import healthstack.app.pref.AppStage.Education
 import healthstack.app.pref.AppStage.Home
-import healthstack.app.pref.AppStage.Insights
 import healthstack.app.pref.AppStage.Onboarding
 import healthstack.app.pref.AppStage.Profile
 import healthstack.app.pref.AppStage.Settings
@@ -17,17 +16,29 @@ import healthstack.app.pref.AppStage.SignUp
 import healthstack.app.pref.AppStage.StudyInformation
 import healthstack.app.pref.SettingPreference
 import healthstack.app.status.StatusDataType
+import healthstack.app.sync.FileSyncManager
 import healthstack.app.sync.SyncManager
 import healthstack.app.task.repository.TaskRepository
 import healthstack.app.task.repository.TaskRepositoryImpl
 import healthstack.kit.info.MyProfileView
 import healthstack.kit.info.SettingsView
 import healthstack.kit.info.StudyInfoView
+import healthstack.kit.info.publication.PdfPublication
+import healthstack.kit.info.publication.content.TextBlock
 import healthstack.kit.task.onboarding.OnboardingTask
 import healthstack.kit.task.signup.SignUpTask
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+
+/**
+ * Composable function representing the entire application.
+ *
+ * @param onboardingTask the onboarding task to be performed when the app is launched.
+ * @param singUpTask the sign up task to be performed after the onboarding task is completed.
+ * @param statusList the list of status data types to be displayed in the UI.
+ * @param healthDataSyncSpecs the list of health data sync specifications to be used by the SyncManager.
+ */
 
 @Composable
 fun BaseApplication(
@@ -46,6 +57,15 @@ fun BaseApplication(
     )
 }
 
+/**
+ * The main function of the application.
+ *
+ * @param settingPreference the shared preferences object for the application.
+ * @param onboardingTask the onboarding task to be performed when the app is launched.
+ * @param singUpTask the sign up task to be performed after the onboarding task is completed.
+ * @param statusList the list of status data types to be displayed in the UI.
+ * @param healthDataSyncSpecs the list of health data sync specifications to be used by the SyncManager.
+ */
 @Composable
 private fun Main(
     settingPreference: SettingPreference,
@@ -90,17 +110,36 @@ private fun Main(
                 initialize = { changeNavigation(Onboarding) }
             ).Render()
         }
-        composable(Insights.name) { }
-        composable(Education.name) { }
+        composable(Education.name) {
+            EducationView(
+                changeNavigation,
+                listOf(
+                    PdfPublication(
+                        "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                        "Heart Health",
+                        "How to Prevent a Heart Stroke?",
+                        "10 min read",
+                        listOf(
+                            TextBlock(
+                                "To prevent a stroke, prioritize a healthy lifestyle. "
+                            )
+                        )
+                    )
+                )
+            ).Render()
+        }
         composable(Onboarding.name) {
             onboardingTask.callback = { changeNavigation(SignUp) }
             onboardingTask.Render()
         }
         composable(SignUp.name) {
             SyncManager.initialize(LocalContext.current, healthDataSyncSpecs)
+            FileSyncManager.initialize(LocalContext.current, 15)
+
             singUpTask.callback = {
                 scope.launch {
                     SyncManager.getInstance().startBackgroundSync()
+                    FileSyncManager.getInstance().startBackgroundSync()
                 }
                 changeNavigation(Home)
             }

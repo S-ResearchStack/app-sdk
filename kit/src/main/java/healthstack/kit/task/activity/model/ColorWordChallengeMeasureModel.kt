@@ -7,7 +7,7 @@ class ColorWordChallengeMeasureModel(
     title: String = "Color Word Challenge",
     val numTest: Int = 10,
 ) : StepModel(id, title, null) {
-    fun getTestset(): Array<IntArray> {
+    private fun generateTestset(): Array<IntArray> {
         // +1 for buffer
         var ret = Array(numTest + 1) { IntArray(5) }
         for (i in 0 until numTest) {
@@ -52,6 +52,8 @@ class ColorWordChallengeMeasureModel(
         "PINK",
         "BROWN",
     )
+
+    val testset = generateTestset()
 
     fun getRandomColor(): Long {
         return colorCodes[(colorCodes.indices).random()]

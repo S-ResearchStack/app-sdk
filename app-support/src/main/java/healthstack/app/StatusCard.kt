@@ -11,11 +11,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import healthstack.app.status.HealthStatus
 import healthstack.app.status.StatusDataType
 import healthstack.app.status.TaskStatus
-import healthstack.app.viewmodel.HealthStatusViewModel
 import healthstack.kit.theme.AppTheme
 import healthstack.kit.ui.HealthDataStatusRow
 import healthstack.kit.ui.TaskStatus
@@ -37,7 +42,7 @@ fun StatusCards(
 
         val healthStatus = dataTypeStatus.filterNot {
             it is TaskStatus
-        }
+        } as List<HealthStatus>
 
         HealthStatusCard(healthStatus)
         TaskStatusCard(dataTypeStatus.filterIsInstance<TaskStatus>()[0], viewModel)
@@ -58,10 +63,24 @@ fun TaskStatusCard(
 
 @Composable
 fun HealthStatusCard(
-    data: List<StatusDataType>,
+    data: List<HealthStatus>,
 ) {
-    val vms = data.map { HealthStatusViewModel(it) }
-    val healthStates = vms.map {
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    val latestLifecycleEvent = remember { mutableStateOf(Lifecycle.Event.ON_ANY) }
+    val viewModels = data.map {
+        it.toViewModel()
+    }
+
+    val observer = LifecycleEventObserver { _, event ->
+        latestLifecycleEvent.value = event
+        viewModels.map {
+            it.lifecycle = event
+        }
+    }
+
+    lifecycle.addObserver(observer)
+
+    val healthStates = viewModels.map {
         it.healthState.collectAsState()
     }
 
@@ -80,7 +99,11 @@ fun HealthStatusCard(
                 )
         ) {
             for (i in data.indices)
-                HealthDataStatusRow(data[i].getIcon(), "${healthStates[i].value.state}", data[i].getUnitString())
+                HealthDataStatusRow(
+                    data[i].getIcon(),
+                    "${healthStates[i].value.state}",
+                    data[i].getUnitString()
+                )
         }
     }
 }

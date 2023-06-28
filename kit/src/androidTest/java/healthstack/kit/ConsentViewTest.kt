@@ -1,7 +1,9 @@
 package healthstack.kit
 
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import healthstack.healthdata.link.HealthDataLink
 import healthstack.healthdata.link.HealthDataLinkHolder
 import healthstack.kit.task.base.CallbackCollection
@@ -54,5 +56,9 @@ class ConsentViewTest {
 
         rule.onNodeWithText("testTitle").assertExists()
         rule.onNodeWithText("WrongTestTitle").assertDoesNotExist()
+
+        rule.onNodeWithContentDescription("back button icon")
+            .assertExists()
+            .performClick()
     }
 }

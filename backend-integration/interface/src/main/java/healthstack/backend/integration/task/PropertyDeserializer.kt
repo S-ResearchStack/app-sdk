@@ -20,10 +20,26 @@ class PropertyDeserializer : JsonDeserializer<ItemProperties> {
 
         return when (jsonObject["tag"].asString.uppercase()) {
             "SLIDER" -> context?.deserialize(json, ScaleProperties::class.java)
-            "RADIO", "CHECKBOX" -> context?.deserialize(
+            "RADIO", "CHECKBOX", "IMAGE", "MULTIIMAGE", "DROPDOWN" -> context?.deserialize(
                 json,
                 ChoiceProperties::class.java
             )
+
+            "DATETIME" -> context?.deserialize(
+                json,
+                DateTimeProperties::class.java
+            )
+
+            "TEXT" -> context?.deserialize(
+                json,
+                TextProperties::class.java
+            )
+
+            "RANK" -> context?.deserialize(
+                json,
+                RankingProperties::class.java
+            )
+
             else -> throw IllegalArgumentException("Not supported tag.")
         }
     }

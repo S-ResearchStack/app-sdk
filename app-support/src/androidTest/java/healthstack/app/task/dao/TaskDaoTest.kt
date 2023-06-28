@@ -16,7 +16,6 @@ import healthstack.backend.integration.task.ChoiceProperties
 import healthstack.backend.integration.task.Contents
 import healthstack.backend.integration.task.Item
 import healthstack.backend.integration.task.Option
-import java.time.LocalDateTime
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -28,6 +27,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
 import org.junit.runner.RunWith
+import java.time.LocalDateTime
+
+/**
+* This class contains the test functions for the TaskDao class.
+*/
 
 @RunWith(AndroidJUnit4::class)
 @TestInstance(PER_CLASS)
@@ -65,8 +69,12 @@ class TaskDaoTest {
         scheduledAt = curTime.plusMinutes(5),
         validUntil = curTime.plusMinutes(10),
         submittedAt = null,
-        startedAt = null
+        startedAt = null,
+        type = "SURVEY"
     )
+    /**
+     * This function creates an instance of the TaskRoomDatabase and initializes the TaskDao object.
+     */
 
     @BeforeAll
     fun createDb() {
@@ -78,23 +86,34 @@ class TaskDaoTest {
             .build()
         taskDao = db.taskDao()
     }
+    /**
+     * This function clears all the data from the database tables after each test function is executed.
+     */
 
     @AfterEach
     fun removeTestData() {
         db.clearAllTables()
     }
+    /**
+     * This function closes the TaskRoomDatabase instance.
+     */
 
     @AfterAll
     fun closeDb() {
         db.close()
     }
+    /**
+     * This function tests the insertion of a Task entity into the TaskDao and verifies if the data has been stored correctly.
+     *
+     * @throws [AssertionError] if the assertion on the test case fails
+     */
 
     @Test
     fun insertAllAndFindByIdTest() {
         runTest {
             taskDao.insertAll(listOf(exampleTask))
 
-            val storedTask = taskDao.findById(exampleTask.id.toString()).first()
+            val storedTask = taskDao.findById(exampleTask.id.toString())!!
 
             assertEquals(exampleTask.taskId, storedTask.taskId)
             assertEquals(exampleTask.revisionId, storedTask.revisionId)
@@ -106,15 +125,20 @@ class TaskDaoTest {
                 storedTask.properties.items[0].contents.title
             )
             assertEquals(
-                exampleTask.properties.items[0].contents.itemProperties.tag,
-                storedTask.properties.items[0].contents.itemProperties.tag
+                exampleTask.properties.items[0].contents.itemProperties!!.tag,
+                storedTask.properties.items[0].contents.itemProperties!!.tag
             )
             assertEquals(
-                exampleTask.properties.items[0].contents.itemProperties::class,
-                storedTask.properties.items[0].contents.itemProperties::class
+                exampleTask.properties.items[0].contents.itemProperties!!::class,
+                storedTask.properties.items[0].contents.itemProperties!!::class
             )
         }
     }
+    /**
+     * This function tests the setSubmittedAt function of the TaskDao and verifies if the submittedAt field has been set correctly for the Task entity.
+     *
+     * @throws [AssertionError] if the assertion on the test case fails
+     */
 
     @Test
     fun setSubmittedAtTest() {
@@ -124,11 +148,16 @@ class TaskDaoTest {
             taskDao.insertAll(listOf(exampleTask))
             taskDao.setSubmittedAt(exampleTask.id.toString(), submitTime.toString())
 
-            val storedTask = taskDao.findById(exampleTask.id.toString()).first()
+            val storedTask = taskDao.findById(exampleTask.id.toString())!!
 
             assertEquals(submitTime, storedTask.submittedAt)
         }
     }
+    /**
+     * This function tests the setResult function of the TaskDao and verifies if the result, startedAt, and submittedAt fields have been set correctly for the Task entity.
+     *
+     * @throws [AssertionError] if the assertion on the test case fails
+     */
 
     @Test
     fun setResultTest() {
@@ -140,27 +169,37 @@ class TaskDaoTest {
             taskDao.insertAll(listOf(exampleTask))
             taskDao.setResult(exampleTask.id.toString(), listOf(result), startTime.toString(), submitTime.toString())
 
-            val storedTask = taskDao.findById(exampleTask.id.toString()).first()
+            val storedTask = taskDao.findById(exampleTask.id.toString())!!
 
             assertEquals(listOf(result), storedTask.result)
             assertEquals(startTime, storedTask.startedAt)
             assertEquals(submitTime, storedTask.submittedAt)
         }
     }
+    /**
+     * This function tests the removeAll function of the TaskDao and verifies if all the data has been removed from the TaskDao.
+     *
+     * @throws [AssertionError] if the assertion on the test case fails
+     */
 
     @Test
     fun removeAllTest() {
         runTest {
             taskDao.insertAll(listOf(exampleTask))
 
-            var storedTask = taskDao.findById(exampleTask.id.toString()).first()
-            assertEquals(exampleTask.taskId, storedTask.taskId)
+            var storedTask = taskDao.findById(exampleTask.id.toString())
+            assertEquals(exampleTask.taskId, storedTask?.taskId)
 
             taskDao.removeAll()
-            storedTask = taskDao.findById(exampleTask.id.toString()).first()
+            storedTask = taskDao.findById(exampleTask.id.toString())
             assertEquals(null, storedTask)
         }
     }
+    /**
+     * This function tests the getActiveTasks function of the TaskDao and verifies if the correct Task entities are returned by the function.
+     *
+     * @throws [AssertionError] if the assertion on the test case fails
+     */
 
     @Test
     fun getActiveTasksTest() {
@@ -171,6 +210,11 @@ class TaskDaoTest {
             assertEquals(exampleTask.taskId, storedTask[0].taskId)
         }
     }
+    /**
+     * This function tests the getCompletedTasks function of the TaskDao and verifies if the correct Task entities are returned by the function.
+     *
+     * @throws [AssertionError] if the assertion on the test case fails
+     */
 
     @Test
     fun getCompletedTasksTest() {
@@ -185,6 +229,11 @@ class TaskDaoTest {
             assertEquals(exampleTask.taskId, storedTask[0].taskId)
         }
     }
+    /**
+     * This function tests the getUpcomingTasks function of the TaskDao and verifies if the correct Task entities are returned by the function.
+     *
+     * @throws [AssertionError] if the assertion on the test case fails
+     */
 
     @Test
     fun getUpcomingTasksTest() {
