@@ -12,8 +12,8 @@ object Versions {
     const val APPCOMPAT = "1.4.1"
 
     object Google {
-        const val HEALTH_DATA = "1.0.0-alpha01"
-        const val HEALTH_CONNECT = "1.0.0-alpha07"
+        const val HEALTH_DATA = "1.1.0-alpha01"
+        const val HEALTH_CONNECT = "1.1.0-alpha02"
         const val GMS = "4.3.10"
         const val FIREBASE_BOM = "30.1.0"
         const val PLAY_SERVICE_AUTH = "20.2.0"
