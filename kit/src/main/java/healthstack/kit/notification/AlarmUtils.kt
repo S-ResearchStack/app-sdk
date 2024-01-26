@@ -62,11 +62,11 @@ class AlarmUtils private constructor() {
             AlarmManager.RTC_WAKEUP,
             triggerTime,
             interval,
-            pendingIntentMap[alarmCode]
+            pendingIntentMap[alarmCode]!!
         )
     }
 
     fun cancelAlarm(alarmCode: Int) {
-        alarmManager.cancel(pendingIntentMap[alarmCode])
+        alarmManager.cancel(pendingIntentMap[alarmCode]!!)
     }
 }
