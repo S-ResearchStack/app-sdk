@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 29
-        targetSdk = 31
+        targetSdk = 34
     }
 
     compileOptions {

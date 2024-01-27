@@ -5,7 +5,7 @@ object Versions {
     const val ANDROID_BUILD = "7.2.2"
 
     object Hilt {
-        const val DAGGER = "2.42"
+        const val DAGGER = "2.47"
         const val ANDROIDX = "1.0.0"
     }
 
