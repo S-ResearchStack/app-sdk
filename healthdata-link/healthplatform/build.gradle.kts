@@ -1,5 +1,5 @@
 import AppDependencies.ANDROIDX_CONCURRENT
-import AppDependencies.GOOGLE_HEALTH_DATA
+import AppDependencies.GOOGLE_HEALTH_CONNECT
 
 plugins {
     id("com.android.library")
@@ -52,7 +52,7 @@ android {
 
 dependencies {
     implementation(project(":healthdata-link:interface"))
-    implementation(GOOGLE_HEALTH_DATA)
+    implementation(GOOGLE_HEALTH_CONNECT)
     implementation(ANDROIDX_CONCURRENT)
 
     testRuntimeOnly(AppDependencies.JUNIT_ENGINE)

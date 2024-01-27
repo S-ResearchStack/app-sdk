@@ -12,7 +12,6 @@ object Versions {
     const val APPCOMPAT = "1.4.1"
 
     object Google {
-        const val HEALTH_DATA = "1.1.0-alpha01"
         const val HEALTH_CONNECT = "1.1.0-alpha02"
         const val GMS = "4.3.10"
         const val FIREBASE_BOM = "30.1.0"
@@ -111,15 +110,12 @@ object AppDependencies {
     const val HILT_ANDROIDX_WORK = "androidx.hilt:hilt-work:${Versions.Hilt.ANDROIDX}"
     const val HILT_ANDORIDX_COMPILER = "androidx.hilt:hilt-compiler:${Versions.Hilt.ANDROIDX}"
 
-    const val GOOGLE_HEALTH_DATA =
-        "com.google.android.libraries.healthdata:health-data-api:${Versions.Google.HEALTH_DATA}"
     const val GOOGLE_HEALTH_CONNECT = "androidx.health.connect:connect-client:${Versions.Google.HEALTH_CONNECT}"
 
     const val ANTLR = "org.antlr:antlr4:${Versions.ANTLR}"
 
     val healthDataImplLibs = arrayListOf<String>().apply {
         add(ANDROIDX_WORK)
-        add(GOOGLE_HEALTH_DATA)
         add(GOOGLE_HEALTH_CONNECT)
     }
 
