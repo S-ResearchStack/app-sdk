@@ -7,9 +7,8 @@ if (buildAppsWithSDKProject.toBoolean()) {
 }
 include(":kit")
 include(":healthdata-link:interface")
+include(":healthdata-link:healthconnect")
 include(":backend-integration:interface")
 include(":backend-integration:healthstack-adapter")
-include(":healthdata-link:healthplatform")
-include(":healthdata-link:healthconnect")
 include(":resources:korean")
 include(":app-support")
