@@ -58,15 +58,19 @@ class AlarmUtils private constructor() {
     }
 
     fun setRepeatingAlarm(triggerTime: Long, interval: Long, alarmCode: Int) {
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            triggerTime,
-            interval,
-            pendingIntentMap[alarmCode]!!
-        )
+        pendingIntentMap[alarmCode]?.let {
+            alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                triggerTime,
+                interval,
+                it
+            )
+        }
     }
 
     fun cancelAlarm(alarmCode: Int) {
-        alarmManager.cancel(pendingIntentMap[alarmCode]!!)
+        pendingIntentMap[alarmCode]?.let {
+            alarmManager.cancel(it)
+        }
     }
 }
