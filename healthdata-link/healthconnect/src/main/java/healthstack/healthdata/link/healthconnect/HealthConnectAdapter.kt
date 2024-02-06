@@ -1,6 +1,5 @@
 package healthstack.healthdata.link.healthconnect
 
-import android.annotation.SuppressLint
 import android.os.RemoteException
 import android.util.Log
 import androidx.activity.ComponentActivity
