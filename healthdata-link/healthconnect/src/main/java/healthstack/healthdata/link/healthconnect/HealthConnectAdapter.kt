@@ -25,16 +25,16 @@ class HealthConnectAdapter(
         HealthConnectUtils.nameToRecord(it)
     }
 
-    private val requiredPermissions: Set<HealthPermission> = healthDataTypes.map {
+    private val requiredPermissions: Set<String> = healthDataTypes.map {
         listOf(
-            HealthPermission.createReadPermission(it),
-            HealthPermission.createWritePermission(it)
+            HealthPermission.getReadPermission(it),
+            HealthPermission.getWritePermission(it)
         )
     }
         .flatten()
         .toSet()
 
-    private lateinit var launcher: ActivityResultLauncher<Set<HealthPermission>>
+    private lateinit var launcher: ActivityResultLauncher<Set<String>>
 
     fun createLauncher(context: ComponentActivity) {
         launcher = context.registerForActivityResult(
@@ -45,9 +45,7 @@ class HealthConnectAdapter(
     }
 
     override suspend fun hasAllPermissions(): Boolean =
-        requiredPermissions == healthConnectClient.permissionController.getGrantedPermissions(
-            requiredPermissions
-        )
+        requiredPermissions == healthConnectClient.permissionController.getGrantedPermissions()
 
     override suspend fun requestPermissions() {
         healthConnectClient.permissionController.revokeAllPermissions()
