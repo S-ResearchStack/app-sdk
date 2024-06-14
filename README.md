@@ -13,28 +13,27 @@ The stack also includes:
 -   A backend system consisting of services and a data engine available through application programming interface (API) endpoints
 -   A web portal for survey creation, participant management, and data analysis
 
-Refer to <a href="https://s-healthstack.io" target="_blank">https://s-healthstack.io</a> for documentation, or jump directly to:
-- The <a href="https://s-healthstack.io/install-backend.html" target="_blank">backend system installation instructions</a>
-- The <a href="https://s-healthstack.io/install-sdk.html" target="_blank">app SDK installation instructions</a>
-- The <a href="https://s-healthstack.io/install-portal.html" target="_blank">web portal installation instructions</a>
-- The <a href="https://s-healthstack.io/tutorial.html" target="_blank">getting started tutorial</a>
+Refer to <a href="https://developer.samsung.com/health/stack" target="_blank">Samsung Developer Portal</a> for documentation, or jump directly to:
+- The <a href="https://developer.samsung.com/health/stack/developer-guide/installation/install-backend.html" target="_blank">backend system installation instructions</a>
+- The <a href="https://developer.samsung.com/health/stack/developer-guide/installation/install-sdk.html" target="_blank">app SDK installation instructions</a>
+- The <a href="https://developer.samsung.com/health/stack/developer-guide/installation/install-portal.html" target="_blank">web portal installation instructions</a>
+- The <a href="https://developer.samsung.com/codelab/health/research-app.html" target="_blank">getting started tutorial</a>
 
 
 
 Follow these instructions to install, build, and verify the app SDK.
 
-> If you are installing the full stack, this installation requires successful prior completion of the [backend system installation](install-backend.md).
+> If you are installing the full stack, this installation requires successful prior completion of the [backend system installation](https://developer.samsung.com/health/stack/developer-guide/installation/install-backend.html).
 
 # Prerequisites
 
 ## I. Install OpenJDK 11
 
-1. Set up and install OpenJDK 11 using the instructions at [https://openjdk.org/install/]
-(https://openjdk.org/install).
+1. Set up and install OpenJDK 11 using the instructions at [OpenJDK](https://openjdk.org/install) page.
 
-## II. Install Android Studio 
+## II. Install Android Studio
 
-1. Set up and install Android Studio on Windows, macOS, or Linux using the instructions at [https://developer.android.com/studio](https://developer.android.com/studio){:target="_blank"}.
+1. Set up and install Android Studio on Windows, macOS, or Linux using the instructions at [Android Studio](https://developer.android.com/studio) page.
 
 # Build
 
@@ -63,7 +62,7 @@ Follow these instructions to install, build, and verify the app SDK.
    }
    ```
 
-   These dependencies will add the necessary modules of the S-HealthStack SDK to your project. You can find a list of all the modules here: [Maven Central - s-healthstack](https://central.sonatype.com/search?smo=true&q=s-healthstack). 
+   These dependencies will add the necessary modules of the S-HealthStack SDK to your project. You can find a list of all the modules here: [Maven Central - s-healthstack](https://central.sonatype.com/search?smo=true&q=s-healthstack).
 
    > Version 0.9c refers to the beta version. Please refer to the Maven Center to see the latest versions.
 
@@ -90,11 +89,11 @@ Follow these instructions to install, build, and verify the app SDK.
 
 ## V. Check the Coding Style
 
-1. Use the [Compose API guidelines](https://github.com/androidx/androidx/blob/androidx-main/compose/docs/compose-api-guidelines.md){:target="_blank"} to check your coding style. The guidelines outline the patterns, best practices, and prescriptive style guidelines for writing idiomatic Jetpack Compose APIs. 
+1. Use the [Compose API guidelines](https://github.com/androidx/androidx/blob/androidx-main/compose/docs/compose-api-guidelines.md) to check your coding style. The guidelines outline the patterns, best practices, and prescriptive style guidelines for writing idiomatic Jetpack Compose APIs.
 
 ## VI. Create a Firebase Project
 
-1. Follow the instructions at [https://firebase.google.com/docs/android/setup](https://firebase.google.com/docs/android/setup){:target="_blank"} to add a Firebase project to the Firebase account you created during backend system installation.
+1. Follow the instructions at [Add Firebase to your Android project](https://firebase.google.com/docs/android/setup) to add a Firebase project to the Firebase account you created during backend system installation.
 
 ## VII. Per App Configuration
 
@@ -104,8 +103,8 @@ After app creation, for each app you need to:
 
 2. For full-stack implementations only, associate your app with the backend system and portal study.
 
-Refer to [Configuring the App Environment](../app-creation/configure-app.md) for details.
+Refer to [Configuring the App Environment](https://developer.samsung.com/health/stack/developer-guide/app-creation/configure-app.html) for details.
 
 ## VIII. Reference Documentation
 
-Refer to our [API reference](../../api-reference/api-overview.md) and [SDK reference](../../sdk-reference/kit.md) documentation for details on all the backend API endpoints and SDK packages.
+Refer to our [API reference](https://developer.samsung.com/health/stack/developer-guide/portal-REST-API-reference/all-endpoints/api-overview.html) and [SDK reference](https://developer.samsung.com/health/stack/developer-guide/SDK-Documentation/references/kit/overview.html) documentation for details on all the backend API endpoints and SDK packages.
