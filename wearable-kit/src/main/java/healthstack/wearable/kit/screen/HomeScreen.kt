@@ -15,13 +15,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material.Text
+import healthstack.common.model.PrivDataType
 import healthstack.wearable.kit.R
 import healthstack.wearable.kit.component.MeasurementButton
 import healthstack.wearable.kit.theme.TextColor
 
-class HomeScreen(private val lastMeasureTime: String, private val healthDataList: List<String>) {
+class HomeScreen(private val lastMeasureTime: String, private val healthDataList: List<PrivDataType>) {
     @Composable
-    fun Render(onClick: (String) -> Unit) {
+    fun Render(onClick: (PrivDataType) -> Unit) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
