@@ -3,7 +3,7 @@ package healthstack.wearable.support
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import healthstack.common.room.WearableAppDataBase
+import healthstack.common.room.WearableAppDatabase
 import healthstack.common.room.dao.EcgDao
 import healthstack.wearable.support.data.DataSender
 import healthstack.wearable.support.data.EcgTracker
@@ -43,7 +43,7 @@ object Provider {
     @Singleton
     @Provides
     fun provideECGDao(@ApplicationContext context: Context): EcgDao =
-        WearableAppDataBase.initialize(context).ecgDao()
+        WearableAppDatabase.initialize(context).ecgDao()
 
     @Singleton
     @Provides

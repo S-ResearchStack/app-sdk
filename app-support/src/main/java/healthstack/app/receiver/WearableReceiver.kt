@@ -7,7 +7,7 @@ import com.google.android.gms.wearable.Wearable
 import com.google.android.gms.wearable.WearableListenerService
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import healthstack.common.room.WearableAppDataBase
+import healthstack.common.room.WearableAppDatabase
 import healthstack.common.model.EcgSet
 
 abstract class WearableReceiver : WearableListenerService() {
@@ -23,7 +23,7 @@ abstract class WearableReceiver : WearableListenerService() {
                     String(it.readBytes())
                 }
         }.onSuccess {
-            WearableAppDataBase.getInstance()?.ecgDao()?.insertAll(
+            WearableAppDatabase.getInstance()?.ecgDao()?.insertAll(
                 gson.fromJson(it, object : TypeToken<ArrayList<EcgSet>>() {}.type)
             )
         }.onFailure {

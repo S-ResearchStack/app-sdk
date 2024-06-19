@@ -22,20 +22,20 @@ import healthstack.common.model.EcgSet
         EcgConverter::class,
     ]
 )
-abstract class WearableAppDataBase : RoomDatabase() {
+abstract class WearableAppDatabase : RoomDatabase() {
     abstract fun ecgDao(): EcgDao
 
     companion object {
         @Volatile
-        private var INSTANCE: WearableAppDataBase? = null
+        private var INSTANCE: WearableAppDatabase? = null
 
         fun initialize(
             context: Context,
-        ): WearableAppDataBase =
+        ): WearableAppDatabase =
             INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    WearableAppDataBase::class.java,
+                    WearableAppDatabase::class.java,
                     "wearable_app_db"
                 )
                     .fallbackToDestructiveMigration()
@@ -46,6 +46,6 @@ abstract class WearableAppDataBase : RoomDatabase() {
                 instance
             }
 
-        fun getInstance(): WearableAppDataBase? = INSTANCE
+        fun getInstance(): WearableAppDatabase? = INSTANCE
     }
 }
