@@ -41,6 +41,9 @@ fun Router(
     var remainPercent by remember {
         mutableStateOf(0)
     }
+    var measurementType by remember {
+        mutableStateOf("")
+    }
 
     ecgMainViewModel.lastMeasurementTime.observeAsState().value?.let {
         lastMeasurementTime = it
@@ -67,30 +70,34 @@ fun Router(
     ) {
         composable(Route.Home.name) {
             homeScreen.Render {
+                type ->
+                measurementType = type
                 navController.navigate(Route.Main.name)
             }
         }
         composable(Route.Main.name) {
-            ecgMainScreen.Render {
-                navController.navigate(Route.Measure.name)
+            when (measurementType) {
+                "ECG" -> ecgMainScreen.Render { navController.navigate(Route.Measure.name) }
             }
         }
         composable(Route.Measure.name) {
-            ecgMeasureScreen.Render(
-                onInitial = {
-                    ecgMeasureViewModel.startTrackingEcg()
-                },
-                onMeasuring = {},
-                onCompleted = {
-                    navController.navigate(Route.Main.name)
-                },
-                onOverLoad = {
-                    ecgMeasureViewModel.pushState(MeasureState.Initial)
-                },
-                onDispose = {
-                    ecgMeasureViewModel.stopTracking()
-                },
-            )
+            when (measurementType) {
+                "ECG" -> ecgMeasureScreen.Render(
+                    onInitial = {
+                        ecgMeasureViewModel.startTrackingEcg()
+                    },
+                    onMeasuring = {},
+                    onCompleted = {
+                        navController.navigate(Route.Main.name)
+                    },
+                    onOverLoad = {
+                        ecgMeasureViewModel.pushState(MeasureState.Initial)
+                    },
+                    onDispose = {
+                        ecgMeasureViewModel.stopTracking()
+                    },
+                )
+            }
         }
     }
 }

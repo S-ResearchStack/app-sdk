@@ -16,17 +16,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material.Text
 import healthstack.wearable.kit.R
-import healthstack.wearable.kit.component.EcgMeasurementButton
+import healthstack.wearable.kit.component.MeasurementButton
 import healthstack.wearable.kit.theme.TextColor
 
 class HomeScreen(private val lastMeasureTime: String, private val healthDataList: List<String>) {
     @Composable
-    fun Render(onClick: () -> Unit) {
+    fun Render(onClick: (String) -> Unit) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             dimensionResource(id = R.dimen.cardview_compat_inset_shadow)
             Spacer(modifier = Modifier.height(20.dp))
@@ -44,10 +44,7 @@ class HomeScreen(private val lastMeasureTime: String, private val healthDataList
                 fontSize = 16.sp,
             )
             healthDataList.forEach {
-                when (it) {
-                    "ECG" -> EcgMeasurementButton(lastMeasureTime, onClick)
-                    else -> Unit
-                }
+                MeasurementButton(it, lastMeasureTime, onClick)
                 Spacer(modifier = Modifier.height(8.dp))
             }
             Spacer(modifier = Modifier.height(45.dp))

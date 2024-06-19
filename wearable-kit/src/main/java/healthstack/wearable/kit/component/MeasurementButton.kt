@@ -26,28 +26,36 @@ import healthstack.wearable.kit.theme.SubTextColor
 import healthstack.wearable.kit.theme.TextColor
 
 @Composable
-fun EcgMeasurementButton(lastMeasureTime: String, onClick: () -> Unit) {
+fun MeasurementButton(dataType: String, lastMeasureTime: String, onClick: (String) -> Unit) {
+    val iconId = when (dataType) {
+        "ECG" -> R.drawable.health_ecg
+        else -> TODO()
+    }
+
+    val titleId = when (dataType) {
+        "ECG" -> R.string.ecg
+        else -> TODO()
+    }
+
     Row(
         Modifier
             .fillMaxWidth(0.9f)
             .height(57.dp)
             .padding(top = 8.dp)
             .background(HomeScreenItemBackground, RoundedCornerShape(26))
-            .clickable {
-                onClick()
-            },
+            .clickable { onClick(dataType) },
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Spacer(modifier = Modifier.width(12.dp))
         Image(
-            painter = painterResource(id = R.drawable.health_ecg),
+            painter = painterResource(id = iconId),
             contentDescription = null,
             modifier = Modifier.size(24.dp),
         )
         Spacer(modifier = Modifier.width(8.dp))
         Column {
             Text(
-                text = stringResource(id = R.string.ecg),
+                text = stringResource(id = titleId),
                 color = TextColor,
                 fontSize = 16.sp,
             )
