@@ -5,15 +5,12 @@
     <string name="app_message">Contribute to world\nhealth researches with\nyour measurements</string>
     <!-- ecg -->
     <string name="ecg">ECG</string>
-    <string name="title_activity_ecgactivity">ECGActivity</string>
     <string name="ecg_message">Electrocardiogram (ECG)\ndata is collected for heart\nresearch.</string>
     <string name="ecg_measure">Rest your finger lightly on\nthe top button</string>
     <string name="ecg_guide_1">Wear the watch 10\nminutes before recording\nECG.</string>
     <string name="ecg_guide_2">Moisturize your skin and\ntry again.</string>
     <string name="guide_message">Make sure the watch is\nsnug on your wrist.</string>
     <string name="ecg_measure_fail">Couldn\'t measure ECG.\nPlease try again.</string>
-    <string name="note">Note</string>
-    <string name="note_message">Your data collected\nthrough Samsung Health\nResearch is used for research purpose only.\nMake sure to measure\nregulary for meaningful\ncontributions.</string>
     <string name="measuring">Measuring</string>
     <string name="stay_still">Stay still</string>
     <string name="measuring_complete">Measured successfully!</string>
