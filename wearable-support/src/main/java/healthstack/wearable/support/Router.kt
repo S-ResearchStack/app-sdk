@@ -22,6 +22,7 @@ import healthstack.wearable.support.viewmodel.EcgMeasureViewModel
 
 @Composable
 fun Router(
+    healthDataList: List<String>,
     ecgMainViewModel: EcgMainViewModel = hiltViewModel(),
     ecgMeasureViewModel: EcgMeasureViewModel = hiltViewModel(),
 ) {
@@ -52,7 +53,7 @@ fun Router(
     }
     orientation = getOrientation(LocalContext.current) ?: ORIENTATION_UNDEFINED
 
-    val homeScreen = HomeScreen(lastMeasurementTime)
+    val homeScreen = HomeScreen(lastMeasurementTime, healthDataList)
     val ecgMainScreen = EcgMainScreen(lastMeasurementTime)
     val ecgMeasureScreen = EcgMeasureScreen(
         measureState,
