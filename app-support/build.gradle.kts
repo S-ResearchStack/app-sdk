@@ -67,6 +67,7 @@ android {
 
 dependencies {
     implementation(project(":kit"))
+    implementation(project(":common"))
     implementation(project(":healthdata-link:interface"))
     implementation(project(":backend-integration:interface"))
 
@@ -82,6 +83,7 @@ dependencies {
     implementation(AppDependencies.GSON)
     implementation(AppDependencies.CRON_QUARTZ)
     implementation(AppDependencies.GUAVA)
+    implementation(AppDependencies.PLAY_SERVICE_WEARABLE)
     kapt(listOf(AppDependencies.ANDROIDX_ROOM_COMPILER))
 
     debugImplementation(AppDependencies.uiDebugLibs)

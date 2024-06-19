@@ -1,3 +1,4 @@
 [submodule "samples/starter-app"]
 	path = samples/starter-app
 	url = https://github.com/S-HealthStack/starter-app
+	branch = main
