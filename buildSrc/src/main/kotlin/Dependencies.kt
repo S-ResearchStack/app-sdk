@@ -18,6 +18,7 @@ object Versions {
         const val GMS = "4.3.10"
         const val FIREBASE_BOM = "30.1.0"
         const val PLAY_SERVICE_AUTH = "20.2.0"
+        const val PLAY_SERVICE_WEARABLE = "18.0.0"
     }
 
     object AndroidX {
@@ -31,9 +32,11 @@ object Versions {
         const val DATASTORE = "1.0.0"
         const val NAVIGATION_COMPOSE = "2.4.2"
         const val ROOM = "2.4.3"
+        const val WEARABLE_ROOM = "2.4.2"
         const val ACTIVITY = "1.6.1"
         const val FRAGMENT = "1.5.5"
         const val MEDIA3 = "1.0.1"
+        const val PAGING = "3.1.1"
     }
 
     const val GUAVA = "31.1-android"
@@ -70,6 +73,8 @@ object Versions {
     object Compose {
         const val UI = "1.2.0"
         const val ACTIVITY = "1.4.0"
+        const val WEARABLE = "1.1.2"
+        const val LIFECYCLE_VIEWMODEL_COMPOSE = "2.3.0"
     }
 
     const val RULES = "1.5.0"
@@ -80,6 +85,14 @@ object Versions {
     const val ACCOMPANIST_SYSTEMUI = "0.25.1"
     const val SIGNATURE_PAD = "0.1.2"
     const val BOUQUET = "1.0.0"
+
+    // WEARABLE
+    object Wearable {
+        const val COMPAT = "1.6.1"
+        const val MATERIAL_UI = "1.5.0"
+        const val CONSTRAINT_LAYOUT = "2.1.4"
+        const val TEST_MONITOR = "1.6.1"
+    }
 }
 
 object AppDependencies {
@@ -95,6 +108,8 @@ object AppDependencies {
     const val ANDROIDX_ROOM = "androidx.room:room-runtime:${Versions.AndroidX.ROOM}"
     const val ANDROIDX_ROOM_COMPILER = "androidx.room:room-compiler:${Versions.AndroidX.ROOM}"
     const val ANDROIDX_ROOM_KTX = "androidx.room:room-ktx:${Versions.AndroidX.ROOM}"
+    const val ANDROIDX_ROOM_PAGING = "androidx.room:room-paging:${Versions.AndroidX.ROOM}"
+    const val ANDROIDX_PAGING = "androidx.paging:paging-runtime:${Versions.AndroidX.PAGING}"
     const val ANDROIDX_ACTIVITY = "androidx.activity:activity-ktx:${Versions.AndroidX.ACTIVITY}"
     const val ANDROIDX_FRAGMENT = "androidx.fragment:fragment-ktx:${Versions.AndroidX.FRAGMENT}"
 
@@ -111,6 +126,7 @@ object AppDependencies {
     const val HILT_ANDROIDX = "androidx.hilt:hilt-common:${Versions.Hilt.ANDROIDX}"
     const val HILT_ANDROIDX_WORK = "androidx.hilt:hilt-work:${Versions.Hilt.ANDROIDX}"
     const val HILT_ANDORIDX_COMPILER = "androidx.hilt:hilt-compiler:${Versions.Hilt.ANDROIDX}"
+    const val HILT_COMPOSE = "androidx.hilt:hilt-navigation-compose:${Versions.Hilt.ANDROIDX}"
 
     const val GOOGLE_HEALTH_CONNECT = "androidx.health.connect:connect-client:${Versions.Google.HEALTH_CONNECT}"
 
@@ -119,6 +135,27 @@ object AppDependencies {
     val healthDataImplLibs = arrayListOf<String>().apply {
         add(ANDROIDX_WORK)
         add(GOOGLE_HEALTH_CONNECT)
+    }
+
+    val androidXImplLibsWearable = arrayListOf<String>().apply {
+        add(ANDROIDX_WORK)
+        add(ANDROIDX_CORE)
+        add(ANDROIDX_DATASTORE)
+        add(ANDROIDX_COMPAT)
+    }
+
+    val composeImplLibsWearable = arrayListOf<String>().apply {
+        add(COMPOSE_UI)
+        add(COMPOSE_UI_TOOLING)
+        add(COMPOSE_RUNTIME)
+        add(COMPOSE_ACTIVITY)
+        add(COMPOSE_MATERIAL_WEAR)
+        add(COMPOSE_FOUNDATION_WEAR)
+        add(ANDROIDX_NAVIGATION_COMPOSE)
+        add(COMPOSE_LIFECYCLE_VIEWMODEL)
+        add(COMPOSE_MATERIAL_ANDROID)
+        add(COMPOSE_MATERIAL_ANDROID_ICON)
+        add(COMPOSE_MATERIAL_ANDROID_ICON_EXT)
     }
 
     val activityImplLibs = arrayListOf<String>().apply {
@@ -137,6 +174,7 @@ object AppDependencies {
         add(HILT_ANDROIDX)
         add(HILT_ANDROIDX_WORK)
         add(HILT_DAGGER)
+        add(HILT_COMPOSE)
     }
 
     val hiltKaptLibs = arrayListOf<String>().apply {
@@ -147,12 +185,15 @@ object AppDependencies {
     val roomLibs = arrayListOf<String>().apply {
         add(ANDROIDX_ROOM)
         add(ANDROIDX_ROOM_KTX)
+        add(ANDROIDX_ROOM_PAGING)
+        add(ANDROIDX_PAGING)
     }
 
     // Auth
     const val FIREBASE_BOM = "com.google.firebase:firebase-bom:${Versions.Google.FIREBASE_BOM}"
     const val FIREBASE_AUTH = "com.google.firebase:firebase-auth-ktx"
     const val PLAYSERVICE_AUTH = "com.google.android.gms:play-services-auth:${Versions.Google.PLAY_SERVICE_AUTH}"
+    const val PLAY_SERVICE_WEARABLE = "com.google.android.gms:play-services-wearable:${Versions.Google.PLAY_SERVICE_WEARABLE}"
 
     val authImplLibs = arrayListOf<String>().apply {
         add(FIREBASE_AUTH)
@@ -201,6 +242,12 @@ object AppDependencies {
     const val COROUTINE_GUAVA = "org.jetbrains.kotlinx:kotlinx-coroutines-guava:${Versions.COROUTINE}"
     const val ANDROID_RULES = "androidx.test:rules:${Versions.RULES}"
 
+    // Wearable
+    const val WEAR_APPCOMPAT = "androidx.appcompat:appcompat:${Versions.Wearable.COMPAT}"
+    const val WEAR_MATERIAL = "com.google.android.material:material:${Versions.Wearable.MATERIAL_UI}"
+    const val WEAR_CONST_LAYOUT = "androidx.constraintlayout:constraintlayout:${Versions.Wearable.CONSTRAINT_LAYOUT}"
+    const val WEAR_TEST_MONITOR = "androidx.test:monitor:${Versions.Wearable.TEST_MONITOR}"
+
     val testRuntimeLibs = arrayListOf<String>().apply {
         add(JUNIT_ENGINE)
         add(JUNIT_ENGINE_VINTAGE)
@@ -248,6 +295,12 @@ object AppDependencies {
     const val COMPOSE_MATERIAL_ANDROID_ICON_EXT =
         "androidx.compose.material:material-icons-extended:${Versions.Compose.UI}"
     const val COMPOSE_ACTIVITY = "androidx.activity:activity-compose:${Versions.Compose.ACTIVITY}"
+    const val COMPOSE_MATERIAL_WEAR =
+        "androidx.wear.compose:compose-material:${Versions.Compose.WEARABLE}"
+    const val COMPOSE_FOUNDATION_WEAR =
+        "androidx.wear.compose:compose-foundation:${Versions.Compose.WEARABLE}"
+    const val COMPOSE_LIFECYCLE_VIEWMODEL =
+        "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.Compose.LIFECYCLE_VIEWMODEL_COMPOSE}"
     const val ACCOMPANIST_SYSTEMUI =
         "com.google.accompanist:accompanist-systemuicontroller:${Versions.ACCOMPANIST_SYSTEMUI}"
     const val ACCOMPANIST_PAGER = "com.google.accompanist:accompanist-pager:${Versions.ACCOMPANIST_PAGER}"
@@ -289,6 +342,11 @@ object AppDependencies {
         add(COMPOSE_UI_MANIFEST)
         add(ANDROIDX_COMTOM_VIEW)
         add(ANDROIDX_CUSTOM_VIEW_CONTAINER)
+    }
+
+    val uiDebugLibsWearable = arrayListOf<String>().apply {
+        add(COMPOSE_UI_TOOLING)
+        add(COMPOSE_UI_MANIFEST)
     }
 }
 
