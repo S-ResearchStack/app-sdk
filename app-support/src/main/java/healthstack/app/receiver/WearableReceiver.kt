@@ -26,10 +26,10 @@ abstract class WearableReceiver : WearableListenerService() {
             WearableAppDataBase.getInstance()?.ecgDao()?.insertAll(
                 gson.fromJson(it, object : TypeToken<ArrayList<EcgSet>>() {}.type)
             )
-            channelClient.close(channel)
         }.onFailure {
             Log.e(TAG, "${it.message}")
         }
+        channelClient.close(channel)
     }
 
     companion object {
