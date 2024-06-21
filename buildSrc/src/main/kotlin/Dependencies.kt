@@ -1,7 +1,7 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
 object Versions {
-    const val HEALTH_STACK = "devel"
+    const val HEALTH_STACK = "1.1"
 
     const val KOTLIN = "1.7.0"
     const val ANDROID_BUILD = "7.2.2"
