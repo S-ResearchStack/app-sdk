@@ -21,4 +21,8 @@ interface UserRegistrationClient {
      * @param userProfile Data including profile information collected from the Profile View.
      */
     suspend fun updateUser(idToken: String, userId: String, userProfile: UserProfile)
+
+    suspend fun signUp(email: String, password: String): RegisteredUser
+
+    suspend fun signIn(email: String, password: String): MyToken
 }

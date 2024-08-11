@@ -66,6 +66,7 @@ android {
 
 dependencies {
     implementation(project(":healthdata-link:interface"))
+    implementation(project(":backend-integration:interface"))
 
     implementation(platform(AppDependencies.FIREBASE_BOM))
     implementation(AppDependencies.authImplLibs)
@@ -84,6 +85,7 @@ dependencies {
     implementation(AppDependencies.MEDIA3_UI)
     implementation(AppDependencies.PDF_READER)
     implementation(files("libs/branch-logic-engine-0.0.1-plain.jar"))
+
 
     debugImplementation(AppDependencies.uiDebugLibs)
 

@@ -1,5 +1,8 @@
 package healthstack.backend.integration.adapter
 
+import healthstack.backend.integration.registration.MyToken
+import healthstack.backend.integration.registration.RegisteredUser
+import healthstack.backend.integration.registration.SignUpUser
 import healthstack.backend.integration.registration.User
 import healthstack.backend.integration.registration.UserProfile
 import healthstack.backend.integration.task.TaskResult
@@ -28,6 +31,16 @@ interface HealthStackBackendAPI {
         @Path("projectId") projectId: String,
         @Body user: User,
     )
+
+    @POST("/auth/signup")
+    suspend fun signUp(
+        @Body signUpUser: SignUpUser,
+    ): RegisteredUser
+
+    @POST("/auth/signin")
+    suspend fun signIn(
+        @Body signInUser: SignUpUser,
+    ): MyToken
 
     @PATCH("/api/projects/{projectId}/users/{userId}")
     suspend fun updateUser(
