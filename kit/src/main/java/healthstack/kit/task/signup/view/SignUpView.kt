@@ -1,6 +1,8 @@
 package healthstack.kit.task.signup.view
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.annotation.StringRes
@@ -29,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.firebase.auth.FirebaseAuth
 import healthstack.backend.integration.BackendFacadeHolder
+import healthstack.backend.integration.exception.UserAlreadyExistsException
 import healthstack.kit.R
 import healthstack.kit.annotation.PreviewGenerated
 import healthstack.kit.auth.AuthCallback
@@ -99,7 +102,7 @@ class SignUpView : View<SignUpModel>() {
             },
             backgroundColor = AppTheme.colors.background
         ) {
-            SignUpBody(model)
+            SignUpBody(model, callbackCollection)
         }
     }
 
@@ -128,7 +131,12 @@ class SignUpView : View<SignUpModel>() {
         ) { }
 
     @Composable
-    private fun SignUpBody(model: SignUpModel) {
+    private fun SignUpBody(model: SignUpModel, callbackCollection: CallbackCollection) {
+
+        @StringRes val failedToSignInMessage = R.string.failed_to_signin
+
+        val context = LocalContext.current
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -176,10 +184,29 @@ class SignUpView : View<SignUpModel>() {
             if (model.providers.contains(Basic))
                 SignUpComponent.ofBasic()({ email: String, password: String ->
                     CoroutineScope(Dispatchers.IO).launch {
-                        val authRes = BackendFacadeHolder.getInstance().signUp(email, password)
-                        val res2 = BackendFacadeHolder.getInstance().signIn(email, password)
+                        try {
+                            BackendFacadeHolder.getInstance().signUp(email, password)
+                        } catch(e: UserAlreadyExistsException){
+                        } catch(e: Exception) {
+                            Handler(Looper.getMainLooper()).postDelayed(
+                                { ViewUtil.showToastMessage(context, context.getString(failedToSignInMessage)) }, 0
+                            )
+                            return@launch
+                        }
+                        try {
+                            val res2 = BackendFacadeHolder.getInstance().signIn(email, password)
+                            Log.i("EEEEE", "${res2.accessToken}")
+                            Handler(Looper.getMainLooper()).postDelayed(
+                                { ViewUtil.showToastMessage(context, "${res2.accessToken}") }, 0
+                            )
+                        } catch(e: Exception) {
+                            Handler(Looper.getMainLooper()).postDelayed(
+                                { ViewUtil.showToastMessage(context, context.getString(failedToSignInMessage)) }, 0
+                            )
+                            return@launch
+                        }
 
-                        Log.i("CCCCCCCCCCC", "$authRes, $res2")
+                        callbackCollection.next()
                     }
                 })
         }
