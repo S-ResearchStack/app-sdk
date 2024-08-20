@@ -48,7 +48,7 @@ fun BasicSignUpComponent(onClick: (email: String, password: String) -> Unit) {
                 .padding(vertical = 8.dp)
                 .testTag(EMAIL_TEST_TAG)
                 .width(312.dp)
-                .height(48.dp),
+                .height(60.dp),
             value = emailState.value,
             onValueChange = { emailState.value = it },
             placeholder = "Email Address",
@@ -61,7 +61,7 @@ fun BasicSignUpComponent(onClick: (email: String, password: String) -> Unit) {
                 .padding(vertical = 8.dp)
                 .testTag(PASSWORD_TEST_TAG)
                 .width(312.dp)
-                .height(48.dp),
+                .height(60.dp),
             value = passwordState.value,
             onValueChange = { passwordState.value = it },
             placeholder = "Password",

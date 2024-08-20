@@ -31,10 +31,14 @@ import healthstack.wearable.kit.theme.TextColor
 fun MeasurementButton(dataType: PrivDataType, lastMeasureTime: String, onClick: (PrivDataType) -> Unit) {
     val iconId = when (dataType) {
         ECG -> R.drawable.health_ecg
+        PrivDataType.ACCELEROMETER ->  R.drawable.health_ecg
+        PrivDataType.HEARTRATE ->  R.drawable.health_ecg
     }
 
     val titleId = when (dataType) {
         ECG -> R.string.ecg
+        PrivDataType.ACCELEROMETER -> R.string.ecg
+        PrivDataType.HEARTRATE -> R.string.ecg
     }
 
     Row(

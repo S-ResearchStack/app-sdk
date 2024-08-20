@@ -80,6 +80,8 @@ fun Router(
         composable(Route.Main.name) {
             when (measurementType) {
                 ECG -> ecgMainScreen.Render { navController.navigate(Route.Measure.name) }
+                PrivDataType.ACCELEROMETER -> TODO()
+                PrivDataType.HEARTRATE -> TODO()
             }
         }
         composable(Route.Measure.name) {
@@ -99,6 +101,9 @@ fun Router(
                         ecgMeasureViewModel.stopTracking()
                     },
                 )
+
+                PrivDataType.ACCELEROMETER -> TODO()
+                PrivDataType.HEARTRATE -> TODO()
             }
         }
     }

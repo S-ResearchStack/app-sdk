@@ -82,17 +82,6 @@ class SignUpView : View<SignUpModel>() {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Bottom
                 ) {
-                    if (model.providers.contains(Basic)) {
-                        Image(
-                            painter = painterResource(R.drawable.signup_divider),
-                            contentDescription = "",
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(21.dp),
-                            contentScale = ContentScale.FillWidth
-                        )
-                    }
-
                     providerToLauncher.forEach { (provider, launcher) ->
                         SignUpComponent.of(provider)({
                             launcher.launch(Unit)
@@ -196,6 +185,7 @@ class SignUpView : View<SignUpModel>() {
                         try {
                             val res2 = BackendFacadeHolder.getInstance().signIn(email, password)
                             Log.i("EEEEE", "${res2.accessToken}")
+                            Log.i("FFFFF", "${res2.refreshToken}")
                             Handler(Looper.getMainLooper()).postDelayed(
                                 { ViewUtil.showToastMessage(context, "${res2.accessToken}") }, 0
                             )
