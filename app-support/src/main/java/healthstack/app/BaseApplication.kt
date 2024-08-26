@@ -18,6 +18,7 @@ import healthstack.app.pref.SettingPreference
 import healthstack.app.status.StatusDataType
 import healthstack.app.sync.FileSyncManager
 import healthstack.app.sync.SyncManager
+import healthstack.app.sync.SyncWearDataManager
 import healthstack.app.task.repository.TaskRepository
 import healthstack.app.task.repository.TaskRepositoryImpl
 import healthstack.kit.info.MyProfileView
@@ -30,6 +31,7 @@ import healthstack.kit.task.signup.SignUpTask
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.util.concurrent.TimeUnit
 
 /**
  * Composable function representing the entire application.
@@ -134,11 +136,13 @@ private fun Main(
         }
         composable(SignUp.name) {
             SyncManager.initialize(LocalContext.current, healthDataSyncSpecs)
+            SyncWearDataManager.initialize(LocalContext.current, 15, TimeUnit.MINUTES)
             FileSyncManager.initialize(LocalContext.current, 15)
 
             singUpTask.callback = {
                 scope.launch {
                     SyncManager.getInstance().startBackgroundSync()
+                    SyncWearDataManager.getInstance().startBackgroundSync()
                     FileSyncManager.getInstance().startBackgroundSync()
                 }
                 changeNavigation(Home)

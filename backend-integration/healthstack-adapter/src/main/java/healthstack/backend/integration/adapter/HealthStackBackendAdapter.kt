@@ -31,6 +31,13 @@ class HealthStackBackendAdapter(
         networkClient.sync(idToken, projectId, healthData.instantToString())
     }
 
+    override suspend fun syncHealthData(
+        idToken: String,
+        heathData: HealthData
+    ) {
+        networkClient.syncHealthData(idToken, listOf(projectId), heathData)
+    }
+
     override suspend fun registerUser(idToken: String, user: healthstack.backend.integration.registration.User) {
         try {
             networkClient.registerUser(idToken, projectId, user)
