@@ -11,6 +11,8 @@ object Versions {
         const val ANDROIDX = "1.0.0"
     }
 
+    const val JACKSON = "2.14.2"
+
     const val APPCOMPAT = "1.4.1"
 
     object Google {
@@ -39,6 +41,7 @@ object Versions {
         const val PAGING = "3.1.1"
     }
 
+    const val APACHE_COMMONS_IO = "2.16.1"
     const val GUAVA = "31.1-android"
     const val RETROFIT = "2.9.0"
     const val OKHTTP = "4.5.0"
@@ -113,6 +116,8 @@ object AppDependencies {
     const val ANDROIDX_ACTIVITY = "androidx.activity:activity-ktx:${Versions.AndroidX.ACTIVITY}"
     const val ANDROIDX_FRAGMENT = "androidx.fragment:fragment-ktx:${Versions.AndroidX.FRAGMENT}"
 
+    const val APACHE_COMMONS_IO = "commons-io:commons-io:${Versions.APACHE_COMMONS_IO}"
+
     const val GUAVA = "com.google.guava:guava:${Versions.GUAVA}"
 
     const val SUPPORT_ANNOTATION =
@@ -127,6 +132,10 @@ object AppDependencies {
     const val HILT_ANDROIDX_WORK = "androidx.hilt:hilt-work:${Versions.Hilt.ANDROIDX}"
     const val HILT_ANDORIDX_COMPILER = "androidx.hilt:hilt-compiler:${Versions.Hilt.ANDROIDX}"
     const val HILT_COMPOSE = "androidx.hilt:hilt-navigation-compose:${Versions.Hilt.ANDROIDX}"
+
+    const val JACKSON_DATAFORMAT_CSV = "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:${Versions.JACKSON}"
+    const val JACKSON_DATATYPE_JSR310 = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${Versions.JACKSON}"
+    const val JACKSON_MODULE_KOTLIN = "com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.JACKSON}"
 
     const val GOOGLE_HEALTH_CONNECT = "androidx.health.connect:connect-client:${Versions.Google.HEALTH_CONNECT}"
 

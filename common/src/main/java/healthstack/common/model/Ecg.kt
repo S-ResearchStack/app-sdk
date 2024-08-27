@@ -22,6 +22,22 @@ data class EcgSet(
     override var timestamp = ecgs.first().timestamp
 
     var sessionId: Long = 0
+    override fun toDataMap(): Map<String, Any> {
+        return buildMap<String, Any> {
+            ecgs.forEachIndexed { index, value ->
+                put("ECG${index + 1}_mv", value.ecg)
+            }
+            put("LeadOff", leadOff)
+            put("SessionId", sessionId)
+            put("PktSeq#", sequence)
+            put("PosThreshold_mv", maxThreshold)
+            put("NegThreshold_mv", minThreshold)
+            put("PPG_Green", ppgGreens[0].ppg)
+            put("PPG_Green_Current", ppgGreens[1].ppg)
+            put("timestamp", timestamp)
+            put("time_offset", timeOffset)
+        }
+    }
 }
 
 data class Ecg(
