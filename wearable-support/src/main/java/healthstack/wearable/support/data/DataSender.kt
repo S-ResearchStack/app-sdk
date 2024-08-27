@@ -8,7 +8,7 @@ import com.google.android.gms.wearable.Node
 import com.google.android.gms.wearable.Wearable
 import com.google.gson.Gson
 import healthstack.common.MessageConfig.MOBILE_RESEARCH_APP_CAPABILITY
-import healthstack.common.model.PrivDataType
+import healthstack.common.model.WearDataType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
@@ -16,14 +16,14 @@ import java.util.concurrent.TimeUnit
 class DataSender(private val context: Context) {
     suspend fun sendData(
         serializableData: Any,
-        privDataType: PrivDataType,
+        wearDataType: WearDataType,
     ) = withContext(Dispatchers.IO) {
         runCatching {
             val nodes = getCapabilityNodes()
             if (nodes.size != 1) throw IllegalStateException("The nodes size is not 1. Node Size: ${nodes.size}")
 
             val channelClient = Wearable.getChannelClient(context)
-            val channel = Tasks.await(channelClient.openChannel(nodes.first().id, privDataType.messagePath))
+            val channel = Tasks.await(channelClient.openChannel(nodes.first().id, wearDataType.messagePath))
             val message = Gson().toJson(serializableData).toByteArray()
 
             Tasks.await(channelClient.getOutputStream(channel)).use { it.write(message) }

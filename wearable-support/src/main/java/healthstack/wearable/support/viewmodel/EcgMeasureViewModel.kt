@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import healthstack.common.room.dao.EcgDao
 import healthstack.common.model.EcgSet
-import healthstack.common.model.PrivDataType
+import healthstack.common.model.WearDataType
 import healthstack.common.MeasureState
 import healthstack.wearable.support.data.EcgTracker
 import healthstack.wearable.support.data.pref.TrackMeasureTimePref
@@ -67,7 +67,7 @@ class EcgMeasureViewModel @Inject constructor(
                             trackMeasureTimePref.add(sessionId)
                         }
                         ecgSets.forEach { it.sessionId = sessionId }
-                        dataSender.sendData(ecgSets, PrivDataType.ECG).onFailure {
+                        dataSender.sendData(ecgSets, WearDataType.WEAR_ECG).onFailure {
                             ecgDao.insertAll(ecgSets)
                         }
                     }
