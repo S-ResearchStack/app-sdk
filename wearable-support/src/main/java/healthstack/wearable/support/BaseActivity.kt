@@ -13,7 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
-import healthstack.common.model.PrivDataType
+import healthstack.common.model.WearDataType
 import healthstack.wearable.kit.theme.HealthWearableTheme
 
 enum class Route {
@@ -23,7 +23,7 @@ enum class Route {
 }
 
 @Composable
-fun BaseActivity(activity: Activity, healthDataList: List<PrivDataType>) {
+fun BaseActivity(activity: Activity, healthDataList: List<WearDataType>) {
     HealthWearableTheme {
         var isHealthTrackerConnected by remember { mutableStateOf(PrivDataRequester.isConnected) }
         var isPermissionCheckerLaunched by remember { mutableStateOf(false) }

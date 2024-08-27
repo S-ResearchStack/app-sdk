@@ -13,8 +13,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import healthstack.common.MeasureState
-import healthstack.common.model.PrivDataType
-import healthstack.common.model.PrivDataType.ECG
+import healthstack.common.model.WearDataType
+import healthstack.common.model.WearDataType.WEAR_ECG
 import healthstack.wearable.kit.screen.EcgMainScreen
 import healthstack.wearable.kit.screen.EcgMeasureScreen
 import healthstack.wearable.kit.screen.HomeScreen
@@ -24,7 +24,7 @@ import healthstack.wearable.support.viewmodel.EcgMeasureViewModel
 
 @Composable
 fun Router(
-    healthDataList: List<PrivDataType>,
+    healthDataList: List<WearDataType>,
     ecgMainViewModel: EcgMainViewModel = hiltViewModel(),
     ecgMeasureViewModel: EcgMeasureViewModel = hiltViewModel(),
 ) {
@@ -44,7 +44,7 @@ fun Router(
         mutableStateOf(0)
     }
     var measurementType by remember {
-        mutableStateOf(PrivDataType.ECG)
+        mutableStateOf(WearDataType.WEAR_ECG)
     }
 
     ecgMainViewModel.lastMeasurementTime.observeAsState().value?.let {
@@ -79,12 +79,12 @@ fun Router(
         }
         composable(Route.Main.name) {
             when (measurementType) {
-                ECG -> ecgMainScreen.Render { navController.navigate(Route.Measure.name) }
+                WEAR_ECG -> ecgMainScreen.Render { navController.navigate(Route.Measure.name) }
             }
         }
         composable(Route.Measure.name) {
             when (measurementType) {
-                ECG -> ecgMeasureScreen.Render(
+                WEAR_ECG -> ecgMeasureScreen.Render(
                     onInitial = {
                         ecgMeasureViewModel.startTrackingEcg()
                     },

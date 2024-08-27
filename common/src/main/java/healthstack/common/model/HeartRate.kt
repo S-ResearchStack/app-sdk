@@ -4,17 +4,16 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import healthstack.common.util.getCurrentTimeOffset
 
-const val PPG_GREEN_TABLE_NAME = "ppg_green"
+const val HEART_RATE_TABLE_NAME = "heartrate"
 
-interface PpgAttribute {
-    val ppg: Int
-}
-sealed class Ppg : PpgAttribute
 @Entity(
-    tableName = PPG_GREEN_TABLE_NAME,
+    tableName = HEART_RATE_TABLE_NAME
 )
-data class PpgGreen(
+data class HeartRate(
     @PrimaryKey override val timestamp: Long = 0,
-    override val ppg: Int = 0,
+    val value: Int = 0,
+    val ibiList: List<Int> = emptyList(),
+    val ibiStatusList: List<Int> = emptyList(),
+    val heartRateStatus: Int = 0,
     override val timeOffset: Int = getCurrentTimeOffset(),
-) : Ppg(), WearData
+) : WearData

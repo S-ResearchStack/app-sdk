@@ -10,7 +10,7 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import healthstack.common.room.dao.EcgDao
-import healthstack.common.model.PrivDataType
+import healthstack.common.model.WearDataType
 import healthstack.wearable.support.data.DataSender
 import healthstack.wearable.support.data.pref.LastSyncTimePref
 import dagger.assisted.Assisted
@@ -61,7 +61,7 @@ class SyncPrivDataWorker @AssistedInject constructor(
             when (val copiedLoadResult = loadResult) {
                 is PagingSource.LoadResult.Page -> {
                     if (copiedLoadResult.data.isEmpty() && nextPage == -1) break
-                    dataSender.sendData(copiedLoadResult.data, PrivDataType.ECG).onSuccess {
+                    dataSender.sendData(copiedLoadResult.data, WearDataType.WEAR_ECG).onSuccess {
                         lastSyncKey = copiedLoadResult.data.last().timestamp
                         nextPage = copiedLoadResult.nextKey
                     }.onFailure {
