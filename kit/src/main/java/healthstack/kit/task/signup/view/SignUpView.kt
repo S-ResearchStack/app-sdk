@@ -1,6 +1,8 @@
 package healthstack.kit.task.signup.view
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
@@ -27,6 +29,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.firebase.auth.FirebaseAuth
+import healthstack.backend.integration.BackendFacadeHolder
+import healthstack.backend.integration.exception.UserAlreadyExistsException
 import healthstack.kit.R
 import healthstack.kit.annotation.PreviewGenerated
 import healthstack.kit.auth.AuthCallback
@@ -41,6 +45,9 @@ import healthstack.kit.task.survey.question.SubStepHolder
 import healthstack.kit.theme.AppTheme
 import healthstack.kit.ui.TopBar
 import healthstack.kit.ui.util.ViewUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SignUpView : View<SignUpModel>() {
     @Composable
@@ -169,7 +176,29 @@ class SignUpView : View<SignUpModel>() {
             Spacer(modifier = Modifier.height(40.dp))
 
             if (model.providers.contains(Basic))
-                SignUpComponent.of(Basic)({ })
+                SignUpComponent.ofBasic()({ email: String, password: String ->
+                    CoroutineScope(Dispatchers.IO).launch {
+                        try {
+                            BackendFacadeHolder.getInstance().signUp(email, password)
+                        } catch (e: UserAlreadyExistsException) {
+                        } catch (e: Exception) {
+                            Handler(Looper.getMainLooper()).postDelayed(
+                                { ViewUtil.showToastMessage(context, context.getString(failedToSignInMessage)) }, 0
+                            )
+                            return@launch
+                        }
+                        try {
+                            BackendFacadeHolder.getInstance().signIn(email, password)
+                        } catch (e: Exception) {
+                            Handler(Looper.getMainLooper()).postDelayed(
+                                { ViewUtil.showToastMessage(context, context.getString(failedToSignInMessage)) }, 0
+                            )
+                            return@launch
+                        }
+
+                        callbackCollection.next()
+                    }
+                })
         }
     }
 }

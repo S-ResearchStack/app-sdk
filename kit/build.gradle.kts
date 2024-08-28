@@ -66,6 +66,7 @@ android {
 
 dependencies {
     implementation(project(":healthdata-link:interface"))
+    implementation(project(":backend-integration:interface"))
 
     implementation(platform(AppDependencies.FIREBASE_BOM))
     implementation(AppDependencies.authImplLibs)
