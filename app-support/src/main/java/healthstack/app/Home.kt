@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -96,6 +97,10 @@ fun Home(
                     DropdownMenuItemData(
                         "Study Information",
                         Icons.Default.Info
+                    ) { changeNavigation(StudyInformation) },
+                    DropdownMenuItemData(
+                        "Instant Sync",
+                        Icons.Default.Send
                     ) { changeNavigation(StudyInformation) },
                 )
             )
