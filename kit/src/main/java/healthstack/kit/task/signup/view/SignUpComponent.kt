@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import healthstack.kit.auth.SignInProvider
-import healthstack.kit.auth.SignInProvider.Basic
 import healthstack.kit.auth.SignInProvider.Google
 import healthstack.kit.ui.SquareButton
 import healthstack.kit.ui.SquareTextField
@@ -24,20 +23,22 @@ object SignUpComponent {
     fun of(provider: SignInProvider): @Composable (() -> Unit) -> Unit =
         when (provider) {
             Google -> { onClick -> GoogleSignInButton(onClick) }
-            Basic -> { onClick -> BasicSignUpComponent(onClick) }
+            else -> { _ -> Unit }
         }
+
+    @Composable
+    fun ofBasic(): @Composable ((email: String, password: String) -> Unit) -> Unit =
+        { onClick -> BasicSignUpComponent(onClick) }
 }
 
 internal const val EMAIL_TEST_TAG = "emailTestTag"
 internal const val PASSWORD_TEST_TAG = "passwordTag"
-internal const val PASSWORD_CONFIRM_TEST_TAG = "pwConfirmTag"
 internal const val SIGNUP_BUTTON_TEST_TAG = "signupButtonTag"
 
 @Composable
-fun BasicSignUpComponent(onClick: () -> Unit) {
+fun BasicSignUpComponent(onClick: (email: String, password: String) -> Unit) {
     val emailState = remember { mutableStateOf("") }
     val passwordState = remember { mutableStateOf("") }
-    val passwordConfirmState = remember { mutableStateOf("") }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -47,7 +48,7 @@ fun BasicSignUpComponent(onClick: () -> Unit) {
                 .padding(vertical = 8.dp)
                 .testTag(EMAIL_TEST_TAG)
                 .width(312.dp)
-                .height(48.dp),
+                .height(60.dp),
             value = emailState.value,
             onValueChange = { emailState.value = it },
             placeholder = "Email Address",
@@ -60,24 +61,10 @@ fun BasicSignUpComponent(onClick: () -> Unit) {
                 .padding(vertical = 8.dp)
                 .testTag(PASSWORD_TEST_TAG)
                 .width(312.dp)
-                .height(48.dp),
+                .height(60.dp),
             value = passwordState.value,
             onValueChange = { passwordState.value = it },
             placeholder = "Password",
-            shouldMask = true,
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        SquareTextField(
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .testTag(PASSWORD_CONFIRM_TEST_TAG)
-                .width(312.dp)
-                .height(48.dp),
-            value = passwordConfirmState.value,
-            onValueChange = { passwordConfirmState.value = it },
-            placeholder = "Confirm Password",
             shouldMask = true,
         )
 
@@ -89,7 +76,9 @@ fun BasicSignUpComponent(onClick: () -> Unit) {
                 .width(320.dp)
                 .height(44.dp),
             text = "Sign Up",
-            onClick = onClick,
+            onClick = {
+                onClick(emailState.value, passwordState.value)
+            },
             enabled = emailState.value != ""
         )
     }

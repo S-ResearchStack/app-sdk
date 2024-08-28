@@ -81,17 +81,6 @@ class SignUpView : View<SignUpModel>() {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Bottom
                 ) {
-                    if (model.providers.contains(Basic)) {
-                        Image(
-                            painter = painterResource(R.drawable.signup_divider),
-                            contentDescription = "",
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(21.dp),
-                            contentScale = ContentScale.FillWidth
-                        )
-                    }
-
                     providerToLauncher.forEach { (provider, launcher) ->
                         SignUpComponent.of(provider)({
                             launcher.launch(Unit)
@@ -101,7 +90,7 @@ class SignUpView : View<SignUpModel>() {
             },
             backgroundColor = AppTheme.colors.background
         ) {
-            SignUpBody(model)
+            SignUpBody(model, callbackCollection)
         }
     }
 
@@ -130,7 +119,12 @@ class SignUpView : View<SignUpModel>() {
         ) { }
 
     @Composable
-    private fun SignUpBody(model: SignUpModel) {
+    private fun SignUpBody(model: SignUpModel, callbackCollection: CallbackCollection) {
+
+        @StringRes val failedToSignInMessage = R.string.failed_to_signin
+
+        val context = LocalContext.current
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
