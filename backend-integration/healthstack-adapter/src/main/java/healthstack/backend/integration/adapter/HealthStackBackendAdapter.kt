@@ -6,6 +6,10 @@ import android.webkit.MimeTypeMap.getFileExtensionFromUrl
 import healthstack.backend.integration.BackendFacade
 import healthstack.backend.integration.exception.RegisterException
 import healthstack.backend.integration.exception.UserAlreadyExistsException
+import healthstack.backend.integration.registration.SignInResponse
+import healthstack.backend.integration.registration.SignUpResponse
+import healthstack.backend.integration.registration.SignInRequest
+import healthstack.backend.integration.registration.SignUpRequest
 import healthstack.backend.integration.registration.UserProfile
 import healthstack.healthdata.link.HealthData
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -44,6 +48,19 @@ class HealthStackBackendAdapter(
 
     override suspend fun updateUser(idToken: String, userId: String, userProfile: UserProfile) =
         networkClient.updateUser(idToken, projectId, userId, userProfile)
+
+    override suspend fun signUp(email: String, password: String): SignUpResponse =
+        try {
+            networkClient.signUp(SignUpRequest(email, password))
+        } catch (e: retrofit2.HttpException) {
+            when (e.code()) {
+                HttpURLConnection.HTTP_CONFLICT -> throw UserAlreadyExistsException()
+                else -> throw RegisterException()
+            }
+        }
+
+    override suspend fun signIn(email: String, password: String): SignInResponse =
+        networkClient.signIn(SignInRequest(email, password))
 
     @Throws(IllegalArgumentException::class)
     override suspend fun getTasks(
