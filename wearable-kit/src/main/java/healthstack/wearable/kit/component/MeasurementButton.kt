@@ -20,21 +20,23 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material.Text
-import healthstack.common.model.PrivDataType
-import healthstack.common.model.PrivDataType.ECG
+import healthstack.common.model.WearDataType
+import healthstack.common.model.WearDataType.WEAR_ECG
 import healthstack.wearable.kit.R
 import healthstack.wearable.kit.theme.HomeScreenItemBackground
 import healthstack.wearable.kit.theme.SubTextColor
 import healthstack.wearable.kit.theme.TextColor
 
 @Composable
-fun MeasurementButton(dataType: PrivDataType, lastMeasureTime: String, onClick: (PrivDataType) -> Unit) {
+fun MeasurementButton(dataType: WearDataType, lastMeasureTime: String, onClick: (WearDataType) -> Unit) {
     val iconId = when (dataType) {
-        ECG -> R.drawable.health_ecg
+        WEAR_ECG -> R.drawable.health_ecg
+        else -> throw Exception("no button icon for $dataType")
     }
 
     val titleId = when (dataType) {
-        ECG -> R.string.ecg
+        WEAR_ECG -> R.string.ecg
+        else -> throw Exception("no button title for $dataType")
     }
 
     Row(

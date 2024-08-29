@@ -42,11 +42,11 @@ open class EcgTracker {
         if (this.size == 10)
             ppgGreens.add(this[5].run { PpgGreen(timestamp, getValue(ValueKey.EcgSet.PPG_GREEN)) })
         return EcgSet(
-            this.map { Ecg(it.timestamp, it.getValue(ValueKey.EcgSet.ECG)) },
+            this.map { Ecg(it.timestamp, it.getValue(ValueKey.EcgSet.ECG_MV)) },
             ppgGreens,
             this[0].getValue(ValueKey.EcgSet.LEAD_OFF),
-            this[0].getValue(ValueKey.EcgSet.MAX_THRESHOLD),
-            this[0].getValue(ValueKey.EcgSet.MIN_THRESHOLD),
+            this[0].getValue(ValueKey.EcgSet.MAX_THRESHOLD_MV),
+            this[0].getValue(ValueKey.EcgSet.MIN_THRESHOLD_MV),
             this[0].getValue(ValueKey.EcgSet.SEQUENCE)
         )
     }

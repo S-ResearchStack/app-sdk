@@ -13,4 +13,6 @@ interface HealthDataSyncClient {
      * @param healthData Health data of users collected through the [healthstack.healthdata.link.HealthDataLink].
      */
     suspend fun sync(idToken: String, healthData: HealthData)
+
+    suspend fun syncHealthData(idToken: String, heathData: HealthData)
 }

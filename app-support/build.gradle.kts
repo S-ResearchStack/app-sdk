@@ -84,6 +84,10 @@ dependencies {
     implementation(AppDependencies.CRON_QUARTZ)
     implementation(AppDependencies.GUAVA)
     implementation(AppDependencies.PLAY_SERVICE_WEARABLE)
+    implementation(AppDependencies.APACHE_COMMONS_IO)
+    implementation(AppDependencies.JACKSON_DATAFORMAT_CSV)
+    implementation(AppDependencies.JACKSON_DATATYPE_JSR310)
+    implementation(AppDependencies.JACKSON_MODULE_KOTLIN)
     kapt(listOf(AppDependencies.ANDROIDX_ROOM_COMPILER))
 
     debugImplementation(AppDependencies.uiDebugLibs)

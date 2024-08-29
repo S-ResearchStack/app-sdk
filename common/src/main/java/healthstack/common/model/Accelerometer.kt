@@ -4,24 +4,25 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import healthstack.common.util.getCurrentTimeOffset
 
-const val PPG_GREEN_TABLE_NAME = "ppg_green"
+const val ACCELEROMETER_TABLE_NAME = "accelerometer"
 
-interface PpgAttribute {
-    val ppg: Int
-}
-sealed class Ppg : PpgAttribute
 @Entity(
-    tableName = PPG_GREEN_TABLE_NAME,
+    tableName = ACCELEROMETER_TABLE_NAME
 )
-data class PpgGreen(
-    @PrimaryKey override val timestamp: Long = 0,
-    override val ppg: Int = 0,
+data class Accelerometer(
+    @PrimaryKey
+    override val timestamp: Long = 0,
+    val x: Int = 0,
+    val y: Int = 0,
+    val z: Int = 0,
     override val timeOffset: Int = getCurrentTimeOffset(),
-) : Ppg(), WearData {
+) : WearData {
     override fun toDataMap(): Map<String, Any> =
         mapOf(
             ::timestamp.name to timestamp,
-            ::ppg.name to ppg,
+            ::x.name to x,
+            ::y.name to y,
+            ::z.name to z,
             ::timeOffset.name to timeOffset,
         )
 }
