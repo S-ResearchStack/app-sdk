@@ -1,0 +1,153 @@
+<resources>
+  <!-- need to localize -->
+  <string name="settings">Settings</string>
+  <string name="join_a_study">Join a study</string>
+  <string name="join_in_study_message">Go to Join In to join a study</string>
+  <string name="no_registered_message">You have no registered studies</string>
+  <string name="no_completed_message">You have no completed studies</string>
+  <string name="completed_status">Completed</string>
+  <string name="dropped_status">Dropped</string>
+  <string name="withdraw_status">Withdraw</string>
+  <string name="completed_study_title">Completed Studies</string>
+  <string name="app_message">Contribution to medical research development will be greatly appreciated.</string>
+  <string name="start_with_samsung_account">Start with Samsung account</string>
+  <string name="no_samsung_account">Don\'t have a Samsung account?</string>
+  <string name="create_samsung_account">Register</string>
+  <string name="samsung_account_login_failed">Fail to login with Samsung account</string>
+  <string name="already_login_message">Already logged in to the Samsung account.</string>
+  <string name="require_samsung_account_login">You need to log in with your Samsung account.</string>
+  <string name="fail_to_signin">Check your account</string>
+  <string name="already_registered_user">Already registered account</string>
+
+  <string name="home_study_list">Join in</string>
+  <string name="home_task_list">Participating</string>
+  <string name="home_data">Data</string>
+  <string name="study_list_title">Studies available for participation</string>
+  <string name="no_study_message">No studies has been created yet.</string>
+  <string name="study_code_button">+ Enter the study code</string>
+  <string name="study_code_not_found">Invalid study code</string>
+  <string name="study_code_empty">Enter the study code to continue</string>
+  <string name="study_code_check_network">Check your network connection</string>
+  <string name="study_code_unexpected_error">Unknown error. Please contact admin</string>
+  <string name="task_list_title">Tasks</string>
+  <string name="active_task_title">Active Tasks</string>
+  <string name="no_active_task_message">No active tasks</string>
+  <string name="completed_task_title">Completed Tasks</string>
+  <string name="no_completed_task_message">No Completed Tasks</string>
+  <string name="input_study_code_message">Enter the assigned study code.</string>
+  <string name="join_study_message">Join Study</string>
+  <string name="study_code">Study Code</string>
+  <string name="study_informaion">Study Information</string>
+  <string name="study_introduction">Study Description</string>
+  <string name="study_requirements">Study Requirement</string>
+  <string name="eligibility_title">Conformity Assessment</string>
+  <string name="agreement">Prior Consent</string>
+  <string name="next">Next</string>
+  <string name="confirm">Confirm</string>
+  <string name="write_signature">Sign</string>
+  <string name="read_study_consent">
+    In this study, we are collecting the data below.
+    Please refer to the terms and conditions of the study for more information.
+  </string>
+  <string name="study_consent">terms and conditions</string>
+  <string name="already_joined_study">Already participating</string>
+  <string name="submit">Submit</string>
+  <string name="check_shealth_permission">Check Samsung Health access</string>
+  <string name="registered_study_title">Registered Studies</string>
+  <string name="back_to_home">Back to Home</string>
+  <string name="study_permission_title">Data Information</string>
+  <string name="data_permission">Data Permissions</string>
+  <string name="samsung_health">Samsung Health</string>
+  <string name="sensor">Mobile sensor data</string>
+  <string name="priv_data">Wearable sensor data</string>
+  <string name="device_stats">Device Status</string>
+  <string name="email">Email</string>
+  <string name="password">Password</string>
+  <string name="login">Login</string>
+  <string name="joined_study_message">Participated in %s</string>
+  <string name="task_done_message">Task completed successfully.</string>
+  <string name="not_completed_task_message">Please respond to the required questions.</string>
+  <string name="collected_health_data_title">Collected Health Data</string>
+  <string name="collected_sensor_data_title">Collected Mobile Sensor Data</string>
+  <string name="collected_custom_data_title">Collected Custom Data</string>
+  <string name="collected_usage_data_title">Collected Phone Usage Data</string>
+  <string name="collected_priv_data_title">Collected Wearable Sensor Data</string>
+  <string name="collected_device_stat_data_title">Collected Device Status Data</string>
+  <string name="no_requirement_message">No study requirements</string>
+  <string name="inform_to_agree">* Agree and sign to continue.</string>
+  <string name="enter_admin_password_message">Enter admin password to open the Data tab</string>
+  <string name="enter_admin_password">Enter admin password</string>
+  <string name="enter_admin_password_error_message">Enter admin password before accessing the Data tab</string>
+  <string name="enter_data_tab_button">View Data tab</string>
+
+  <string-array name="consent_list">
+    <item>I have read the terms of research and information on collected data and agree to join the research.</item>
+    <item>I agree to share anonymized data with the researcher.</item>
+  </string-array>
+
+  <string name="blood_glucose">Blood Glucose</string>
+  <string name="blood_pressure">Blood Pressure</string>
+  <string name="exercise">Exercise</string>
+  <string name="heartrate">Heartrate</string>
+  <string name="height">Height</string>
+  <string name="spo2">SpO2</string>
+  <string name="sleep_session">Sleep Session</string>
+  <string name="sleep_stage">Sleep Stage</string>
+  <string name="steps">Steps</string>
+  <string name="weight">Weight</string>
+  <string name="respiratory_rate">Respiratory rate</string>
+  <string name="total_calories_burned">Total Calories</string>
+  <string name="unspecified">Error</string>
+
+  <string name="light">Light</string>
+  <string name="accelerometer">Accelerometer</string>
+  <string name="speed">Speed</string>
+
+  <string name="screen_interaction">Screen interaction</string>
+  <string name="call_log">Call log</string>
+
+  <string name="wear_acceleromemter">Accelerometer</string>
+  <string name="wear_bia">BIA</string>
+  <string name="wear_ecg">ECG</string>
+  <string name="wear_ppg_green">PPG Green</string>
+  <string name="wear_ppg_ir">PPG IR</string>
+  <string name="wear_ppg_red">PPG Red</string>
+  <string name="wear_spo2">SpO2</string>
+  <string name="wear_sweat_loss">Sweat Loss</string>
+  <string name="wear_heart_rate">Heart Rate</string>
+  <string name="wear_blood_pressure">Blood Pressure</string>
+
+  <string name="device_stat_mobile_wear_connection">device name</string>
+  <string name="device_stat_wear_battery">battery</string>
+  <string name="device_stat_wear_power_on_off">power</string>
+  <string name="device_stat_wear_off_body">off body</string>
+
+  <string name="phone_usage_request">Request to allow phone usage data</string>
+  <string name="phone_usage_request_message">
+    This study collects data on users\' phone usage. Please click the button below to grant permission to the Health Research app.
+  </string>
+  <string name="phone_usage_request_button">Go to allow permission</string>
+
+  <!-- log in/log out -->
+  <string name="log_out">Logout</string>
+  <string name="cancel">Cancel</string>
+  <string name="log_out_notify">Logout will interrupt the studies you are participating in.</string>
+
+  <string name="deregister">Delete Account</string>
+  <string name="deregister_notify">Are you sure you want to delete your account?</string>
+  <string name="mobile_data_enable">Allow mobile data</string>
+  <string name="exists_not_uploaded_files">Some files are yet to be uploaded</string>
+  <string name="enable_ecg_bia">Enable ECG / BIA measurement on watch</string>
+
+  <string name="start_task">Start Task</string>
+  <string name="stop_task">Stop Task</string>
+  <string name="start_assessment">Start Assessment</string>
+  <string name="stop_assessment">Stop Assessment</string>
+  <string name="start_recording">Start Recording</string>
+  <string name="stop_recording">Stop Recording</string>
+  <string name="task_done">Measurement Completed</string>
+
+  <string name="in_clinic">In-clinic</string>
+
+  <string name="permission_require_toast">Please allow permission for research contribution</string>
+</resources>

@@ -27,9 +27,9 @@ Follow these instructions to install, build, and verify the app SDK.
 
 # Prerequisites
 
-## I. Install OpenJDK 11
+## I. Install OpenJDK 17
 
-1. Set up and install OpenJDK 11 using the instructions at [OpenJDK](https://openjdk.org/install) page.
+1. Set up and install OpenJDK 17 using the instructions at [OpenJDK](https://openjdk.org/install) page.
 
 ## II. Install Android Studio
 
@@ -74,37 +74,23 @@ Follow these instructions to install, build, and verify the app SDK.
 
 1. Test either all modules or just the kit.
 
-   - To test all modules, including samples:
+  - To test all modules, including samples:
 
-     ```
-     ./gradlew test
-     ```
+    ```
+    ./gradlew test
+    ```
 
-   - To test just the kit:
+  - To test just the kit:
 
-     ```
-     ./gradlew :kit:test
-     ```
+    ```
+    ./gradlew :kit:test
+    ```
 
 
 ## V. Check the Coding Style
 
 1. Use the [Compose API guidelines](https://github.com/androidx/androidx/blob/androidx-main/compose/docs/compose-api-guidelines.md) to check your coding style. The guidelines outline the patterns, best practices, and prescriptive style guidelines for writing idiomatic Jetpack Compose APIs.
 
-## VI. Create a Firebase Project
-
-1. Follow the instructions at [Add Firebase to your Android project](https://firebase.google.com/docs/android/setup) to add a Firebase project to the Firebase account you created during backend system installation.
-
-## VII. Per App Configuration
-
-After app creation, for each app you need to:
-
-1. Register your app with your Firebase project by updating the ***\<repository\>*/app/google-service.json** configuration file.
-
-2. For full-stack implementations only, associate your app with the backend system and portal study.
-
-Refer to [Configuring the App Environment](https://developer.samsung.com/health/stack/developer-guide/app-creation/configure-app.html) for details.
-
-## VIII. Reference Documentation
+## VI. Reference Documentation
 
 Refer to our [API reference](https://developer.samsung.com/health/stack/developer-guide/portal-REST-API-reference/all-endpoints/api-overview.html) and [SDK reference](https://developer.samsung.com/health/stack/developer-guide/SDK-Documentation/references/kit/overview.html) documentation for details on all the backend API endpoints and SDK packages.

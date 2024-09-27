@@ -1,0 +1,3 @@
+package researchstack.backend.integration
+
+interface HealthDataModelInterface

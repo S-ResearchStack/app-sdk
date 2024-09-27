@@ -1,4 +1,3 @@
-[submodule "samples/starter-app"]
-	path = samples/starter-app
-	url = https://github.com/S-HealthStack/starter-app
-	branch = main
+[submodule "proto"]
+	path = proto
+	url = https://github.com/S-ResearchStack/proto.git

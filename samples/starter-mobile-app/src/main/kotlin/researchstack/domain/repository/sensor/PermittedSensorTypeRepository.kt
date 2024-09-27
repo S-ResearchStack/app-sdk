@@ -1,0 +1,6 @@
+package researchstack.domain.repository.sensor
+
+import researchstack.domain.model.sensor.TrackerDataType
+import researchstack.domain.repository.PermittedTypeRepository
+
+interface PermittedSensorTypeRepository : PermittedTypeRepository<TrackerDataType>
