@@ -6,6 +6,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.ExistingWorkPolicy
 import androidx.work.ListenableWorker
 import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
@@ -57,8 +58,17 @@ object WorkerRegistrar {
         )
     }
 
-    fun registerOneTimeHealthDataWorker(context: Context) {
-        registerUniqueOneTimeWorker(context)
+    fun registerOneTimeDataSyncWorker(context: Context) {
+        registerUniqueOneTimeWorker(
+            context,
+            "SyncDataWorker",
+            SyncDataWorker::class.java
+        )
+        registerUniqueOneTimeWorker(
+            context,
+            "UploadHealthDataFileWorker",
+            UploadHealthDataFileWorker::class.java
+        )
     }
 
     fun registerDataSyncWorker(context: Context) {
@@ -125,14 +135,16 @@ object WorkerRegistrar {
             )
     }
 
-    private fun registerUniqueOneTimeWorker(
+    private fun <T : ListenableWorker> registerUniqueOneTimeWorker(
         context: Context,
+        uniqueWorkName: String,
+        workerClass: Class<T>,
     ) {
         WorkManager.getInstance(context)
             .enqueueUniqueWork(
-                "SyncDataWorker-onetime",
+                "$uniqueWorkName-onetime",
                 ExistingWorkPolicy.REPLACE,
-                OneTimeWorkRequestBuilder<SyncDataWorker>().build()
+                OneTimeWorkRequest.Builder(workerClass).build()
             )
     }
 }
