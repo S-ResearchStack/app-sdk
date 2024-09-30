@@ -89,7 +89,7 @@ import researchstack.presentation.viewmodel.SignOutViewModel
 import researchstack.presentation.viewmodel.SyncHealthDataViewModel
 import researchstack.presentation.viewmodel.study.InsightPasswordViewModel
 import researchstack.presentation.viewmodel.study.StudyListViewModel
-import researchstack.presentation.worker.WorkerRegistrar.registerDataSyncWorker
+import researchstack.presentation.worker.WorkerRegistrar.registerOneTimeHealthDataWorker
 import java.time.Instant
 
 @Composable
@@ -260,7 +260,7 @@ fun InsightContent(
             .padding(horizontal = 24.dp)
             .fillMaxSize()
     ) {
-       AppTextButton(
+        AppTextButton(
             text = "Check Health Connect access",
             backgroundColor = AppTheme.colors.dataVisualization2.copy(@Suppress("MagicNumber") 0.8f),
             borderColor = AppTheme.colors.dataVisualization2,
@@ -425,7 +425,7 @@ private fun SyncMenuItem() {
         enabled = 1 * 60 < (Instant.now().epochSecond - lastTimestamp),
         onClick = {
             lastTimestamp = Instant.now().epochSecond
-            registerDataSyncWorker(context)
+            registerOneTimeHealthDataWorker(context)
         }
     ) {
         Row {
