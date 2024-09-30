@@ -3,8 +3,11 @@ package researchstack.presentation.worker
 import android.content.Context
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.ExistingWorkPolicy
 import androidx.work.ListenableWorker
 import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import researchstack.BuildConfig
@@ -52,6 +55,19 @@ object WorkerRegistrar {
             "WatchConnectedEventWorker",
             WatchConnectedEventWorker::class.java,
             60,
+        )
+    }
+
+    fun registerOneTimeDataSyncWorker(context: Context) {
+        registerUniqueOneTimeWorker(
+            context,
+            "SyncDataWorker",
+            SyncDataWorker::class.java
+        )
+        registerUniqueOneTimeWorker(
+            context,
+            "UploadHealthDataFileWorker",
+            UploadHealthDataFileWorker::class.java
         )
     }
 
@@ -116,6 +132,19 @@ object WorkerRegistrar {
                         setConstraints(it)
                     }
                 }.build()
+            )
+    }
+
+    private fun <T : ListenableWorker> registerUniqueOneTimeWorker(
+        context: Context,
+        uniqueWorkName: String,
+        workerClass: Class<T>,
+    ) {
+        WorkManager.getInstance(context)
+            .enqueueUniqueWork(
+                "$uniqueWorkName-onetime",
+                ExistingWorkPolicy.REPLACE,
+                OneTimeWorkRequest.Builder(workerClass).build()
             )
     }
 }
