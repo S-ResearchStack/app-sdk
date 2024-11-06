@@ -1,2 +1,2 @@
 configurations.maybeCreate("default")
-artifacts.add("default", file("priv-health-tracking-v1.2.0.aar"))
+artifacts.add("default", file("samsung-health-sensor-api-v1.3.0.aar"))
